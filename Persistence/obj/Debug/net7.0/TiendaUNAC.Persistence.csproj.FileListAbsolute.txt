@@ -1,0 +1,12 @@
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Persistence.deps.json
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Persistence.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Persistence.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.csproj.AssemblyReference.cache
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.AssemblyInfoInputs.cache
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.AssemblyInfo.cs
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.csproj.CoreCompileInputs.cache
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\refint\TiendaUNAC.Persistence.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\ref\TiendaUNAC.Persistence.dll

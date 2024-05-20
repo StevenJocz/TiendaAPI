@@ -1,0 +1,12 @@
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Infrastructure.deps.json
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Infrastructure.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.AssemblyReference.cache
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.AssemblyInfoInputs.cache
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.AssemblyInfo.cs
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\refint\TiendaUNAC.Infrastructure.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\ref\TiendaUNAC.Infrastructure.dll

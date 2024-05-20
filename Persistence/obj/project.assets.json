@@ -1,0 +1,109 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "TiendaUNAC.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/TiendaUNAC.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TiendaUNAC.Domain.dll": {}
+        }
+      },
+      "TiendaUNAC.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "TiendaUNAC.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TiendaUNAC.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TiendaUNAC.Infrastructure.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TiendaUNAC.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/TiendaUNAC.Domain.csproj",
+      "msbuildProject": "../Domain/TiendaUNAC.Domain.csproj"
+    },
+    "TiendaUNAC.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../Infrastructure/TiendaUNAC.Infrastructure.csproj",
+      "msbuildProject": "../Infrastructure/TiendaUNAC.Infrastructure.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "TiendaUNAC.Infrastructure >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Steve\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj",
+      "projectName": "TiendaUNAC.Persistence",
+      "projectPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj",
+      "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
+      "outputPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Persistence\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {
+            "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj": {
+              "projectPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
