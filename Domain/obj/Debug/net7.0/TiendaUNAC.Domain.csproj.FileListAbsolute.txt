@@ -10,3 +10,15 @@ D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Do
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\refint\TiendaUNAC.Domain.dll
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.pdb
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\ref\TiendaUNAC.Domain.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\bin\Debug\net7.0\TiendaUNAC.Domain.deps.json
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\bin\Debug\net7.0\TiendaUNAC.Domain.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.csproj.AssemblyReference.cache
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.AssemblyInfoInputs.cache
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.AssemblyInfo.cs
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.csproj.CoreCompileInputs.cache
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\refint\TiendaUNAC.Domain.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.pdb
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Domain\obj\Debug\net7.0\ref\TiendaUNAC.Domain.dll

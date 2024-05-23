@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TiendaUNAC.Domain.DTOs
+namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
 {
     public class LoginDTOs
     {

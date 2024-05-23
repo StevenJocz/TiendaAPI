@@ -1,0 +1,49 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\01ceba2d-eb83-4ff6-bd15-05f662c1c20a.jpg",
+      "PackagePath": "staticwebassets\\Categoria\\01ceba2d-eb83-4ff6-bd15-05f662c1c20a.jpg"
+    },
+    {
+      "Id": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\02d53957-b534-4e32-a3b3-d4747744f1f8.jpg",
+      "PackagePath": "staticwebassets\\Categoria\\02d53957-b534-4e32-a3b3-d4747744f1f8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\081ddbd7-2d1f-44ce-a45d-a3c3c648dd67.jpg",
+      "PackagePath": "staticwebassets\\Categoria\\081ddbd7-2d1f-44ce-a45d-a3c3c648dd67.jpg"
+    },
+    {
+      "Id": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\7eaac0b2-525a-473d-b8e4-6e328ff5b765.jpg",
+      "PackagePath": "staticwebassets\\Categoria\\7eaac0b2-525a-473d-b8e4-6e328ff5b765.jpg"
+    },
+    {
+      "Id": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\b6cceb9c-0a41-44c6-ade9-06a347fc5019.jpg",
+      "PackagePath": "staticwebassets\\Categoria\\b6cceb9c-0a41-44c6-ade9-06a347fc5019.jpg"
+    },
+    {
+      "Id": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\df9f4ddc-5ea5-43e0-bb9c-8483969f759e.jpg",
+      "PackagePath": "staticwebassets\\Categoria\\df9f4ddc-5ea5-43e0-bb9c-8483969f759e.jpg"
+    },
+    {
+      "Id": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",
+      "PackagePath": "staticwebassets\\Categoria\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.TiendaUNAC.API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.TiendaUNAC.API.props",
+      "PackagePath": "build\\TiendaUNAC.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.TiendaUNAC.API.props",
+      "PackagePath": "buildMultiTargeting\\TiendaUNAC.API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.TiendaUNAC.API.props",
+      "PackagePath": "buildTransitive\\TiendaUNAC.API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

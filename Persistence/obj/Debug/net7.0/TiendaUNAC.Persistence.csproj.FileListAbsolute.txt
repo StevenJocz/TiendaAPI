@@ -10,3 +10,20 @@ D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUN
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\refint\TiendaUNAC.Persistence.dll
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.pdb
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\ref\TiendaUNAC.Persistence.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Persistence.deps.json
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Persistence.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Persistence.pdb
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.csproj.AssemblyReference.cache
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.AssemblyInfoInputs.cache
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.AssemblyInfo.cs
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.csproj.CoreCompileInputs.cache
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\refint\TiendaUNAC.Persistence.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.pdb
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\ref\TiendaUNAC.Persistence.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Domain.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Infrastructure.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.csproj.CopyComplete
