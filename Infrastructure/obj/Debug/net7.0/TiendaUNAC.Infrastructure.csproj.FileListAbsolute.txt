@@ -10,21 +10,21 @@ D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\Tiend
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\refint\TiendaUNAC.Infrastructure.dll
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\ref\TiendaUNAC.Infrastructure.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CopyComplete
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Infrastructure.deps.json
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Infrastructure.dll
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.dll
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.AssemblyReference.cache
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.AssemblyInfoInputs.cache
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.AssemblyInfo.cs
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CopyComplete
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.dll
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\refint\TiendaUNAC.Infrastructure.dll
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\ref\TiendaUNAC.Infrastructure.dll
-C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.dll
-C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
-C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CopyComplete
-D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.dll
-D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
-D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CopyComplete

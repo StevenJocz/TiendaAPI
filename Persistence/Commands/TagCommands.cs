@@ -105,7 +105,6 @@ namespace TiendaUNAC.Persistence.Commands
                 var existeTag = await _context.TagEs.FirstOrDefaultAsync(x => x.IdTag == tagDTOs.IdTag);
                 if (existeTag != null)
                 {
-
                     existeTag.IdTag = tagDTOs.IdTag;
                     existeTag.Tag = tagDTOs.Tag;
                     existeTag.Activo = tagDTOs.Activo;

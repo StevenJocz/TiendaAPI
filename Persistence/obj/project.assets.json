@@ -2734,20 +2734,28 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Steve\\.nuget\\packages\\": {}
+    "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj",
+      "projectUniqueName": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj",
       "projectName": "TiendaUNAC.Persistence",
-      "projectPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj",
-      "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
-      "outputPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Persistence\\obj\\",
+      "projectPath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj",
+      "packagesPath": "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Persistence\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\soporte.sion.UNAC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -2760,8 +2768,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj": {
-              "projectPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj"
+            "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj"
             }
           }
         }
@@ -2791,7 +2799,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.409\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿               using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -44,5 +44,17 @@ namespace TiendaUNAC.Domain.DTOs.ProductoDTOs
                 PorcentajeValor = imagenProductoDTOs.PorcentajeValor
             };
         }
+       
+    }
+
+    public class ListaImagenesDTOs
+    {
+        public int id { get; set; }
+        public string imagen { get; set; }
+        public string nombreImagen { get; set; }
+        public string nombreColor { get; set; }
+        public string color { get; set; }
+        public string porcentajeValor { get; set; }
+     
     }
 }

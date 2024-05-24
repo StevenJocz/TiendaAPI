@@ -14,6 +14,7 @@ namespace TiendaUNAC.Domain.Entities.ProductoE
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdTallaProducto { get; set; }
+        public int IdProducto { get; set; }
         public string Talla { get; set; }
         public int PorcentajeValor { get; set; }
     }
