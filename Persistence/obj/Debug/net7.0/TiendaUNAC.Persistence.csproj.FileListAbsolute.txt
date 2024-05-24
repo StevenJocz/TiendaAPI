@@ -27,3 +27,8 @@ C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\D
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.csproj.CopyComplete
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Domain.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Infrastructure.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Infrastructure.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Persistence\obj\Debug\net7.0\TiendaUNAC.Persistence.csproj.CopyComplete

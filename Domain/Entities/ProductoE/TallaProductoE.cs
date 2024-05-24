@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TiendaUNAC.Domain.Entities.ConfiguracionE
+namespace TiendaUNAC.Domain.Entities.ProductoE
 {
-    [Table("TblTag")]
-    public class TagE
+    [Table("TblTallaProducto")]
+    public class TallaProductoE
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int IdTag { get; set; }
-        public string Tag { get; set; }
-        public bool Activo { get; set; }
+        public int IdTallaProducto { get; set; }
+        public string Talla { get; set; }
+        public int PorcentajeValor { get; set; }
     }
 }

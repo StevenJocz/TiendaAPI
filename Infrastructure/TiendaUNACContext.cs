@@ -6,7 +6,9 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
+using TiendaUNAC.Domain.Entities.ProductoE;
 
 namespace TiendaUNAC.Infrastructure
 {
@@ -40,6 +42,13 @@ namespace TiendaUNAC.Infrastructure
         // Configuración
         public virtual DbSet<CategoriaE> CategoriaEs { get; set; }
         public virtual DbSet<TagE> TagEs { get; set; }
+
+        //Productos
+        public virtual DbSet<ProductoE> ProductoEs { get; set; }
+        public virtual DbSet<ImagenProductoE> ImagenProductoEs { get; set; }
+        public virtual DbSet<TallaProductoE> TallaProductoEs { get; set; }
+        public virtual DbSet<InventarioSionDTOs> InventarioSionEs { get; set; }
+
 
     }
 }

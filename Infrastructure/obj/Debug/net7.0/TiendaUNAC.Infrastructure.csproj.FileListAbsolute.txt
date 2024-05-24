@@ -25,3 +25,6 @@ C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\ob
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.dll
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
 C:\Users\soporte.sion.UNAC\Documents\GitHub\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CopyComplete
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
+D:\Proyectos Desarrollo\TiendaUNAC\Service\Infrastructure\obj\Debug\net7.0\TiendaUNAC.Infrastructure.csproj.CopyComplete
