@@ -39,9 +39,9 @@ namespace TiendaUNAC.Domain.DTOs.ProductoDTOs
     public class ListaTallaDTOs
     {
         public int id { get; set; }
-        public int nombre { get; set; }
-        public int porcentaje { get; set; }
-        public int valor { get; set; }
+        public string nombre { get; set; }
+        public string porcentaje { get; set; }
+        public double valor { get; set; }
 
     }
 }

@@ -73,7 +73,23 @@ namespace TiendaUNAC.Domain.DTOs.ProductoDTOs
         public int Descuento { get; set; }
         public DateTime FechaFinDescuento { get; set; }
         public bool Activo { get; set; }
+        public int IdTercero { get; set; }
+        public double? stock { get; set; }
+        public double? precioBase { get; set; }
         public List<ListaImagenesDTOs> Imagenes { get; set; }
         public List<ListaTallaDTOs> Tallas { get; set; }
+    }
+
+    public class VerProductoDtos
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Categorias { get; set; }
+        public List<ImagenDto> Imagenes { get; set; }
+        public bool AplicaDescuento { get; set; }
+        public int Descuento { get; set; }
+        public bool Nuevo { get; set; }
+        public bool Activo { get; set; }
+        public double existencias { get; set; }
     }
 }

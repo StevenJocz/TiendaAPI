@@ -55,6 +55,11 @@ namespace TiendaUNAC.Domain.DTOs.ProductoDTOs
         public string nombreColor { get; set; }
         public string color { get; set; }
         public string porcentajeValor { get; set; }
-     
+    }
+
+    public class ImagenDto
+    {
+        public string ImagenUno { get; set; }
+        public string ImagenDos { get; set; }
     }
 }
