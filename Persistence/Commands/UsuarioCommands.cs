@@ -58,6 +58,25 @@ namespace TiendaUNAC.Persistence.Commands
             try
             {
 
+
+
+                if (true)
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha añadido el producto exitosamente!",
+                    };
+
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo agregar el producto! Por favor, inténtalo de nuevo más tarde.",
+                    };
+                }
             }
             catch (Exception)
             {
