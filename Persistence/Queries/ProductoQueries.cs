@@ -223,6 +223,7 @@ namespace TiendaUNAC.Persistence.Queries
                             nombreColor = imagen.NombreColor,
                             color = imagen.Color,
                             porcentajeValor = imagen.PorcentajeValor.ToString(),
+                            actualizar = true
                         };
 
                         ListImagenes.Add(imagenes);

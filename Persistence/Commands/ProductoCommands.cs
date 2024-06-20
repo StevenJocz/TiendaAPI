@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace TiendaUNAC.Persistence.Commands
     public interface IProductoCommands
     {
         Task<RespuestaDTO> crearProducto(ListaProductosDTOs listaProductosDTOs);
+        Task<RespuestaDTO> actualizarProducto(ListaProductosDTOs listaProductosDTOs);
     }
     public class ProductoCommands: IProductoCommands, IDisposable
     {
@@ -146,6 +148,105 @@ namespace TiendaUNAC.Persistence.Commands
             }
         }
 
+        #endregion
+
+        #region ACTUALIZAR PRODUCTO
+
+        public async Task<RespuestaDTO> actualizarProducto(ListaProductosDTOs listaProductosDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo ProductoCommands.actualizarProducto...");
+            try
+            {
+                var existeProducto = await _context.ProductoEs.FirstOrDefaultAsync(x => x.IdProducto == listaProductosDTOs.Id);
+                if (existeProducto != null)
+                {
+
+                    var tallaToDelete = await _context.TallaProductoEs.Where(x => x.IdProducto == listaProductosDTOs.Id).ToListAsync();
+
+                    if (tallaToDelete.Any())
+                    {
+                        _context.TallaProductoEs.RemoveRange(tallaToDelete);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    if (listaProductosDTOs.Tallas != null || listaProductosDTOs.Tallas.Count > 0)
+                    {
+                        foreach (var talla in listaProductosDTOs.Tallas)
+                        {
+                            var tallas = new TallaProductoDTOs
+                            {
+                                IdProducto = listaProductosDTOs.Id,
+                                Talla = talla.nombre,
+                                PorcentajeValor = int.Parse(talla.porcentaje)
+                            };
+
+                            var tallaE = TallaProductoDTOs.CrearE(tallas);
+                            await _context.TallaProductoEs.AddAsync(tallaE);
+                            await _context.SaveChangesAsync();
+                        }
+                    }
+
+                    if (listaProductosDTOs.Imagenes != null || listaProductosDTOs.Imagenes.Count > 0)
+                    {
+                        foreach (var imagen in listaProductosDTOs.Imagenes)
+                        {
+                            if (imagen.actualizar == false)
+                            {
+                                var ruta = "";
+                                string rutaImagen = "wwwroot/Productos";
+                                ruta = await _imagenes.guardarImage(imagen.imagen, rutaImagen);
+
+                                var imagenes = new ImagenProductoDTOs
+                                {
+                                    IdProducto = listaProductosDTOs.Id,
+                                    Imagen = ruta,
+                                    Nombre = imagen.nombreImagen,
+                                    NombreColor = imagen.nombreColor,
+                                    Color = imagen.color,
+                                    PorcentajeValor = int.Parse(imagen.porcentajeValor)
+                                };
+
+                                var imagenE = ImagenProductoDTOs.CrearE(imagenes);
+                                await _context.ImagenProductoEs.AddAsync(imagenE);
+                                await _context.SaveChangesAsync();
+                            }
+                           
+                        }
+                    }
+
+                    existeProducto.IdInventario = listaProductosDTOs.IdInventario;
+                    existeProducto.IdCategoria = listaProductosDTOs.IdCategoria;
+                    existeProducto.Nombre = listaProductosDTOs.Nombre;
+                    existeProducto.Descripcion = listaProductosDTOs.Descripcion;
+                    existeProducto.Informacion = listaProductosDTOs.Informacion;
+                    existeProducto.Activo = listaProductosDTOs.Activo;
+                    existeProducto.Descuento = listaProductosDTOs.Descuento;
+                    existeProducto.FechaFinDescuento = listaProductosDTOs.FechaFinDescuento;
+
+                    _context.ProductoEs.Update(existeProducto);
+                    await _context.SaveChangesAsync();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha actualizado el producto exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo encontrar el producto!. Por favor, verifica los datos.",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo ProductoCommands.actualizarProducto...");
+                throw;
+            }
+        }
         #endregion
     }
 }

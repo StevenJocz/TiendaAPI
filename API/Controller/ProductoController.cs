@@ -136,5 +136,21 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+
+        [HttpPut("Put_Actualizar_Producto")]
+        public async Task<IActionResult> actualizarProducto([FromBody] ListaProductosDTOs listaProductosDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando ProductoController.actualizarProducto...");
+                var respuesta = await _productoCommands.actualizarProducto(listaProductosDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.actualizarProducto...");
+                throw;
+            }
+        }
     }
 }

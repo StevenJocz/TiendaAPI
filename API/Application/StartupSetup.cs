@@ -18,6 +18,8 @@ namespace TiendaUNAC.API.Application
             service.AddTransient<ICategoriaQueries, CategoriaQueries>();
             service.AddTransient<ITagQuieries, TagQuieries>();
             service.AddTransient<IProductoQueries, ProductoQueries>();
+            service.AddTransient<IUsuarioQueries, UsuarioQueries>();
+            service.AddTransient<IGeneralesQueries, GeneralesQueries>();
 
 
             // Utilidades

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4PS/zIs6/xHWFeGW37XPfNgTukNKbHVbDzLMh8O5wTc=",
+  "Hash": "NzK46PkC1j3bt9TUYfOygb4i7rVttbj/7v+1IY3nxvE=",
   "Source": "TiendaUNAC.API",
   "BasePath": "_content/TiendaUNAC.API",
   "Mode": "Default",
@@ -219,6 +219,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Productos\\d1ea3e80-41f0-4b71-a494-822278b98956.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\e150682f-c89e-438c-ab4e-3167fc7684ce.jpg",
+      "SourceId": "TiendaUNAC.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "BasePath": "_content/TiendaUNAC.API",
+      "RelativePath": "Productos/e150682f-c89e-438c-ab4e-3167fc7684ce.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Productos\\e150682f-c89e-438c-ab4e-3167fc7684ce.jpg"
     },
     {
       "Identity": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",

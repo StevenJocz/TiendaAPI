@@ -6,9 +6,12 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
+using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
+using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
 using TiendaUNAC.Domain.Entities.ProductoE;
+using TiendaUNAC.Domain.Entities.UsuariosE;
 
 namespace TiendaUNAC.Infrastructure
 {
@@ -39,6 +42,11 @@ namespace TiendaUNAC.Infrastructure
             base.OnModelCreating(modelBuilder);
         }
 
+        // Generales
+        public virtual DbSet<tiposDocumentosDTOs> tipoDocumentosEs { get; set; }
+        public virtual DbSet<generosDTOs> generosEs { get; set; }
+        public virtual DbSet<ubicacionDTOs> ubicacionEs { get; set; }
+
         // Configuración
         public virtual DbSet<CategoriaE> CategoriaEs { get; set; }
         public virtual DbSet<TagE> TagEs { get; set; }
@@ -48,6 +56,10 @@ namespace TiendaUNAC.Infrastructure
         public virtual DbSet<ImagenProductoE> ImagenProductoEs { get; set; }
         public virtual DbSet<TallaProductoE> TallaProductoEs { get; set; }
         public virtual DbSet<InventarioSionDTOs> InventarioSionEs { get; set; }
+
+        //Usuarios 
+        public virtual DbSet<UsuariosE> UsuariosEs { get; set; }
+       
 
 
     }
