@@ -22,3 +22,15 @@ D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Do
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\refint\TiendaUNAC.Domain.dll
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.pdb
 D:\Proyectos Desarrollo\TiendaUNAC\Service\Domain\obj\Debug\net7.0\ref\TiendaUNAC.Domain.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\bin\Debug\net7.0\TiendaUNAC.Domain.deps.json
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\bin\Debug\net7.0\TiendaUNAC.Domain.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\bin\Debug\net7.0\TiendaUNAC.Domain.pdb
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.csproj.AssemblyReference.cache
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.AssemblyInfoInputs.cache
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.AssemblyInfo.cs
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.csproj.CoreCompileInputs.cache
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\refint\TiendaUNAC.Domain.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\TiendaUNAC.Domain.pdb
+D:\Proyectos UNAC\Proyectos\TiendaAPI\Domain\obj\Debug\net7.0\ref\TiendaUNAC.Domain.dll

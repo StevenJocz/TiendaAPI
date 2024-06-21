@@ -46,6 +46,25 @@
           }
         }
       },
+      "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.20": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.IdentityModel.Protocols.OpenIdConnect": "6.35.0"
+        },
+        "compile": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.OpenApi/7.0.5": {
         "type": "package",
         "dependencies": {
@@ -1095,6 +1114,9 @@
       "TiendaUNAC.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.20"
+        },
         "compile": {
           "bin/placeholder/TiendaUNAC.Domain.dll": {}
         },
@@ -1172,6 +1194,21 @@
         "azureicon.png",
         "lib/netstandard2.0/Azure.Identity.dll",
         "lib/netstandard2.0/Azure.Identity.xml"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.JwtBearer/7.0.20": {
+      "sha512": "lIjUAxtqNv+bD+Bnlksu96/haMLfuXA7nASXUnvxXfFWA3YEov7pM5AtvlelvQCtwFvu1LR4SFryHvLur491Qg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.jwtbearer/7.0.20",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll",
+        "lib/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.xml",
+        "microsoft.aspnetcore.authentication.jwtbearer.7.0.20.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.jwtbearer.nuspec"
       ]
     },
     "Microsoft.AspNetCore.OpenApi/7.0.5": {
@@ -3208,11 +3245,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\TiendaUNAC.API.csproj",
+      "projectUniqueName": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\TiendaUNAC.API.csproj",
       "projectName": "TiendaUNAC.API",
-      "projectPath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\TiendaUNAC.API.csproj",
+      "projectPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\TiendaUNAC.API.csproj",
       "packagesPath": "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\obj\\",
+      "outputPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -3235,8 +3272,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj": {
-              "projectPath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj"
+            "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Persistence\\TiendaUNAC.Persistence.csproj": {
+              "projectPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Persistence\\TiendaUNAC.Persistence.csproj"
             }
           }
         }

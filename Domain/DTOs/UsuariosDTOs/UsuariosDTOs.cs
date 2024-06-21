@@ -12,12 +12,13 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
     public class UsuariosDTOs
     {
         public int IdUsuario { get; set; }
+        public int IdTipoUsuario { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int IdTipoDocumento { get; set; }
         public string Documento { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public int Celular { get; set; }
+        public string Celular { get; set; }
         public int IdMunicipio { get; set; }
         public string Direccion { get; set; }
         public string Correo { get; set; }
@@ -29,6 +30,7 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
             return new UsuariosDTOs
             {
                 IdUsuario = usuariosE.IdUsuario,
+                IdTipoUsuario = usuariosE.IdTipoUsuario,
                 Nombre = usuariosE.Nombre,
                 Apellido = usuariosE.Apellido,
                 IdTipoDocumento = usuariosE.IdTipoDocumento,
@@ -48,6 +50,7 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
             return new UsuariosE
             {
                 IdUsuario = usuariosDTOs.IdUsuario,
+                IdTipoUsuario = usuariosDTOs.IdTipoUsuario,
                 Nombre = usuariosDTOs.Nombre,
                 Apellido = usuariosDTOs.Apellido,
                 IdTipoDocumento = usuariosDTOs.IdTipoDocumento,
@@ -60,6 +63,27 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
                 Password = usuariosDTOs.Password,
                 FechaRegistro = usuariosDTOs.FechaRegistro
             };
+        }
+
+        public class InicioSesionDTOs
+        {
+            public string correo { get; set; }
+            public string password { get; set; }
+        }
+
+        public class DatosUsuarioDTOs
+        {
+            public int idUsuario { get; set; }
+            public string nombre { get; set; }
+            public string correo { get; set; }
+            public int tipoUsuario { get; set; }
+        }
+
+        public class RespuestaInicioSesion
+        {
+            public bool resultado { get; set; }
+            public string mensaje { get; set; }
+            public string token { get; set; }
         }
     }
 

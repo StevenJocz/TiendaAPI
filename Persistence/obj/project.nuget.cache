@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "yHogbiEwr2eN0wvZ9Dy8u4Rt9VsPtwiJMarlUiAsDMCqOE8EX2py0OB0foItECnnVaiCI7IDfFTrR1FXtHE0dQ==",
+  "dgSpecHash": "CAmzGrzko3DIDgw2hze5mgnuv5tSms3AYZaj+Iu//KIx0dcYb5wtOLn7A5l1GMWxEd9JfLeR05VGaOnveeqccA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\Persistence\\TiendaUNAC.Persistence.csproj",
+  "projectFilePath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Persistence\\TiendaUNAC.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.20\\microsoft.aspnetcore.authentication.jwtbearer.7.0.20.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.5\\microsoft.data.sqlclient.5.1.5.nupkg.sha512",

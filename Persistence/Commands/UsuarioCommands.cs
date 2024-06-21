@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
+using TiendaUNAC.Domain.Entities.UsuariosE;
+using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
 using TiendaUNAC.Persistence.Queries;
 
@@ -13,7 +16,7 @@ namespace TiendaUNAC.Persistence.Commands
 {
     public interface IUsuarioCommands
     {
-
+        Task<RespuestaDTO> crearUsuario(UsuariosDTOs usuariosDTOs);
     }
 
     public class UsuarioCommands: IUsuarioCommands, IDisposable
@@ -21,12 +24,15 @@ namespace TiendaUNAC.Persistence.Commands
         private readonly TiendaUNACContext _context = null;
         private readonly ILogger<IUsuarioCommands> _logger;
         private readonly IConfiguration _configuration;
+        private readonly IPassword _password;
 
-        public UsuarioCommands(TiendaUNACContext context, ILogger<IUsuarioCommands> logger, IConfiguration configuration)
+        public UsuarioCommands(ILogger<IUsuarioCommands> logger, IConfiguration configuration, IPassword password)
         {
-            _context = context;
             _logger = logger;
             _configuration = configuration;
+            string? connectionString = _configuration.GetConnectionString("ConnectionTienda");
+            _context = new TiendaUNACContext(connectionString);
+            _password = password;
         }
 
         #region implementacion Disponse
@@ -52,15 +58,33 @@ namespace TiendaUNAC.Persistence.Commands
         #endregion
 
         #region CREA USUARIO
-        public async Task<RespuestaDTO> crearUsuario()
+        public async Task<RespuestaDTO> crearUsuario(UsuariosDTOs usuariosDTOs)
         {
             _logger.LogInformation("Iniciando metodo UsuarioCommands.crearUsuario...");
             try
             {
+                var hashedPassword = await _password.GenerarPassword(usuariosDTOs.Password);
+                var usuario = new UsuariosDTOs
+                {
+                    IdTipoUsuario = usuariosDTOs.IdTipoUsuario,
+                    Nombre = usuariosDTOs.Nombre,
+                    Apellido = usuariosDTOs.Apellido,
+                    IdTipoDocumento = usuariosDTOs.IdTipoDocumento,
+                    Documento = usuariosDTOs.Documento,
+                    FechaNacimiento = usuariosDTOs.FechaNacimiento,
+                    Celular = usuariosDTOs.Celular,
+                    IdMunicipio = usuariosDTOs.IdMunicipio,
+                    Direccion = usuariosDTOs.Direccion,
+                    Correo = usuariosDTOs.Correo,
+                    Password = hashedPassword,
+                    FechaRegistro = usuariosDTOs.FechaRegistro
+                };
 
+                var usuarioE = UsuariosDTOs.CrearE(usuario);
+                await _context.UsuariosEs.AddAsync(usuarioE);
+                await _context.SaveChangesAsync();
 
-
-                if (true)
+                if (usuarioE.IdUsuario != 0)
                 {
                     return new RespuestaDTO
                     {

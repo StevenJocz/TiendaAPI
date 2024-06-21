@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7OICb+DYFRgQf/6zeH/zrI7Fb+jm0cCK4CR7+588hNYtpymMAV85JCPMAgyQ1mJF74WXhRLRNSUKodGL4HAhTQ==",
+  "dgSpecHash": "CvSD8wrZgDUyO6lbxgc52VRJAC8H1lBrKSBjEjuvKbnnq0fNAnk0R54VPrS4pt5WiH3H5GsOIMOJYohDQtZU9g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\soporte.sion.UNAC\\Documents\\GitHub\\TiendaUNAC\\Service\\API\\TiendaUNAC.API.csproj",
+  "projectFilePath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\TiendaUNAC.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.20\\microsoft.aspnetcore.authentication.jwtbearer.7.0.20.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.5\\microsoft.aspnetcore.openapi.7.0.5.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

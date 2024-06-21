@@ -14,12 +14,13 @@ namespace TiendaUNAC.Domain.Entities.UsuariosE
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdUsuario { get; set; }
+        public int IdTipoUsuario { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
         public int IdTipoDocumento { get; set; }
         public string Documento { get; set; }
         public DateTime FechaNacimiento { get; set; }
-        public int Celular { get; set; }
+        public string Celular { get; set; }
         public int IdMunicipio { get; set; }
         public string Direccion { get; set; }
         public string Correo { get; set; }
