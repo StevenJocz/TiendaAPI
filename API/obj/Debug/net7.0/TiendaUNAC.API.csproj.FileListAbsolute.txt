@@ -233,3 +233,4 @@ D:\Proyectos UNAC\Proyectos\TiendaAPI\API\obj\Debug\net7.0\TiendaUNAC.API.pdb
 D:\Proyectos UNAC\Proyectos\TiendaAPI\API\obj\Debug\net7.0\TiendaUNAC.API.genruntimeconfig.cache
 D:\Proyectos UNAC\Proyectos\TiendaAPI\API\obj\Debug\net7.0\ref\TiendaUNAC.API.dll
 D:\Proyectos UNAC\Proyectos\TiendaAPI\API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Proyectos Desarrollo\TiendaUNAC\Service\API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

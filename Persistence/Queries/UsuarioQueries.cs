@@ -19,6 +19,7 @@ namespace TiendaUNAC.Persistence.Queries
     public interface IUsuarioQueries
     {
         Task<RespuestaInicioSesion> InicioSesion(InicioSesionDTOs inicioSesionDTOs);
+        Task<List<PermisosUsuarioDTOs>> permisosUsuario(int tipoUsuario);
     }
 
     public class UsuarioQueries : IUsuarioQueries, IDisposable
@@ -72,7 +73,7 @@ namespace TiendaUNAC.Persistence.Queries
 
                 var usuarioExite = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.Correo == correo);
 
-                if (usuarioExite.IdUsuario > 0)
+                if (usuarioExite != null)
                 {
                     var verificarPassword = await _password.VerificarPassword(password, usuarioExite.Password);
 
@@ -115,7 +116,6 @@ namespace TiendaUNAC.Persistence.Queries
                     };
 
                 }
-
             }
             catch (Exception)
             {
@@ -125,6 +125,38 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
+        #region PERMISOS USUARIOS
+        public async Task<List<PermisosUsuarioDTOs>> permisosUsuario(int tipoUsuario)
+        {
+            _logger.LogInformation("Iniciando metodo UsuarioQueries.permisosUsuario...");
+            try
+            {
+                var permisos = await _context.PermisosUsuarioEs.Where(x => x.IdTipoUsuario == tipoUsuario).ToListAsync();
 
+                var listaPermisos = new List<PermisosUsuarioDTOs>();
+
+                foreach(var permiso in permisos)
+                {
+                    var lista = new PermisosUsuarioDTOs
+                    {
+                        IdTipoUsuariosPermiso = permiso.IdTipoUsuariosPermiso,
+                        IdTipoUsuario = permiso.IdTipoUsuario,
+                        Path = permiso.Path,
+                        Icono = permiso.Icono,
+                        Texto = permiso.Texto
+                    };
+
+                    listaPermisos.Add(lista);
+                }
+
+                return listaPermisos;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioQueries.permisosUsuario...");
+                throw;
+            }
+        }
+        #endregion
     }
 }

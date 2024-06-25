@@ -59,6 +59,7 @@ namespace TiendaUNAC.Infrastructure
 
         //Usuarios 
         public virtual DbSet<UsuariosE> UsuariosEs { get; set; }
+        public virtual DbSet<PermisosUsuarioE> PermisosUsuarioEs { get; set; }
        
 
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
 using TiendaUNAC.Domain.Utilities;
@@ -55,6 +56,30 @@ namespace TiendaUNAC.API.Controller
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar UsuarioController.inicioSesion...");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_Permisos")]
+        public async Task<IActionResult> permisosUsuario(int tipoUsuario)
+        {
+            _logger.LogInformation("Iniciando UsuarioController.permisosUsuario...");
+            try
+            {
+                var respuesta = await _usuariosQueries.permisosUsuario(tipoUsuario);
+
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontraron permisos registradass. Por favor, intenta nuevamente más tarde.");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.permisosUsuario");
                 throw;
             }
         }
