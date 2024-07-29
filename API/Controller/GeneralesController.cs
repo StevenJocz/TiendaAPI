@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TiendaUNAC.Domain.DTOs.ConfiguracionDTOs;
+using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Persistence.Commands;
 using TiendaUNAC.Persistence.Queries;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -10,11 +13,13 @@ namespace TiendaUNAC.API.Controller
     public class GeneralesController : ControllerBase
     {
         private readonly IGeneralesQueries _generalesQueries;
+        private readonly IGeneralesCommands _generalesCommands;
         private readonly ILogger<GeneralesController> _logger;
 
-        public GeneralesController(IGeneralesQueries generalesQueries, ILogger<GeneralesController> logger)
+        public GeneralesController(IGeneralesQueries generalesQueries, IGeneralesCommands generalesCommands, ILogger<GeneralesController> logger)
         {
             _generalesQueries = generalesQueries;
+            _generalesCommands = generalesCommands;
             _logger = logger;
         }
 
@@ -85,6 +90,46 @@ namespace TiendaUNAC.API.Controller
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar GeneralesController.Ubicacion");
+                throw;
+            }
+        }
+
+        [HttpPost("Post_Crear_Cupon")]
+        public async Task<IActionResult> crearCupon([FromBody] CuponesDTOs cuponesDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando CategoriaController.crearCategoria...");
+                var respuesta = await _generalesCommands.crearCupon(cuponesDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar CategoriaController.crearCategoria...");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_Cupones")]
+        public async Task<IActionResult> Cupones(int Accion, string Cupon)
+        {
+            _logger.LogInformation("Iniciando GeneralesController.Cupones...");
+            try
+            {
+                var respuesta = await _generalesQueries.cupones(Accion, Cupon);
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontraron registros. Por favor intenta nuevamente más tarde");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.Cupones");
                 throw;
             }
         }

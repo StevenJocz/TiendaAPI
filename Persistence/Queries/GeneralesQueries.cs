@@ -4,9 +4,12 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using TiendaUNAC.Domain.DTOs.ConfiguracionDTOs;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.Entities.ConfiguracionE;
 using TiendaUNAC.Infrastructure;
 
 namespace TiendaUNAC.Persistence.Queries
@@ -16,6 +19,7 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<tiposDocumentosDTOs>> TiposDocumentos();
         Task<List<generosDTOs>> generos();
         Task<List<ubicacionDTOs>> ubicacion(int Accion, int Parametro);
+        Task<List<CuponesDTOs>> cupones(int accion, string Cupon);
     }
 
     public class GeneralesQueries: IGeneralesQueries, IDisposable
@@ -139,6 +143,52 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
+        #region CUPONES
+        public async Task<List<CuponesDTOs>> cupones(int accion, string Cupon)
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesQueries.cupones...");
+            try
+            {
+                var expresion = (Expression<Func<CuponesE, bool>>)null;
+
+                if (accion == 1)
+                {
+                    expresion = expresion = x => x.Activo == true || x.Activo == false;
+                }
+                else if (accion == 2)
+                {
+                    expresion = expresion = x => x.Activo == true && x.FechaLimite > DateTime.UtcNow && x.TextoCupon == Cupon;
+                }
+
+                var cupones = await _context.CuponesEs.Where(expresion).ToListAsync();
+
+                var ListCupones = new List<CuponesDTOs>();
+
+                foreach (var item in cupones)
+                {
+                    var list = new CuponesDTOs
+                    {
+                        IdCupon = item.IdCupon,
+                        TextoCupon = item.TextoCupon,
+                        ValorCupon = item.ValorCupon,
+                        FechaLimite = item.FechaLimite,
+                        FechaCreacion = item.FechaCreacion,
+                        IdUsuarioCreador = item.IdUsuarioCreador,
+                        Activo = item.Activo
+                    };
+
+                    ListCupones.Add(list);
+                }
+
+                return ListCupones;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesQueries.cupones...");
+                throw;
+            }
+        }
+        #endregion
 
     }
 }

@@ -250,6 +250,8 @@ namespace TiendaUNAC.Persistence.Queries
                         ListTallas.Add(tallas);
                     }
 
+                    double precio = inventario.precio * inventario.iva / 100;
+
 
                     var list = new ListaProductosDTOs
                     {
@@ -265,7 +267,7 @@ namespace TiendaUNAC.Persistence.Queries
                         Activo = item.Activo,
                         IdTercero = item.IdTercero,
                         stock = inventario.existencias,
-                        precioBase = inventario.precio,
+                        precioBase = inventario.precio + precio,
                         Imagenes = ListImagenes,
                         Tallas = ListTallas
                     };
