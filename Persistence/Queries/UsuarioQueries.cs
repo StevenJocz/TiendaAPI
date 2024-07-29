@@ -5,6 +5,7 @@ using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
@@ -76,6 +77,11 @@ namespace TiendaUNAC.Persistence.Queries
                 if (usuarioExite != null)
                 {
                     var verificarPassword = await _password.VerificarPassword(password, usuarioExite.Password);
+                    var departamentoCiudad = (await _context.ubicacionEs
+                                            .FromSqlInterpolated($"EXEC Ubicacion @Accion={5}, @Parametro={usuarioExite.IdMunicipio}")
+                                            .ToListAsync())
+                                            .FirstOrDefault();
+
 
                     if (verificarPassword)
                     {
@@ -84,6 +90,8 @@ namespace TiendaUNAC.Persistence.Queries
                             idUsuario = usuarioExite.IdUsuario,
                             nombre = usuarioExite.Nombre,
                             correo = usuarioExite.Correo,
+                            telefono = usuarioExite.Celular,
+                            direccion = departamentoCiudad.Nombre + " - " + usuarioExite.Direccion,
                             tipoUsuario = usuarioExite.IdTipoUsuario
                         };
 

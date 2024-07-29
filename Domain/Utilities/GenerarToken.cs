@@ -29,6 +29,8 @@ namespace TiendaUNAC.Domain.Utilities
                 claims.AddClaim(new Claim("idUsuario", Convert.ToString(datosUsuarioDTOs.idUsuario)));
                 claims.AddClaim(new Claim("nombre", datosUsuarioDTOs.nombre));
                 claims.AddClaim(new Claim("correo", datosUsuarioDTOs.correo));
+                claims.AddClaim(new Claim("telefono", datosUsuarioDTOs.telefono));
+                claims.AddClaim(new Claim("direccion", datosUsuarioDTOs.direccion));
                 claims.AddClaim(new Claim("tipoUsuario", Convert.ToString(datosUsuarioDTOs.tipoUsuario)));
 
                 var credencialesToken = new SigningCredentials
