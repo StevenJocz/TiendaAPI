@@ -178,6 +178,43 @@ namespace TiendaUNAC.Persistence.Queries
                 throw;
             }
         }
+        #endregion 
+
+
+        #region CONSULTAR CUPONE
+        public async Task<List<CuponesDTOs>> consultarCupon(string cupon, int idUsuario)
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesQueries.consultarCupon...");
+            try
+            {
+                var cupones = await _context.CuponesEs.FromSqlInterpolated($"EXEC TipoDocumentos").ToListAsync();
+
+                var ListCupones = new List<CuponesDTOs>();
+
+                foreach (var item in cupones)
+                {
+                    var list = new CuponesDTOs
+                    {
+                        IdCupon = item.IdCupon,
+                        TextoCupon = item.TextoCupon,
+                        ValorCupon = item.ValorCupon,
+                        FechaLimite = item.FechaLimite,
+                        FechaCreacion = item.FechaCreacion,
+                        IdUsuarioCreador = item.IdUsuarioCreador,
+                        Activo = item.Activo
+                    };
+
+                    ListCupones.Add(list);
+                }
+
+                return ListCupones;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesQueries.consultarCupon...");
+                throw;
+            }
+        }
         #endregion
 
         #region CUPONES POR ID
