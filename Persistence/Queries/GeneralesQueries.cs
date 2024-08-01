@@ -19,7 +19,8 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<tiposDocumentosDTOs>> TiposDocumentos();
         Task<List<generosDTOs>> generos();
         Task<List<ubicacionDTOs>> ubicacion(int Accion, int Parametro);
-        Task<List<CuponesDTOs>> cupones(int accion, string Cupon);
+        Task<List<CuponesDTOs>> cupones();
+        Task<List<CuponesDTOs>> cuponesId(int IdCupon);
     }
 
     public class GeneralesQueries: IGeneralesQueries, IDisposable
@@ -144,23 +145,12 @@ namespace TiendaUNAC.Persistence.Queries
         #endregion
 
         #region CUPONES
-        public async Task<List<CuponesDTOs>> cupones(int accion, string Cupon)
+        public async Task<List<CuponesDTOs>> cupones()
         {
             _logger.LogTrace("Iniciando metodo GeneralesQueries.cupones...");
             try
             {
-                var expresion = (Expression<Func<CuponesE, bool>>)null;
-
-                if (accion == 1)
-                {
-                    expresion = expresion = x => x.Activo == true || x.Activo == false;
-                }
-                else if (accion == 2)
-                {
-                    expresion = expresion = x => x.Activo == true && x.FechaLimite > DateTime.UtcNow && x.TextoCupon == Cupon;
-                }
-
-                var cupones = await _context.CuponesEs.Where(expresion).ToListAsync();
+                var cupones = await _context.CuponesEs.Where(x => x.Activo == true || x.Activo == false).ToListAsync();
 
                 var ListCupones = new List<CuponesDTOs>();
 
@@ -185,6 +175,39 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error en el metodo GeneralesQueries.cupones...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region CUPONES POR ID
+        public async Task<List<CuponesDTOs>> cuponesId(int IdCupon)
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesQueries.cuponesId...");
+            try
+            {
+                var cupones = await _context.CuponesEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdCupon == IdCupon);
+
+                var ListCupones = new List<CuponesDTOs>();
+
+                var list = new CuponesDTOs
+                {
+                    IdCupon = cupones.IdCupon,
+                    TextoCupon = cupones.TextoCupon,
+                    ValorCupon = cupones.ValorCupon,
+                    FechaLimite = cupones.FechaLimite,
+                    FechaCreacion = cupones.FechaCreacion,
+                    IdUsuarioCreador = cupones.IdUsuarioCreador,
+                    Activo = cupones.Activo
+                };
+
+                ListCupones.Add(list);
+
+                return ListCupones;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesQueries.cuponesId...");
                 throw;
             }
         }

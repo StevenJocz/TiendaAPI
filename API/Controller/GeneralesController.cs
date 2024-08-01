@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TiendaUNAC.Domain.DTOs.ConfiguracionDTOs;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Persistence.Commands;
 using TiendaUNAC.Persistence.Queries;
 
@@ -111,12 +112,29 @@ namespace TiendaUNAC.API.Controller
         }
 
         [HttpGet("Get_Cupones")]
-        public async Task<IActionResult> Cupones(int Accion, string Cupon)
+        public async Task<IActionResult> Cupones()
         {
             _logger.LogInformation("Iniciando GeneralesController.Cupones...");
             try
             {
-                var respuesta = await _generalesQueries.cupones(Accion, Cupon);
+                var respuesta = await _generalesQueries.cupones();
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.Cupones");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_Id_Cupones")]
+        public async Task<IActionResult> CuponesId(int IdCupon)
+        {
+            _logger.LogInformation("Iniciando GeneralesController.CuponesId...");
+            try
+            {
+                var respuesta = await _generalesQueries.cuponesId(IdCupon);
                 if (respuesta == null || !respuesta.Any())
                 {
                     return BadRequest("No se encontraron registros. Por favor intenta nuevamente más tarde");
@@ -129,7 +147,23 @@ namespace TiendaUNAC.API.Controller
             }
             catch (Exception)
             {
-                _logger.LogError("Error al iniciar GeneralesController.Cupones");
+                _logger.LogError("Error al iniciar GeneralesController.CuponesId");
+                throw;
+            }
+        }
+
+        [HttpPut("Put_Actualizar_Cupones")]
+        public async Task<IActionResult> actualizarCupones([FromBody] CuponesDTOs cuponesDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando GeneralesController.actualizarCupones...");
+                var respuesta = await _generalesCommands.actualizarCupon(cuponesDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.actualizarCupones...");
                 throw;
             }
         }

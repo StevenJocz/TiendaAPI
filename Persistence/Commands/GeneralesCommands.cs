@@ -17,6 +17,7 @@ namespace TiendaUNAC.Persistence.Commands
     public interface IGeneralesCommands
     {
         Task<RespuestaDTO> crearCupon(CuponesDTOs cuponesDTOs);
+        Task<RespuestaDTO> actualizarCupon(CuponesDTOs cuponesDTOs);
     }
     public class GeneralesCommands: IGeneralesCommands, IDisposable
     {
@@ -98,6 +99,48 @@ namespace TiendaUNAC.Persistence.Commands
             }
         }
 
+        #endregion
+
+
+        #region ACTUALIZAR CUPON
+
+        public async Task<RespuestaDTO> actualizarCupon(CuponesDTOs cuponesDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesCommands.actualizarCupon...");
+            try
+            {
+                var existeCupon = await _context.CuponesEs.FirstOrDefaultAsync(x => x.IdCupon == cuponesDTOs.IdCupon);
+                if (existeCupon != null)
+                {
+                    existeCupon.TextoCupon = cuponesDTOs.TextoCupon;
+                    existeCupon.ValorCupon = cuponesDTOs.ValorCupon;
+                    existeCupon.FechaLimite = cuponesDTOs.FechaLimite;
+                    existeCupon.Activo = cuponesDTOs.Activo;
+
+                    _context.CuponesEs.Update(existeCupon);
+                    await _context.SaveChangesAsync();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha actualizado el cupón exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo encontrar el cupón!. Por favor, verifica los datos.",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesCommands.actualizarCupon...");
+                throw;
+            }
+        }
         #endregion
     }
 }
