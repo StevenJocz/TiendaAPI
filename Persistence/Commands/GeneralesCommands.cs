@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.ConfiguracionDTOs;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
+using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
 
@@ -18,6 +19,7 @@ namespace TiendaUNAC.Persistence.Commands
     {
         Task<RespuestaDTO> crearCupon(CuponesDTOs cuponesDTOs);
         Task<RespuestaDTO> actualizarCupon(CuponesDTOs cuponesDTOs);
+        Task<RespuestaDTO> actualizarMonto(MontoEnvioDTOs montoEnvioDTOs);
     }
     public class GeneralesCommands: IGeneralesCommands, IDisposable
     {
@@ -101,7 +103,6 @@ namespace TiendaUNAC.Persistence.Commands
 
         #endregion
 
-
         #region ACTUALIZAR CUPON
 
         public async Task<RespuestaDTO> actualizarCupon(CuponesDTOs cuponesDTOs)
@@ -142,5 +143,47 @@ namespace TiendaUNAC.Persistence.Commands
             }
         }
         #endregion
+
+        #region ACTUALIZAR MONTO
+
+        public async Task<RespuestaDTO> actualizarMonto(MontoEnvioDTOs montoEnvioDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesCommands.actualizarMonto...");
+            try
+            {
+                var existeMonto = await _context.MontoEnvioEs.FirstOrDefaultAsync(x => x.IdMonto == montoEnvioDTOs.IdMonto);
+                if (existeMonto != null)
+                {
+                    existeMonto.ValorMonto = montoEnvioDTOs.ValorMonto;
+                    existeMonto.FechaActualizacion = DateTime.UtcNow;
+                    existeMonto.IdUsuarioActualizador = montoEnvioDTOs.IdUsuarioActualizador;
+
+                    _context.MontoEnvioEs.Update(existeMonto);
+                    await _context.SaveChangesAsync();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha actualizado el monto exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo encontrar el monto!. Por favor, verifica los datos.",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesCommands.actualizarMonto...");
+                throw;
+            }
+        }
+        #endregion
+
+
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.ConfiguracionDTOs;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
+using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Infrastructure;
 
 namespace TiendaUNAC.Persistence.Queries
@@ -20,7 +21,9 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<generosDTOs>> generos();
         Task<List<ubicacionDTOs>> ubicacion(int Accion, int Parametro);
         Task<List<CuponesDTOs>> cupones();
+        Task<List<CuponesDTOs>> consultarCupon(string cupon, int idUsuario);
         Task<List<CuponesDTOs>> cuponesId(int IdCupon);
+        Task<List<MontoEnvioDTOs>> listarMonto(int IdMonto);
     }
 
     public class GeneralesQueries: IGeneralesQueries, IDisposable
@@ -187,7 +190,7 @@ namespace TiendaUNAC.Persistence.Queries
             _logger.LogTrace("Iniciando metodo GeneralesQueries.consultarCupon...");
             try
             {
-                var cupones = await _context.CuponesEs.FromSqlInterpolated($"EXEC TipoDocumentos").ToListAsync();
+                var cupones = await _context.CuponesEs.FromSqlInterpolated($"EXEC Verificar_Cupo_Usuario @IdUsuario={idUsuario}, @Cupon={cupon}").ToListAsync();
 
                 var ListCupones = new List<CuponesDTOs>();
 
@@ -245,6 +248,41 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error en el metodo GeneralesQueries.cuponesId...");
+                throw;
+            }
+        }
+        #endregion
+
+
+        #region MONTO
+        public async Task<List<MontoEnvioDTOs>> listarMonto(int IdMonto)
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesQueries.listoMonto...");
+            try
+            {
+                var monto = await _context.MontoEnvioEs.Where(x => x.IdMonto == IdMonto).ToListAsync();
+
+                var ListMonto = new List<MontoEnvioDTOs>();
+
+                foreach (var item in monto)
+                {
+                    var list = new MontoEnvioDTOs
+                    {
+                        IdMonto = item.IdMonto,
+                        ValorMonto = item.ValorMonto,
+                        FechaActualizacion = item.FechaActualizacion,
+                        IdUsuarioActualizador = item.IdUsuarioActualizador,
+                    };
+
+                    ListMonto.Add(list);
+                }
+                
+
+                return ListMonto;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesQueries.listoMonto...");
                 throw;
             }
         }

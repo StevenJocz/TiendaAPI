@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
-using TiendaUNAC.Domain.Entities.ConfiguracionE;
+using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
 
 namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs

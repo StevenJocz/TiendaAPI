@@ -128,6 +128,24 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
+
+        [HttpGet("Get_Consultar_Cupones")]
+        public async Task<IActionResult> ConsultarCupon(string cupon, int idUsuario)
+        {
+            _logger.LogInformation("Iniciando GeneralesController.CconsultarCupon...");
+            try
+            {
+                var respuesta = await _generalesQueries.consultarCupon(cupon, idUsuario);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.CconsultarCupon");
+                throw;
+            }
+        }
+
         [HttpGet("Get_Id_Cupones")]
         public async Task<IActionResult> CuponesId(int IdCupon)
         {
@@ -164,6 +182,40 @@ namespace TiendaUNAC.API.Controller
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar GeneralesController.actualizarCupones...");
+                throw;
+            }
+        }
+
+
+        [HttpGet("Get_Monto")]
+        public async Task<IActionResult> Monto(int IdMonto)
+        {
+            _logger.LogInformation("Iniciando GeneralesController.Monto...");
+            try
+            {
+                var respuesta = await _generalesQueries.listarMonto(IdMonto);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.Monto");
+                throw;
+            }
+        }
+
+        [HttpPut("Put_Actualizar_Monto")]
+        public async Task<IActionResult> actualizarMonto([FromBody] MontoEnvioDTOs montoEnvioDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando GeneralesController.actualizarMonto...");
+                var respuesta = await _generalesCommands.actualizarMonto(montoEnvioDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.actualizarMonto...");
                 throw;
             }
         }

@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
-using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
+using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Entities.ProductoE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
 
@@ -46,11 +46,12 @@ namespace TiendaUNAC.Infrastructure
         public virtual DbSet<tiposDocumentosDTOs> tipoDocumentosEs { get; set; }
         public virtual DbSet<generosDTOs> generosEs { get; set; }
         public virtual DbSet<ubicacionDTOs> ubicacionEs { get; set; }
+        public virtual DbSet<MontoEnvioE> MontoEnvioEs { get; set; }
+        public virtual DbSet<CuponesE> CuponesEs { get; set; }
 
         // Configuración
         public virtual DbSet<CategoriaE> CategoriaEs { get; set; }
         public virtual DbSet<TagE> TagEs { get; set; }
-        public virtual DbSet<CuponesE> CuponesEs { get; set; }
 
         //Productos
         public virtual DbSet<ProductoE> ProductoEs { get; set; }
