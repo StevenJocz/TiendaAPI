@@ -115,23 +115,25 @@ namespace TiendaUNAC.Persistence.Commands
                     await _context.EnvioEs.AddAsync(envioE);
                     await _context.SaveChangesAsync();
 
-                    var cuponUsuario = new CuponUsuarioDTOs
+                    if (registrarPedido.IdCupon != 0 )
                     {
-                        IdCupon = registrarPedido.IdCupon,
-                        IdUsuario = registrarPedido.IdUsuario,
-                        FechaRegistro = DateTime.UtcNow,
-                    };
+                        var cuponUsuario = new CuponUsuarioDTOs
+                        {
+                            IdCupon = registrarPedido.IdCupon,
+                            IdUsuario = registrarPedido.IdUsuario,
+                            FechaRegistro = DateTime.UtcNow,
+                        };
 
-                    var cuponUsuarioE = CuponUsuarioDTOs.CrearE(cuponUsuario);
-                    await _context.CuponUsuarioEs.AddAsync(cuponUsuarioE);
-                    await _context.SaveChangesAsync();
+                        var cuponUsuarioE = CuponUsuarioDTOs.CrearE(cuponUsuario);
+                        await _context.CuponUsuarioEs.AddAsync(cuponUsuarioE);
+                        await _context.SaveChangesAsync();
+                    }
 
                     return new RespuestaDTO
                     {
                         resultado = true,
                         mensaje = "¡Se ha añadido el pedido exitosamente!",
                     };
-
                 }
                 else
                 {
