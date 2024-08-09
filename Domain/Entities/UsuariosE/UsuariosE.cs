@@ -21,6 +21,8 @@ namespace TiendaUNAC.Domain.Entities.UsuariosE
         public string Documento { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Celular { get; set; }
+        public int IdPais { get; set; }
+        public int IdDepartamento { get; set; }
         public int IdMunicipio { get; set; }
         public string Direccion { get; set; }
         public string Correo { get; set; }

@@ -14,6 +14,7 @@ namespace TiendaUNAC.API.Application
             service.AddTransient<IProductoCommands, ProductoCommands>();
             service.AddTransient<IUsuarioCommands, UsuarioCommands>();
             service.AddTransient<IGeneralesCommands, GeneralesCommands>();
+            service.AddTransient<IPedidoCommands, PedidoCommands>();
 
 
             // Queries Persistance Services

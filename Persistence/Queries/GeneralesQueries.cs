@@ -62,7 +62,6 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
-
         #region TIPO DOCUMENTOS
         public async Task<List<tiposDocumentosDTOs>> TiposDocumentos()
         {
@@ -183,7 +182,6 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion 
 
-
         #region CONSULTAR CUPONE
         public async Task<List<CuponesDTOs>> consultarCupon(string cupon, int idUsuario)
         {
@@ -252,7 +250,6 @@ namespace TiendaUNAC.Persistence.Queries
             }
         }
         #endregion
-
 
         #region MONTO
         public async Task<List<MontoEnvioDTOs>> listarMonto(int IdMonto)

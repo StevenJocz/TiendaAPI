@@ -10,6 +10,7 @@ using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
 using TiendaUNAC.Domain.Entities.GeneralesE;
+using TiendaUNAC.Domain.Entities.PedidosE;
 using TiendaUNAC.Domain.Entities.ProductoE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
 
@@ -48,22 +49,27 @@ namespace TiendaUNAC.Infrastructure
         public virtual DbSet<ubicacionDTOs> ubicacionEs { get; set; }
         public virtual DbSet<MontoEnvioE> MontoEnvioEs { get; set; }
         public virtual DbSet<CuponesE> CuponesEs { get; set; }
+        public virtual DbSet<CuponUsuarioE> CuponUsuarioEs { get; set; }
+        public virtual DbSet<EstadoE> EstadoEs { get; set; }
+        public virtual DbSet<EnvioE> EnvioEs { get; set; }
 
         // Configuración
         public virtual DbSet<CategoriaE> CategoriaEs { get; set; }
         public virtual DbSet<TagE> TagEs { get; set; }
 
-        //Productos
+        // Productos
         public virtual DbSet<ProductoE> ProductoEs { get; set; }
         public virtual DbSet<ImagenProductoE> ImagenProductoEs { get; set; }
         public virtual DbSet<TallaProductoE> TallaProductoEs { get; set; }
         public virtual DbSet<InventarioSionDTOs> InventarioSionEs { get; set; }
 
-        //Usuarios 
+        // Usuarios 
         public virtual DbSet<UsuariosE> UsuariosEs { get; set; }
         public virtual DbSet<PermisosUsuarioE> PermisosUsuarioEs { get; set; }
        
-
+        // Pedidos
+        public virtual DbSet<PedidosE> PedidosEs { get; set; }
+        public virtual DbSet<PedidosRegistrosE> PedidosRegistrosEs { get; set; }
 
     }
 }

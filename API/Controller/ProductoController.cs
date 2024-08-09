@@ -152,5 +152,29 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+
+        [HttpGet("Get_Productos_Favoritos")]
+        public async Task<IActionResult> listaProductosFavoritos([FromQuery]  List<int> IdProductos)
+        {
+            _logger.LogInformation("Iniciando ProductoController.listaProductosFavoritos...");
+            try
+            {
+                var respuesta = await _productoQueries.listaProductosFavoritos(IdProductos);
+
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontro productos registrados. Por favor, intenta nuevamente más tarde.");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.listaProductosFavoritos");
+                throw;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
+using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
 using TiendaUNAC.Domain.Utilities;
@@ -84,5 +85,71 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
+
+        [HttpGet("Get_Usuario")]
+        public async Task<IActionResult> Usuario()
+        {
+            _logger.LogInformation("Iniciando UsuarioController.Usuario...");
+            try
+            {
+                var respuesta = await _usuariosQueries.Usuario();
+                    return Ok(respuesta);
+                
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.Usuario");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_UsuarioID")]
+        public async Task<IActionResult> UsuarioId(int IdUsuario)
+        {
+            _logger.LogInformation("Iniciando UsuarioController.UsuarioId...");
+            try
+            {
+                var respuesta = await _usuariosQueries.UsuarioId(IdUsuario);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.UsuarioId");
+                throw;
+            }
+        }
+
+        [HttpPut("Put_Actualizar_Usuario")]
+        public async Task<IActionResult> actualizarUsuario([FromBody] UsuariosDTOs usuariosDTOs, int Accion)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando UsuarioController.actualizarUsuario...");
+                var respuesta = await _usuarioCommands.actualizarUsuario(usuariosDTOs, Accion);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.actualizarUsuario...");
+                throw;
+            }
+        }
+
+        [HttpPut("Put_Actualizar_contrasena")]
+        public async Task<IActionResult> actualizarContrasena([FromBody] passwordDTOs passwordDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando UsuarioController.actualizarContrasena...");
+                var respuesta = await _usuarioCommands.actualizarContrasena(passwordDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.actualizarContrasena...");
+                throw;
+            }
+        }
     }
 }

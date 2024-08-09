@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
+using TiendaUNAC.Domain.Entities.UsuariosE;
 using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
 using static TiendaUNAC.Domain.DTOs.UsuariosDTOs.UsuariosDTOs;
@@ -21,6 +22,8 @@ namespace TiendaUNAC.Persistence.Queries
     {
         Task<RespuestaInicioSesion> InicioSesion(InicioSesionDTOs inicioSesionDTOs);
         Task<List<PermisosUsuarioDTOs>> permisosUsuario(int tipoUsuario);
+        Task<List<InformacionUsuariosDTOS>> Usuario();
+        Task<List<UsuariosDTOs>> UsuarioId(int IdUsuario);
     }
 
     public class UsuarioQueries : IUsuarioQueries, IDisposable
@@ -162,6 +165,93 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar UsuarioQueries.permisosUsuario...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region USUARIOS
+        public async Task<List<InformacionUsuariosDTOS>> Usuario()
+        {
+            _logger.LogInformation("Iniciando metodo UsuarioQueries.Usuario...");
+            try
+            {
+                var usuarios = await _context.UsuariosEs.ToListAsync();
+
+                var listaUsuarios = new List<InformacionUsuariosDTOS>();
+
+                foreach (var item in usuarios)
+                {
+
+                    var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={6}, @Parametro={item.IdMunicipio}").ToListAsync()).FirstOrDefault();
+
+                    var ubicacion = (await _context.ubicacionEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={5}, @Parametro={item.IdMunicipio}").ToListAsync()).FirstOrDefault();
+                    
+                    var lista = new InformacionUsuariosDTOS
+                    {
+                        IdUsuario = item.IdUsuario,
+                        TipoUsuario = item.IdTipoUsuario == 1 ? "Administrador" : "Usuario",
+                        Nombre = item.Nombre,
+                        Apellido = item.Apellido,
+                        TipoDocumento = tipoDocumento.Documento,
+                        Documento = item.Documento,
+                        FechaNacimiento = item.FechaNacimiento,
+                        Celular = item.Celular,
+                        Ubicacion = ubicacion.Nombre,
+                        Direccion = item.Direccion,
+                        Correo = item.Correo,
+                        FechaRegistro = item.FechaRegistro
+                    };
+
+                    listaUsuarios.Add(lista);
+                }
+
+                return listaUsuarios;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioQueries.Usuario...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region USUARIO POR ID
+        public async Task<List<UsuariosDTOs>> UsuarioId(int IdUsuario)
+        {
+            _logger.LogInformation("Iniciando metodo UsuarioQueries.UsuarioId...");
+            try
+            {
+                var usuarios = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdUsuario == IdUsuario);
+
+                var listaUsuarios = new List<UsuariosDTOs>();
+
+
+                var lista = new UsuariosDTOs
+                {
+                    IdUsuario = usuarios.IdUsuario,
+                    IdTipoUsuario = usuarios.IdTipoUsuario,
+                    Nombre = usuarios.Nombre,
+                    Apellido = usuarios.Apellido,
+                    IdTipoDocumento = usuarios.IdTipoDocumento,
+                    Documento = usuarios.Documento,
+                    FechaNacimiento = usuarios.FechaNacimiento,
+                    Celular = usuarios.Celular,
+                    IdPais = usuarios.IdPais,
+                    IdDepartamento = usuarios.IdDepartamento,
+                    IdMunicipio = usuarios.IdMunicipio,
+                    Direccion = usuarios.Direccion,
+                    Correo = usuarios.Correo,
+                    FechaRegistro = usuarios.FechaRegistro
+                };
+
+                listaUsuarios.Add(lista);
+
+                return listaUsuarios;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioQueries.UsuarioId...");
                 throw;
             }
         }

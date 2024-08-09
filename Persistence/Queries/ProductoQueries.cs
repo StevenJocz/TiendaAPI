@@ -25,6 +25,7 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<InventarioSionDTOs>> inventariosSIONId(int idInventario);
         Task<List<VerProductoDtos>> listaProductos(int accion);
         Task<List<ListaProductosDTOs>> ProductosId(int idProducto);
+        Task<List<VerProductoDtos>> listaProductosFavoritos(List<int> IdProductos);
     }
 
     public class ProductoQueries: IProductoQueries, IDisposable
@@ -285,5 +286,65 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
+        #region LISTAR PRODUCTOS FAVORITOS
+        public async Task<List<VerProductoDtos>> listaProductosFavoritos(List<int> IdProductos)
+        {
+            _logger.LogTrace("Iniciando metodo ProductoQueries.listaProductos...");
+            try
+            {
+                var productos = await _context.ProductoEs
+                                     .Where(x => IdProductos.Contains(x.IdProducto))
+                                     .ToListAsync();
+
+                var ListProductos = new List<VerProductoDtos>();
+
+                foreach (var item in productos)
+                {
+                    var imageneE = await _context.ImagenProductoEs.Where(x => x.IdProducto == item.IdProducto).Take(2).ToListAsync();
+
+                    var ListImagenes = new List<ImagenDto>();
+
+                    if (imageneE != null)
+                    {
+                        var imagenes = new ImagenDto
+                        {
+                            ImagenUno = imageneE.ElementAtOrDefault(0).Imagen,
+                            ImagenDos = imageneE.ElementAtOrDefault(1).Imagen
+                        };
+
+                        ListImagenes.Add(imagenes);
+                    }
+
+                    var categoria = await _context.CategoriaEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdCategoria == item.IdCategoria);
+
+                    var inventario = _context.InventarioSionEs
+                        .FromSqlInterpolated($"EXEC InventarioSION @Accion={2}, @IdInventario={item.IdInventario}").AsEnumerable()
+                        .FirstOrDefault();
+
+                    var list = new VerProductoDtos
+                    {
+                        Id = item.IdProducto,
+                        Nombre = item.Nombre,
+                        Categorias = categoria.Nombre,
+                        Imagenes = ListImagenes,
+                        AplicaDescuento = item.Descuento != 0 && item.FechaFinDescuento > DateTime.Now ? true : false,
+                        Descuento = item.Descuento,
+                        Nuevo = (DateTime.Now - item.FechaCreado).TotalDays < 15,
+                        Activo = item.Activo,
+                        existencias = inventario.existencias
+                    };
+
+                    ListProductos.Add(list);
+                }
+
+                return ListProductos;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoQueries.listaProductos");
+                throw;
+            }
+        }
+        #endregion
     }
 }

@@ -19,6 +19,8 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
         public string Documento { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Celular { get; set; }
+        public int IdPais { get; set; }
+        public int IdDepartamento { get; set; }
         public int IdMunicipio { get; set; }
         public string Direccion { get; set; }
         public string Correo { get; set; }
@@ -37,6 +39,8 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
                 Documento = usuariosE.Documento,
                 FechaNacimiento = usuariosE.FechaNacimiento,
                 Celular = usuariosE.Celular,
+                IdPais = usuariosE.IdPais,
+                IdDepartamento = usuariosE.IdDepartamento,
                 IdMunicipio = usuariosE.IdMunicipio,
                 Direccion = usuariosE.Direccion,
                 Correo = usuariosE.Correo,
@@ -57,6 +61,8 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
                 Documento = usuariosDTOs.Documento,
                 FechaNacimiento = usuariosDTOs.FechaNacimiento,
                 Celular = usuariosDTOs.Celular,
+                IdPais = usuariosDTOs.IdPais,
+                IdDepartamento = usuariosDTOs.IdDepartamento,
                 IdMunicipio = usuariosDTOs.IdMunicipio,
                 Direccion = usuariosDTOs.Direccion,
                 Correo = usuariosDTOs.Correo,
@@ -68,6 +74,12 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
         public class InicioSesionDTOs
         {
             public string correo { get; set; }
+            public string password { get; set; }
+        }
+
+        public class passwordDTOs
+        {
+            public int idUsuario { get; set; }
             public string password { get; set; }
         }
 
@@ -86,6 +98,23 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
             public bool resultado { get; set; }
             public string mensaje { get; set; }
             public string token { get; set; }
+        }
+
+
+        public class InformacionUsuariosDTOS
+        {
+            public int IdUsuario { get; set; }
+            public string TipoUsuario { get; set; }
+            public string Nombre { get; set; }
+            public string Apellido { get; set; }
+            public string TipoDocumento { get; set; }
+            public string Documento { get; set; }
+            public DateTime FechaNacimiento { get; set; }
+            public string Celular { get; set; }
+            public string Ubicacion { get; set; }
+            public string Direccion { get; set; }
+            public string Correo { get; set; }
+            public DateTime FechaRegistro { get; set; }
         }
     }
 
