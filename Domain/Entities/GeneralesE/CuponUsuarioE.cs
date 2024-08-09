@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TiendaUNAC.Domain.Entities.GeneralesE
 {
-    [Table("TblCupones")]
+    [Table("TblCuponesUsuario")]
     public class CuponUsuarioE
     {
         [Key]

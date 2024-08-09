@@ -92,7 +92,8 @@ namespace TiendaUNAC.Persistence.Commands
                             Nombre = item.Nombre,
                             Color = item.Color,
                             Talla = item.Talla,
-                            Valor = item.Valor
+                            ValorUnidad = item.ValorUnidad,
+                            ValorTotal = item.ValorUnidad * item.Cantidad
                         };
 
                         var registroE = PedidosRegistrosDTOs.CrearE(registros);
@@ -105,7 +106,7 @@ namespace TiendaUNAC.Persistence.Commands
                         IdPedido = pedidoE.IdPedido,
                         IdEstado = 1,
                         Direccion = registrarPedido.Direccion,
-                        Complemento = registrarPedido.Direccion,
+                        Complemento = registrarPedido.Complemento,
                         Barrio = registrarPedido.Barrio,
                         Destinatario = registrarPedido.Destinatario,
                         Responsable = registrarPedido.Responsable
