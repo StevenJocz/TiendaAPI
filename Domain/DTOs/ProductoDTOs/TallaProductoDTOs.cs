@@ -36,6 +36,7 @@ namespace TiendaUNAC.Domain.DTOs.ProductoDTOs
             };
         }
     }
+
     public class ListaTallaDTOs
     {
         public int id { get; set; }

@@ -153,6 +153,30 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
+        [HttpGet("Get_Favoritos")]
+        public async Task<IActionResult> listaFavoritos(int idUsuario)
+        {
+            _logger.LogInformation("Iniciando ProductoController.listaFavoritos...");
+            try
+            {
+                var respuesta = await _productoQueries.listaFavoritos(idUsuario);
+
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontro favoritos registrados. Por favor, intenta nuevamente más tarde.");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.listaFavoritos");
+                throw;
+            }
+        }
+
         [HttpGet("Get_Productos_Favoritos")]
         public async Task<IActionResult> listaProductosFavoritos([FromQuery]  List<int> IdProductos)
         {
@@ -173,6 +197,62 @@ namespace TiendaUNAC.API.Controller
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar ProductoController.listaProductosFavoritos");
+                throw;
+            }
+        }
+
+        [HttpPost("Post_Agregar_Favoritos")]
+        public async Task<IActionResult> agregarFavoritos([FromBody] FavoritosDTOs agregarFavoritos)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando ProductoController.agregarFavoritos...");
+                var respuesta = await _productoCommands.agregarFavoritos(agregarFavoritos);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.agregarFavoritos...");
+                throw;
+            }
+        }
+
+        [HttpDelete("Delete_Eliminar_Favoritos")]
+        public async Task<IActionResult> eliminarFavoritos(int idProducto, int idUsuario)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando ProductoController.eliminarFavoritos...");
+                var respuesta = await _productoCommands.eliminarFavoritos(idProducto, idUsuario);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.eliminarFavoritos...");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_Favoritos_Usuario")]
+        public async Task<IActionResult> listaFavoritosUsuarios(int idUsuario)
+        {
+            _logger.LogInformation("Iniciando ProductoController.listaFavoritosUsuarios...");
+            try
+            {
+                var respuesta = await _productoQueries.listaFavoritosUsuarios(idUsuario);
+
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontro favoritos registrados. Por favor, intenta nuevamente más tarde.");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.listaFavoritosUsuarios");
                 throw;
             }
         }

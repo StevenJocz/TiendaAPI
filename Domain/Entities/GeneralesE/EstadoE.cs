@@ -15,6 +15,8 @@ namespace TiendaUNAC.Domain.Entities.GeneralesE
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdEstado { get; set; }
         public string Nombre { get; set; }
-        public bool EsEstadoPedido { get; set; }
+        public string Descripcion { get; set; }
+        public bool EsPedido { get; set; }
+        public bool EsEnvio { get; set; }
     }
 }

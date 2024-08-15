@@ -25,7 +25,9 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<InventarioSionDTOs>> inventariosSIONId(int idInventario);
         Task<List<VerProductoDtos>> listaProductos(int accion);
         Task<List<ListaProductosDTOs>> ProductosId(int idProducto);
+        Task<List<FavoritosDTOs>> listaFavoritos(int idUsuario);
         Task<List<VerProductoDtos>> listaProductosFavoritos(List<int> IdProductos);
+        Task<List<FavoritosInformacion>> listaFavoritosUsuarios(int idUsuario);
     }
 
     public class ProductoQueries: IProductoQueries, IDisposable
@@ -286,15 +288,46 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
+        #region LISTAR  FAVORITOS
+        public async Task<List<FavoritosDTOs>> listaFavoritos(int idUsuario)
+        {
+            _logger.LogTrace("Iniciando metodo ProductoQueries.listaFavoritos...");
+            try
+            {
+                var favoritos = await _context.FavoritosEs.Where(x => x.IdUsuario == idUsuario).ToListAsync();
+
+                var ListFavoritos = new List<FavoritosDTOs>();
+
+                foreach (var item in favoritos)
+                {
+                    var list = new FavoritosDTOs
+                    {
+                        IdDeseos = item.IdDeseos,
+                        IdProducto = item.IdProducto,
+                        IdUsuario = item.IdUsuario,
+                        FechaAgregado = item.FechaAgregado,
+                    };
+
+                    ListFavoritos.Add(list);
+                }
+
+                return ListFavoritos;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoQueries.listaFavoritos");
+                throw;
+            }
+        }
+        #endregion
+
         #region LISTAR PRODUCTOS FAVORITOS
         public async Task<List<VerProductoDtos>> listaProductosFavoritos(List<int> IdProductos)
         {
             _logger.LogTrace("Iniciando metodo ProductoQueries.listaProductos...");
             try
             {
-                var productos = await _context.ProductoEs
-                                     .Where(x => IdProductos.Contains(x.IdProducto))
-                                     .ToListAsync();
+                var productos = await _context.ProductoEs.Where(x => IdProductos.Contains(x.IdProducto)).ToListAsync();
 
                 var ListProductos = new List<VerProductoDtos>();
 
@@ -342,6 +375,43 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar ProductoQueries.listaProductos");
+                throw;
+            }
+        }
+        #endregion
+
+        #region LISTAR  FAVORITOS USUARIO
+        public async Task<List<FavoritosInformacion>> listaFavoritosUsuarios(int idUsuario)
+        {
+            _logger.LogTrace("Iniciando metodo ProductoQueries.listaFavoritosUsuarios...");
+            try
+            {
+                var favoritos = await _context.FavoritosEs.Where(x => x.IdUsuario == idUsuario).ToListAsync();
+
+                var ListFavoritos = new List<FavoritosInformacion>();
+
+                foreach (var item in favoritos)
+                {
+                    var producto = await _context.ProductoEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdProducto == item.IdProducto);
+                    var categoria = await _context.CategoriaEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdCategoria == producto.IdCategoria);
+                    var imagen = await _context.ImagenProductoEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdProducto == item.IdProducto);
+                    var list = new FavoritosInformacion
+                    {
+                        
+                        IdProducto = item.IdProducto,
+                        Nombre = producto.Nombre,
+                        Categoria = categoria.Nombre,
+                        Imagen = imagen.Imagen
+                    };
+
+                    ListFavoritos.Add(list);
+                }
+
+                return ListFavoritos;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoQueries.listaFavoritosUsuarios...");
                 throw;
             }
         }

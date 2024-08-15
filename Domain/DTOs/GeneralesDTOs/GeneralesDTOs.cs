@@ -11,6 +11,7 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
     {
         public bool resultado { get; set; }
         public string mensaje { get; set; }
+        public int? orden { get; set; }
     }
 
     public class tiposDocumentosDTOs

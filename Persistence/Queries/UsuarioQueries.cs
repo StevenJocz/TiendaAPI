@@ -24,6 +24,7 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<PermisosUsuarioDTOs>> permisosUsuario(int tipoUsuario);
         Task<List<InformacionUsuariosDTOS>> Usuario();
         Task<List<UsuariosDTOs>> UsuarioId(int IdUsuario);
+        Task<List<InformacionUsuariosDTOS>> informacionUsuario(int IdUsuario);
     }
 
     public class UsuarioQueries : IUsuarioQueries, IDisposable
@@ -226,7 +227,6 @@ namespace TiendaUNAC.Persistence.Queries
 
                 var listaUsuarios = new List<UsuariosDTOs>();
 
-
                 var lista = new UsuariosDTOs
                 {
                     IdUsuario = usuarios.IdUsuario,
@@ -252,6 +252,48 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar UsuarioQueries.UsuarioId...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region INFORMACIÓN DE USUARIO
+        public async Task<List<InformacionUsuariosDTOS>> informacionUsuario(int IdUsuario)
+        {
+            _logger.LogInformation("Iniciando metodo UsuarioQueries.informacionUsuario...");
+            try
+            {
+                var usuarios = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdUsuario == IdUsuario);
+
+                var listaUsuarios = new List<InformacionUsuariosDTOS>();
+
+                var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={6}, @Parametro={usuarios.IdMunicipio}").ToListAsync()).FirstOrDefault();
+
+                var ubicacion = (await _context.ubicacionEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={5}, @Parametro={usuarios.IdMunicipio}").ToListAsync()).FirstOrDefault();
+
+                var lista = new InformacionUsuariosDTOS
+                {
+                    IdUsuario = usuarios.IdUsuario,
+                    TipoUsuario = usuarios.IdTipoUsuario == 1 ? "Administrador" : "Usuario",
+                    Nombre = usuarios.Nombre,
+                    Apellido = usuarios.Apellido,
+                    TipoDocumento = tipoDocumento.Documento,
+                    Documento = usuarios.Documento,
+                    FechaNacimiento = usuarios.FechaNacimiento,
+                    Celular = usuarios.Celular,
+                    Ubicacion = ubicacion.Nombre,
+                    Direccion = usuarios.Direccion,
+                    Correo = usuarios.Correo,
+                    FechaRegistro = usuarios.FechaRegistro
+                };
+
+                listaUsuarios.Add(lista);
+
+                return listaUsuarios;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioQueries.informacionUsuario...");
                 throw;
             }
         }

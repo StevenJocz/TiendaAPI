@@ -219,5 +219,23 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+
+        [HttpGet("Get_Estados")]
+        public async Task<IActionResult> listarEstados(int Accion)
+        {
+            _logger.LogInformation("Iniciando GeneralesController.listarEstados...");
+            try
+            {
+                var respuesta = await _generalesQueries.listarEstados(Accion);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.listarEstados");
+                throw;
+            }
+        }
+
     }
 }

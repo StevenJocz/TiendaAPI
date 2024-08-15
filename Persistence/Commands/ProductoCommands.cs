@@ -20,7 +20,10 @@ namespace TiendaUNAC.Persistence.Commands
     {
         Task<RespuestaDTO> crearProducto(ListaProductosDTOs listaProductosDTOs);
         Task<RespuestaDTO> actualizarProducto(ListaProductosDTOs listaProductosDTOs);
+        Task<RespuestaDTO> agregarFavoritos(FavoritosDTOs favoritosDTOs);
+        Task<RespuestaDTO> eliminarFavoritos(int idProducto, int idUsuario);
     }
+
     public class ProductoCommands: IProductoCommands, IDisposable
     {
         private readonly TiendaUNACContext _context = null;
@@ -151,7 +154,6 @@ namespace TiendaUNAC.Persistence.Commands
         #endregion
 
         #region ACTUALIZAR PRODUCTO
-
         public async Task<RespuestaDTO> actualizarProducto(ListaProductosDTOs listaProductosDTOs)
         {
             _logger.LogTrace("Iniciando metodo ProductoCommands.actualizarProducto...");
@@ -244,6 +246,85 @@ namespace TiendaUNAC.Persistence.Commands
             catch (Exception)
             {
                 _logger.LogError("Error en el metodo ProductoCommands.actualizarProducto...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region AGREGAR FAVORITOS
+        public async Task<RespuestaDTO> agregarFavoritos(FavoritosDTOs favoritosDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo ProductoCommands.agregarFavoritos...");
+            try
+            {
+                var newFavorito = new FavoritosDTOs
+                {
+                    IdProducto = favoritosDTOs.IdProducto,
+                    IdUsuario = favoritosDTOs.IdUsuario,
+                    FechaAgregado = (DateTime.UtcNow).ToLocalTime(),
+                };
+
+                var favorito = FavoritosDTOs.CrearE(newFavorito);
+                await _context.FavoritosEs.AddAsync(favorito);
+                await _context.SaveChangesAsync();
+
+                if (favorito.IdDeseos != 0)
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha añadido el producto a la lista de deseos exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo agregar el producto a la lista de deseos ! Por favor, inténtalo de nuevo más tarde.",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo ProductoCommands.agregarFavoritos...");
+                throw;
+            }
+        }
+
+        #endregion
+
+        #region ELIMINAR FAVORITOS
+        public async Task<RespuestaDTO> eliminarFavoritos(int idProducto, int idUsuario)
+        {
+            _logger.LogTrace("Iniciando metodo ProductoCommands.eliminarFavoritos...");
+            try
+            {
+                var favorito = await _context.FavoritosEs.FirstOrDefaultAsync(f => f.IdProducto == idProducto && f.IdUsuario == idUsuario);
+
+                if (favorito != null)
+                {
+                    _context.FavoritosEs.Remove(favorito);
+                    await _context.SaveChangesAsync();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡El producto ha sido eliminado de la lista de deseos exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡El producto no se encontró en la lista de deseos!",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo ProductoCommands.eliminarFavoritos...");
                 throw;
             }
         }

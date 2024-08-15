@@ -19,6 +19,7 @@ namespace TiendaUNAC.Domain.DTOs.PedidosDTOs
         public string Talla { get; set; }
         public decimal ValorUnidad { get; set; }
         public decimal ValorTotal { get; set; }
+        public string imagen { get; set; }
 
         public static PedidosRegistrosDTOs CrearDTOs(PedidosRegistrosE pedidosRegistrosE)
         {
@@ -33,7 +34,8 @@ namespace TiendaUNAC.Domain.DTOs.PedidosDTOs
                 Color = pedidosRegistrosE.Color,
                 Talla = pedidosRegistrosE.Talla,
                 ValorUnidad = pedidosRegistrosE.ValorUnidad,
-                ValorTotal = pedidosRegistrosE.ValorTotal
+                ValorTotal = pedidosRegistrosE.ValorTotal,
+                imagen= pedidosRegistrosE.imagen
 
             };
         }
@@ -51,7 +53,8 @@ namespace TiendaUNAC.Domain.DTOs.PedidosDTOs
                 Color = pedidosRegistrosDTOs.Color,
                 Talla = pedidosRegistrosDTOs.Talla,
                 ValorUnidad = pedidosRegistrosDTOs.ValorUnidad,
-                ValorTotal = pedidosRegistrosDTOs.ValorTotal
+                ValorTotal = pedidosRegistrosDTOs.ValorTotal,
+                imagen = pedidosRegistrosDTOs.imagen
 
             };
         }

@@ -14,12 +14,14 @@ using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Entities.PedidosE;
 using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TiendaUNAC.Persistence.Commands
 {
     public interface IPedidoCommands
     {
         Task<RespuestaDTO> registrarPedido(RegistrarPedido registrarPedido);
+        Task<RespuestaDTO> actualizarEstado(ObjetoEstados objetoEstados);
     }
     public class PedidoCommands: IPedidoCommands, IDisposable
     {
@@ -63,16 +65,19 @@ namespace TiendaUNAC.Persistence.Commands
             _logger.LogTrace("Iniciando metodo PedidoCommands.registrarPedido...");
             try
             {
+                var ultimaOrden = await _context.PedidosEs.OrderByDescending(x => x.IdPedido).FirstOrDefaultAsync();
+
                 var pedido = new PedidosDTOs
                 {
                     IdUsuario = registrarPedido.IdUsuario,
+                    Orden = ultimaOrden == null ? 1: ultimaOrden.Orden + 1,
                     IdEstado = 1,
                     SubTotal = registrarPedido.SubTotal,
                     ValorEnvio = registrarPedido.ValorEnvio,
                     ValorDescuento = registrarPedido.ValorDescuento,
                     ValorTotal = registrarPedido.ValorTotal,
                     TipoEntrega = registrarPedido.TipoEntrega,
-                    FechaRegistro = DateTime.UtcNow,
+                    FechaRegistro = (DateTime.UtcNow).ToLocalTime(),
                 };
 
                 var pedidoE = PedidosDTOs.CrearE(pedido);
@@ -93,7 +98,8 @@ namespace TiendaUNAC.Persistence.Commands
                             Color = item.Color,
                             Talla = item.Talla,
                             ValorUnidad = item.ValorUnidad,
-                            ValorTotal = item.ValorUnidad * item.Cantidad
+                            ValorTotal = item.ValorUnidad * item.Cantidad,
+                            imagen = item.imagen
                         };
 
                         var registroE = PedidosRegistrosDTOs.CrearE(registros);
@@ -134,6 +140,7 @@ namespace TiendaUNAC.Persistence.Commands
                     {
                         resultado = true,
                         mensaje = "¡Se ha añadido el pedido exitosamente!",
+                        orden = ultimaOrden == null ? 1 : ultimaOrden.Orden + 1,
                     };
                 }
                 else
@@ -153,5 +160,49 @@ namespace TiendaUNAC.Persistence.Commands
             }
         }
         #endregion
+
+        #region ACTUALIZAR ESTADO
+        public async Task<RespuestaDTO> actualizarEstado(ObjetoEstados objetoEstados)
+        {
+            _logger.LogTrace("Iniciando metodo PedidoCommands.actualizarEstado...");
+            try
+            {
+                var pedido = await _context.PedidosEs.FirstOrDefaultAsync(x => x.IdPedido == objetoEstados.IdPedido);
+                var envio = await _context.EnvioEs.FirstOrDefaultAsync(x => x.IdPedido == objetoEstados.IdPedido);
+
+                if (pedido != null || envio != null)
+                {
+                    pedido.IdEstado = objetoEstados.IdEstadoPedido;
+                    envio.IdEstado = objetoEstados.IdEstadoEnvio;
+
+                    _context.PedidosEs.Update(pedido);
+                    _context.EnvioEs.Update(envio);
+                    await _context.SaveChangesAsync();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha actualizado exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo encontrar pedido!. Por favor, verifica los datos.",
+
+                    };
+                }
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo PedidoCommands.actualizarEstado...");
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

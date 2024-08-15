@@ -24,6 +24,7 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<CuponesDTOs>> consultarCupon(string cupon, int idUsuario);
         Task<List<CuponesDTOs>> cuponesId(int IdCupon);
         Task<List<MontoEnvioDTOs>> listarMonto(int IdMonto);
+        Task<List<EstadoDTOs>> listarEstados(int Accion);
     }
 
     public class GeneralesQueries: IGeneralesQueries, IDisposable
@@ -280,6 +281,52 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error en el metodo GeneralesQueries.listoMonto...");
+                throw;
+            }
+        }
+        #endregion
+
+
+        #region ESTADOS
+        public async Task<List<EstadoDTOs>> listarEstados(int Accion)
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesQueries.listarEstados...");
+            try
+            {
+                var expresion = (Expression<Func<EstadoE, bool>>)null;
+                if (Accion == 1)
+                {
+                    expresion = expresion = x => x.EsPedido == true;
+                } 
+                else
+                {
+                    expresion = expresion = x => x.EsEnvio == true;
+                }
+
+                var estados = await _context.EstadoEs.Where(expresion).ToListAsync();
+
+                var ListaEstados = new List<EstadoDTOs>();
+
+                foreach (var item in estados)
+                {
+                    var list = new EstadoDTOs
+                    {
+                        IdEstado = item.IdEstado,
+                        Nombre = item.Nombre,
+                        Descripcion = item.Descripcion,
+                        EsPedido = item.EsPedido,
+                        EsEnvio = item.EsEnvio,
+                    };
+
+                    ListaEstados.Add(list);
+                }
+
+
+                return ListaEstados;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesQueries.listarEstados...");
                 throw;
             }
         }

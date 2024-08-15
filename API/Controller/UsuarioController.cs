@@ -120,6 +120,24 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
+        [HttpGet("Get_Informacion_Usuario")]
+        public async Task<IActionResult> informacionUsuario(int IdUsuario)
+        {
+            _logger.LogInformation("Iniciando UsuarioController.informacionUsuario...");
+            try
+            {
+                var respuesta = await _usuariosQueries.informacionUsuario(IdUsuario);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.informacionUsuario");
+                throw;
+            }
+        }
+
+
         [HttpPut("Put_Actualizar_Usuario")]
         public async Task<IActionResult> actualizarUsuario([FromBody] UsuariosDTOs usuariosDTOs, int Accion)
         {

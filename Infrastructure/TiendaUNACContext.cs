@@ -7,7 +7,9 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
+using TiendaUNAC.Domain.Entities.ComentarioE;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
 using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Entities.PedidosE;
@@ -62,6 +64,11 @@ namespace TiendaUNAC.Infrastructure
         public virtual DbSet<ImagenProductoE> ImagenProductoEs { get; set; }
         public virtual DbSet<TallaProductoE> TallaProductoEs { get; set; }
         public virtual DbSet<InventarioSionDTOs> InventarioSionEs { get; set; }
+        public virtual DbSet<FavoritosE> FavoritosEs { get; set; }
+
+        //Comentarios
+        public virtual DbSet<ComentarioE> ComentarioEs { get; set; }
+        public virtual DbSet<ComentarioImagenE> ComentarioImagenEs { get; set; }
 
         // Usuarios 
         public virtual DbSet<UsuariosE> UsuariosEs { get; set; }
@@ -70,6 +77,7 @@ namespace TiendaUNAC.Infrastructure
         // Pedidos
         public virtual DbSet<PedidosE> PedidosEs { get; set; }
         public virtual DbSet<PedidosRegistrosE> PedidosRegistrosEs { get; set; }
+        public virtual DbSet<ListaPedidoDTOs> ListaPedidos { get; set; }
 
     }
 }

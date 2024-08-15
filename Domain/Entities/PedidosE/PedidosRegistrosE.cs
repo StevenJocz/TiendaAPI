@@ -23,5 +23,6 @@ namespace TiendaUNAC.Domain.Entities.PedidosE
         public string Talla { get; set; }
         public decimal ValorUnidad { get; set; }
         public decimal ValorTotal { get; set; }
+        public string imagen { get; set; }
     }
 }
