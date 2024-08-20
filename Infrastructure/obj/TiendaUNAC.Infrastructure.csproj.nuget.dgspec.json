@@ -1,27 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Infrastructure\\TiendaUNAC.Infrastructure.csproj": {}
+    "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj": {}
   },
   "projects": {
-    "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Domain\\TiendaUNAC.Domain.csproj": {
+    "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Domain\\TiendaUNAC.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Domain\\TiendaUNAC.Domain.csproj",
+        "projectUniqueName": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Domain\\TiendaUNAC.Domain.csproj",
         "projectName": "TiendaUNAC.Domain",
-        "projectPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Domain\\TiendaUNAC.Domain.csproj",
-        "packagesPath": "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\",
-        "outputPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Domain\\obj\\",
+        "projectPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Domain\\TiendaUNAC.Domain.csproj",
+        "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
+        "outputPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\soporte.sion.UNAC\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -67,28 +61,22 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Infrastructure\\TiendaUNAC.Infrastructure.csproj": {
+    "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Infrastructure\\TiendaUNAC.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj",
         "projectName": "TiendaUNAC.Infrastructure",
-        "projectPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Infrastructure\\TiendaUNAC.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\soporte.sion.UNAC\\.nuget\\packages\\",
-        "outputPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Infrastructure\\obj\\",
+        "projectPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\TiendaUNAC.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Steve\\.nuget\\packages\\",
+        "outputPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "C:\\Users\\soporte.sion.UNAC\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Steve\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -101,8 +89,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Domain\\TiendaUNAC.Domain.csproj": {
-                "projectPath": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\Domain\\TiendaUNAC.Domain.csproj"
+              "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Domain\\TiendaUNAC.Domain.csproj": {
+                "projectPath": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\Domain\\TiendaUNAC.Domain.csproj"
               }
             }
           }
@@ -138,7 +126,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.410\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

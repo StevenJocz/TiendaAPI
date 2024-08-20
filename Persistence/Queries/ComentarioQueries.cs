@@ -11,6 +11,7 @@ using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.ComentarioE;
+using TiendaUNAC.Domain.Entities.PedidosE;
 using TiendaUNAC.Infrastructure;
 
 namespace TiendaUNAC.Persistence.Queries
@@ -85,12 +86,22 @@ namespace TiendaUNAC.Persistence.Queries
                             ListImagenes.Add(imagenes);
                         }
                     }
+
+                    string NombreUsuario = "";
+                    if (item.IdUsuario != 0)
+                    {
+                        var usuario = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdUsuario == item.IdUsuario);
+
+                        NombreUsuario = usuario.Nombre;
+                    }
                    
+
                     var list = new ComentarioDTOs
                     {
                         IdComentario = item.IdComentario,
                         IdProducto = item.IdProducto,
                         IdUsuario = item.IdUsuario,
+                        NombreUsuario = item.IdUsuario == 0 ? "Anonimo" : NombreUsuario,
                         Comentario = item.Comentario,
                         Fecha = item.Fecha,
                         Calificacion = item.Calificacion,
