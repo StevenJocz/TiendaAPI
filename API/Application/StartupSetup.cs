@@ -16,6 +16,7 @@ namespace TiendaUNAC.API.Application
             service.AddTransient<IGeneralesCommands, GeneralesCommands>();
             service.AddTransient<IPedidoCommands, PedidoCommands>();
             service.AddTransient<IComentarioCommands, ComentarioCommands>();
+            service.AddTransient<INotificacionCommads, NotificacionCommads>();
 
             // Queries Persistance Services
             service.AddTransient<ICategoriaQueries, CategoriaQueries>();
@@ -25,6 +26,7 @@ namespace TiendaUNAC.API.Application
             service.AddTransient<IGeneralesQueries, GeneralesQueries>();
             service.AddTransient<IPedidoQueries, PedidoQueries>();
             service.AddTransient<IComentarioQueries, ComentarioQueries>();
+            service.AddTransient<INotificacionQueries, NotificacionQueries>();
 
             // Utilidades
             service.AddScoped<IImagenes, Imagenes>();

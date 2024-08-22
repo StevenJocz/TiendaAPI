@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.DTOs.NotificacionDTOs;
 using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.GeneralesE;
@@ -28,10 +29,12 @@ namespace TiendaUNAC.Persistence.Commands
         private readonly TiendaUNACContext _context = null;
         private readonly ILogger<IPedidoCommands> _logger;
         private readonly IConfiguration _configuration;
+        private readonly INotificacionCommads _notificacion;
 
-        public PedidoCommands(ILogger<PedidoCommands> logger, IConfiguration configuration)
+        public PedidoCommands(ILogger<PedidoCommands> logger, IConfiguration configuration, INotificacionCommads notificacion)
         {
             _logger = logger;
+            _notificacion = notificacion;
             _configuration = configuration;
             string? connectionString = _configuration.GetConnectionString("ConnectionTienda");
             _context = new TiendaUNACContext(connectionString);
@@ -135,6 +138,17 @@ namespace TiendaUNAC.Persistence.Commands
                         await _context.CuponUsuarioEs.AddAsync(cuponUsuarioE);
                         await _context.SaveChangesAsync();
                     }
+
+                    var notificacion = new NotificacionCrear
+                    {
+                        IdTipoNotificacion = 1,
+                        DeIdUsuario = registrarPedido.IdUsuario,
+                        ParaIdUsuario = 2,
+                        IdTipoRelacion = 1,
+                        IdRelacion = pedidoE.IdPedido
+                    };
+
+                    await _notificacion.agregarNotificacion(notificacion);
 
                     return new RespuestaDTO
                     {

@@ -237,5 +237,53 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
+        [HttpGet("Get_ItemDashboard")]
+        public async Task<IActionResult> listarItemDashboard()
+        {
+            _logger.LogInformation("Iniciando GeneralesController.Ubicacion...");
+            try
+            {
+                var respuesta = await _generalesQueries.listarItemDashboard();
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontraron registros. Por favorm intenta nuevamente más tarde");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.listarItemDashboard");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_VentasPorMesYAnio")]
+        public async Task<IActionResult> ObtenerVentasPorMesYAnio()
+        {
+            _logger.LogInformation("Iniciando GeneralesController.ObtenerVentasPorMesYAnio...");
+            try
+            {
+                var respuesta = await _generalesQueries.ObtenerVentasPorMesYAnio();
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontraron registros. Por favorm intenta nuevamente más tarde");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.ObtenerVentasPorMesYAnio");
+                throw;
+            }
+        }
+
     }
 }

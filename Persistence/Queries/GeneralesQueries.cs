@@ -11,6 +11,7 @@ using TiendaUNAC.Domain.DTOs.ConfiguracionDTOs;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
 using TiendaUNAC.Domain.Entities.GeneralesE;
+using TiendaUNAC.Domain.Entities.PedidosE;
 using TiendaUNAC.Infrastructure;
 
 namespace TiendaUNAC.Persistence.Queries
@@ -25,6 +26,8 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<CuponesDTOs>> cuponesId(int IdCupon);
         Task<List<MontoEnvioDTOs>> listarMonto(int IdMonto);
         Task<List<EstadoDTOs>> listarEstados(int Accion);
+        Task<List<Card>> listarItemDashboard();
+        Task<Dictionary<string, object>> ObtenerVentasPorMesYAnio();
     }
 
     public class GeneralesQueries: IGeneralesQueries, IDisposable
@@ -286,7 +289,6 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
-
         #region ESTADOS
         public async Task<List<EstadoDTOs>> listarEstados(int Accion)
         {
@@ -327,6 +329,155 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error en el metodo GeneralesQueries.listarEstados...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region CARD
+        public async Task<List<Card>> listarItemDashboard()
+        {
+            _logger.LogTrace("Iniciando metodo GeneralesQueries.listarItemDashboard...");
+            try
+            {
+                var ListaCard = new List<Card>();
+
+                // Productos
+                var productos = await _context.ProductoEs.ToListAsync();
+                ListaCard.Add(CrearCard("Productos", productos.Count, productos, p => p.FechaCreado, 1));
+
+                // Usuarios
+                var usuarios = await _context.UsuariosEs.ToListAsync();
+                ListaCard.Add(CrearCard("Usuarios", usuarios.Count, usuarios, u => u.FechaRegistro, 2));
+
+                // Pedidos
+                var pedidos = await _context.PedidosEs.ToListAsync();
+                ListaCard.Add(CrearCard("Pedidos", pedidos.Count, pedidos, p => p.FechaRegistro, 3));
+
+                ListaCard.Add(CrearCardPedidos("Ventas", pedidos));
+
+
+                return ListaCard;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo GeneralesQueries.listarItemDashboard...");
+                throw;
+            }
+        }
+
+        private Card CrearCard<T>(string titulo, int total, List<T> lista, Func<T, DateTime> selectorFecha, int tipo)
+        {
+            var mesActual = DateTime.Now.Month;
+            var mesAnterior = DateTime.Now.AddMonths(-1).Month;
+
+            var itemsMesActual = lista.Where(i => selectorFecha(i).Month == mesActual).ToList();
+            var itemsMesAnterior = lista.Where(i => selectorFecha(i).Month == mesAnterior).ToList();
+
+            var numeroNuevos = itemsMesActual.Count;
+            var numeroAnteriores = itemsMesAnterior.Count;
+
+            double porcentaje;
+
+            if (numeroAnteriores == 0)
+            {
+                porcentaje = numeroNuevos > 0 ? 100 : 0;
+            }
+            else
+            {
+                porcentaje = ((double)(numeroNuevos - numeroAnteriores) / numeroAnteriores) * 100;
+            }
+
+            return new Card
+            {
+                Titulo = titulo,
+                Porcentaje = porcentaje,
+                Tipo = tipo,
+                NumeroTotal = total,
+                NumeroNuevos = numeroNuevos,
+                Clase = 1
+            };
+        }
+
+        private Card CrearCardPedidos(string titulo, List<PedidosE> pedidos)
+        {
+            var mesActual = DateTime.Now.Month;
+
+            // Filtrar pedidos con estado 2
+            var pedidosEstadoDos = pedidos.Where(p => p.IdEstado == 2).ToList();
+
+            // Filtrar los pedidos con estado 2 del mes actual
+            var pedidosMesActual = pedidosEstadoDos.Where(p => p.FechaRegistro.Month == mesActual).ToList();
+
+            int numeroNuevos = pedidosMesActual.Count;
+            decimal sumaValorTotalMesActual = pedidosMesActual.Sum(p => p.ValorTotal);
+            decimal sumaValorTotalGeneral = pedidosEstadoDos.Sum(p => p.ValorTotal);
+
+            return new Card
+            {
+                Titulo = titulo,
+                Porcentaje = 0,  
+                Tipo = 4, 
+                NumeroTotal = sumaValorTotalGeneral,
+                NumeroNuevos = sumaValorTotalMesActual,
+                Clase = 1
+            };
+        }
+        
+
+        public async Task<Dictionary<string, object>> ObtenerVentasPorMesYAnio()
+        {
+            _logger.LogTrace("Iniciando método para obtener ventas por mes y año...");
+
+            try
+            {
+                var ventasPorMesYAnio = new Dictionary<string, object>();
+
+                // Obtener el año actual y el año anterior
+                int añoActual = DateTime.Now.Year;
+                int añoAnterior = añoActual - 1;
+
+                var pData = new List<decimal>(); // Datos para el año anterior
+                var uData = new List<decimal>(); // Datos para el año actual
+
+                // Lista de meses
+                var months = new List<string>
+                {
+                    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+                };
+
+                // Iterar por cada mes del año
+                for (int i = 1; i <= 12; i++)
+                {
+                    // Filtrar los pedidos por mes y año
+                    var ventasAñoAnterior = await _context.PedidosEs
+                        .Where(p => p.FechaRegistro.Year == añoAnterior && p.FechaRegistro.Month == i)
+                        .SumAsync(p => p.ValorTotal);
+
+                    var ventasAñoActual = await _context.PedidosEs
+                        .Where(p => p.FechaRegistro.Year == añoActual && p.FechaRegistro.Month == i)
+                        .SumAsync(p => p.ValorTotal);
+
+                    // Añadir los valores a las listas correspondientes
+                    pData.Add(ventasAñoAnterior);
+                    uData.Add(ventasAñoActual);
+                }
+
+                // Añadir las series y los meses al diccionario
+                ventasPorMesYAnio["series"] = new List<object>
+                {
+                    new { data = pData, label = añoAnterior.ToString() },
+                    new { data = uData, label = añoActual.ToString() }
+                };
+
+                ventasPorMesYAnio["months"] = months;
+
+                return ventasPorMesYAnio;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error al obtener ventas por mes y año: ", ex);
                 throw;
             }
         }

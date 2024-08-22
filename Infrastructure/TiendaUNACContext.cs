@@ -12,6 +12,7 @@ using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.ComentarioE;
 using TiendaUNAC.Domain.Entities.ConfiguracionE;
 using TiendaUNAC.Domain.Entities.GeneralesE;
+using TiendaUNAC.Domain.Entities.NotificacionE;
 using TiendaUNAC.Domain.Entities.PedidosE;
 using TiendaUNAC.Domain.Entities.ProductoE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
@@ -78,6 +79,11 @@ namespace TiendaUNAC.Infrastructure
         public virtual DbSet<PedidosE> PedidosEs { get; set; }
         public virtual DbSet<PedidosRegistrosE> PedidosRegistrosEs { get; set; }
         public virtual DbSet<ListaPedidoDTOs> ListaPedidos { get; set; }
+
+        //Notificaciones
+        public virtual DbSet<NotificacionE> NotificacionEs { get; set; }
+        public virtual DbSet<NotificacionTipoE> NotificacionTipoEs { get; set; }
+        public virtual DbSet<NotificacionRelacionE> NotificacionRelacionEs { get; set; }
 
     }
 }

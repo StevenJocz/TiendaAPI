@@ -68,7 +68,7 @@ namespace TiendaUNAC.Persistence.Commands
                     TextoCupon = cuponesDTOs.TextoCupon,
                     ValorCupon = cuponesDTOs.ValorCupon,
                     FechaLimite = cuponesDTOs.FechaLimite,
-                    FechaCreacion = DateTime.UtcNow,
+                    FechaCreacion = (DateTime.UtcNow).ToLocalTime(),
                     Activo = cuponesDTOs.Activo,
                     IdUsuarioCreador = cuponesDTOs.IdUsuarioCreador
                 };

@@ -35,4 +35,14 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
         public int Id { get; set; }
         public string Nombre { get; set; }
     }
+
+    public class Card
+    {
+        public string Titulo { get; set; }
+        public double Porcentaje { get; set; }
+        public int Tipo { get; set; }
+        public decimal NumeroTotal { get; set; }
+        public decimal NumeroNuevos { get; set; }
+        public int Clase { get; set; }
+    }
 }

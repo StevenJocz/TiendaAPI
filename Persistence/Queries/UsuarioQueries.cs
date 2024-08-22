@@ -184,7 +184,7 @@ namespace TiendaUNAC.Persistence.Queries
                 foreach (var item in usuarios)
                 {
 
-                    var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={6}, @Parametro={item.IdMunicipio}").ToListAsync()).FirstOrDefault();
+                    var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={6}, @Parametro={item.IdTipoDocumento}").ToListAsync()).FirstOrDefault();
 
                     var ubicacion = (await _context.ubicacionEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={5}, @Parametro={item.IdMunicipio}").ToListAsync()).FirstOrDefault();
                     
@@ -267,7 +267,7 @@ namespace TiendaUNAC.Persistence.Queries
 
                 var listaUsuarios = new List<InformacionUsuariosDTOS>();
 
-                var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={6}, @Parametro={usuarios.IdMunicipio}").ToListAsync()).FirstOrDefault();
+                var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={6}, @Parametro={usuarios.IdTipoDocumento}").ToListAsync()).FirstOrDefault();
 
                 var ubicacion = (await _context.ubicacionEs.FromSqlInterpolated($"EXEC Ubicacion @Accion={5}, @Parametro={usuarios.IdMunicipio}").ToListAsync()).FirstOrDefault();
 
