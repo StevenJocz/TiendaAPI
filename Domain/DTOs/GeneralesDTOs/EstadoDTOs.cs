@@ -14,6 +14,9 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
         public string Descripcion { get; set; }
         public bool EsPedido { get; set; }
         public bool EsEnvio { get; set; }
+        public bool EsAdmin { get; set; }
+        public string Icono { get; set; }
+        public string Notificacion { get; set; }
 
         public static EstadoDTOs CrearDTOs(EstadoE estadoE)
         {
@@ -24,6 +27,9 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
                 Descripcion = estadoE.Descripcion,
                 EsPedido = estadoE.EsPedido,
                 EsEnvio = estadoE.EsEnvio,
+                EsAdmin = estadoE.EsAdmin,
+                Icono = estadoE.Icono,
+                Notificacion = estadoE.Notificacion
             };
         }
 
@@ -36,6 +42,9 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
                 Descripcion = estadoDTOs.Descripcion,
                 EsPedido = estadoDTOs.EsPedido,
                 EsEnvio = estadoDTOs.EsEnvio,
+                EsAdmin = estadoDTOs.EsAdmin,
+                Icono = estadoDTOs.Icono,
+                Notificacion = estadoDTOs.Notificacion
             };
         }
     }

@@ -113,7 +113,7 @@ namespace TiendaUNAC.Persistence.Commands
                     var envio = new EnvioDTOs
                     {
                         IdPedido = pedidoE.IdPedido,
-                        IdEstado = 1,
+                        IdEstado = 2,
                         Direccion = registrarPedido.Direccion,
                         Complemento = registrarPedido.Complemento,
                         Barrio = registrarPedido.Barrio,
@@ -192,6 +192,17 @@ namespace TiendaUNAC.Persistence.Commands
                     _context.PedidosEs.Update(pedido);
                     _context.EnvioEs.Update(envio);
                     await _context.SaveChangesAsync();
+
+                    var notificacion = new NotificacionCrear
+                    {
+                        IdTipoNotificacion = 1,
+                        DeIdUsuario = 2,
+                        ParaIdUsuario = pedido.IdUsuario,
+                        IdTipoRelacion = 1,
+                        IdRelacion = pedido.IdPedido
+                    };
+
+                    await _notificacion.agregarNotificacion(notificacion);
 
                     return new RespuestaDTO
                     {

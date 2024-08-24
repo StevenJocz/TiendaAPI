@@ -18,5 +18,8 @@ namespace TiendaUNAC.Domain.Entities.GeneralesE
         public string Descripcion { get; set; }
         public bool EsPedido { get; set; }
         public bool EsEnvio { get; set; }
+        public bool EsAdmin { get; set; }
+        public string Icono { get; set; }
+        public string Notificacion { get; set; }
     }
 }

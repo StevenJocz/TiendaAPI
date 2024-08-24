@@ -298,7 +298,7 @@ namespace TiendaUNAC.Persistence.Queries
                 var expresion = (Expression<Func<EstadoE, bool>>)null;
                 if (Accion == 1)
                 {
-                    expresion = expresion = x => x.EsPedido == true;
+                    expresion = expresion = x => x.EsPedido == true && x.EsAdmin == false || x.IdEstado == 1;
                 } 
                 else
                 {
