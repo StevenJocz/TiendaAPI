@@ -9,6 +9,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.UsuariosE;
@@ -134,6 +135,7 @@ namespace TiendaUNAC.Persistence.Queries
                     {
                         idUsuario = usuario.IdUsuario,
                         nombre = usuario.Nombre + " " + usuario.Apellido,
+                        documento = usuario.Documento,
                         correo = usuario.Correo,
                         telefono = usuario.Celular,
                         direccion = usuario.Direccion,

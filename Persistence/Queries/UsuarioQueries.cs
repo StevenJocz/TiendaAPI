@@ -25,6 +25,7 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<InformacionUsuariosDTOS>> Usuario();
         Task<List<UsuariosDTOs>> UsuarioId(int IdUsuario);
         Task<List<InformacionUsuariosDTOS>> informacionUsuario(int IdUsuario);
+        Task<List<UsuariosDTOs>> UsuarioDocumento(string documento);
     }
 
     public class UsuarioQueries : IUsuarioQueries, IDisposable
@@ -294,6 +295,48 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar UsuarioQueries.informacionUsuario...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region INFORMACIÓN DE USUARIO CON NUMEROD DE DOCUMENTO
+        public async Task<List<UsuariosDTOs>> UsuarioDocumento(string documento)
+        {
+            _logger.LogInformation("Iniciando metodo UsuarioQueries.UsuarioId...");
+            try
+            {
+                documento = documento.Trim();
+                var usuarios = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.Documento == documento);
+                var listaUsuarios = new List<UsuariosDTOs>();
+                if (usuarios != null)
+                {
+                    var lista = new UsuariosDTOs
+                    {
+                        IdUsuario = usuarios.IdUsuario,
+                        IdTipoUsuario = usuarios.IdTipoUsuario,
+                        Nombre = usuarios.Nombre,
+                        Apellido = usuarios.Apellido,
+                        IdTipoDocumento = usuarios.IdTipoDocumento,
+                        Documento = usuarios.Documento,
+                        FechaNacimiento = usuarios.FechaNacimiento,
+                        Celular = usuarios.Celular,
+                        IdPais = usuarios.IdPais,
+                        IdDepartamento = usuarios.IdDepartamento,
+                        IdMunicipio = usuarios.IdMunicipio,
+                        Direccion = usuarios.Direccion,
+                        Correo = usuarios.Correo,
+                        FechaRegistro = usuarios.FechaRegistro
+                    };
+
+                    listaUsuarios.Add(lista);
+                }
+
+                return listaUsuarios;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioQueries.UsuarioId...");
                 throw;
             }
         }

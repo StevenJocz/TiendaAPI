@@ -25,7 +25,7 @@ namespace TiendaUNAC.API.Controller
             _logger = logger;
         }
 
-
+        #region POST
         [HttpPost("Post_Registrar_Pedido")]
         public async Task<IActionResult> registrarPedido([FromBody] RegistrarPedido registrarPedido)
         {
@@ -41,7 +41,9 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
+        #region GET
         [HttpGet("Get_Pedidos")]
         public async Task<IActionResult> ListarPedidos(int accion, int idUsuario)
         {
@@ -89,7 +91,9 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
+        #region PUT
         [HttpPut("Put_Actualizar_Estado")]
         public async Task<IActionResult> actualizarEstado([FromBody] ObjetoEstados objetoEstados)
         {
@@ -105,5 +109,6 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
     }
 }

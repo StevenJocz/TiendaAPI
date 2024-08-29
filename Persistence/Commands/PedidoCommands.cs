@@ -186,24 +186,42 @@ namespace TiendaUNAC.Persistence.Commands
 
                 if (pedido != null || envio != null)
                 {
-                    pedido.IdEstado = objetoEstados.IdEstadoPedido;
-                    envio.IdEstado = objetoEstados.IdEstadoEnvio;
-
-                    _context.PedidosEs.Update(pedido);
-                    _context.EnvioEs.Update(envio);
-                    await _context.SaveChangesAsync();
-
-                    var notificacion = new NotificacionCrear
+                    if (objetoEstados.IdEstadoPedido != 0)
                     {
-                        IdTipoNotificacion = 1,
-                        DeIdUsuario = 2,
-                        ParaIdUsuario = pedido.IdUsuario,
-                        IdTipoRelacion = 1,
-                        IdRelacion = pedido.IdPedido
-                    };
+                        pedido.IdEstado = objetoEstados.IdEstadoPedido;
+                        _context.PedidosEs.Update(pedido);
 
-                    await _notificacion.agregarNotificacion(notificacion);
+                        var notificacionPedido = new NotificacionCrear
+                        {
+                            IdTipoNotificacion = objetoEstados.IdEstadoPedido,
+                            DeIdUsuario = 2,
+                            ParaIdUsuario = pedido.IdUsuario,
+                            IdTipoRelacion = 2,
+                            IdRelacion = pedido.IdPedido
+                        };
 
+                        await _notificacion.agregarNotificacion(notificacionPedido);
+                    }
+
+                    if (objetoEstados.IdEstadoEnvio != 0)
+                    {
+                        envio.IdEstado = objetoEstados.IdEstadoEnvio;
+                        _context.EnvioEs.Update(envio);
+
+                        var notificacionEnvio = new NotificacionCrear
+                        {
+                            IdTipoNotificacion = objetoEstados.IdEstadoEnvio,
+                            DeIdUsuario = 2,
+                            ParaIdUsuario = pedido.IdUsuario,
+                            IdTipoRelacion = 2,
+                            IdRelacion = envio.IdEnvio
+                        };
+
+                        await _notificacion.agregarNotificacion(notificacionEnvio);
+                    }
+
+                   
+                    await _context.SaveChangesAsync();
                     return new RespuestaDTO
                     {
                         resultado = true,

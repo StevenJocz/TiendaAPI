@@ -150,8 +150,6 @@ namespace TiendaUNAC.Persistence.Queries
                 var productos = await _context.ProductoEs.Where(expresion).ToListAsync();
                 var ListProductos = new List<VerProductoDtos>();
 
-              
-
                 foreach (var item in productos)
                 {
                     var imageneE = await _context.ImagenProductoEs.Where(x => x.IdProducto == item.IdProducto).Take(2).ToListAsync();
@@ -175,9 +173,15 @@ namespace TiendaUNAC.Persistence.Queries
                         .FromSqlInterpolated($"EXEC InventarioSION @Accion={2}, @IdInventario={item.IdInventario}").AsEnumerable()
                         .FirstOrDefault();
 
+                    if (inventario != null && inventario.existencias <= 0 && accion == 2)
+                    {
+                        // No agregar el producto a la lista
+                        continue;
+                    }
+
                     var list = new VerProductoDtos
                     {
-                        Id= item.IdProducto,
+                        Id = item.IdProducto,
                         Nombre = accion == 1 ? inventario.codigo + " - " + item.Nombre : item.Nombre,
                         Categorias = categoria.Nombre,
                         Imagenes = ListImagenes,

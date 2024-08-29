@@ -8,8 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.ComentarioDTOs;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.DTOs.NotificacionDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.ComentarioE;
+using TiendaUNAC.Domain.Entities.GeneralesE;
+using TiendaUNAC.Domain.Entities.NotificacionE;
+using TiendaUNAC.Domain.Entities.PedidosE;
 using TiendaUNAC.Domain.Entities.ProductoE;
 using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
@@ -19,6 +23,8 @@ namespace TiendaUNAC.Persistence.Commands
     public interface IComentarioCommands
     {
         Task<RespuestaDTO> agregarComentario(ComentarioDTOs comentarioDTOs);
+        Task<RespuestaDTO> EliminarComentario(int idComentario);
+        Task<RespuestaDTO> actualizareEstadoComentario(ComentarioDTOs comentarioDTOs);
     }
     public class ComentarioCommands: IComentarioCommands, IDisposable
     {
@@ -27,14 +33,16 @@ namespace TiendaUNAC.Persistence.Commands
         private readonly ILogger<IComentarioCommands> _logger;
         private readonly IConfiguration _configuration;
         private readonly IImagenes _imagenes;
+        private readonly INotificacionCommads _notificacion;
 
-        public ComentarioCommands(ILogger<ComentarioCommands> logger, IConfiguration configuration, IImagenes imagenes)
+        public ComentarioCommands(ILogger<ComentarioCommands> logger, IConfiguration configuration, IImagenes imagenes, INotificacionCommads notificacion)
         {
             _logger = logger;
             _configuration = configuration;
             _imagenes = imagenes;
             string? connectionString = _configuration.GetConnectionString("ConnectionTienda");
             _context = new TiendaUNACContext(connectionString);
+            _notificacion = notificacion;
         }
 
         #region implementacion Disponse
@@ -72,6 +80,7 @@ namespace TiendaUNAC.Persistence.Commands
                     Comentario = string.IsNullOrEmpty(comentarioDTOs.Comentario) ? null : comentarioDTOs.Comentario,
                     Fecha = (DateTime.UtcNow).ToLocalTime(),
                     Calificacion = comentarioDTOs.Calificacion,
+                    VistoAdmin = false,
                 };
 
                 var comentario = ComentarioDTOs.CrearE(newComentario);
@@ -99,6 +108,17 @@ namespace TiendaUNAC.Persistence.Commands
                             await _context.SaveChangesAsync();
                         }
                     }
+                    var notificacionEnvio = new NotificacionCrear
+                    {
+                        IdTipoNotificacion = 14,
+                        DeIdUsuario = comentarioDTOs.IdUsuario,
+                        ParaIdUsuario = 2,
+                        IdTipoRelacion = 3,
+                        IdRelacion = comentario.IdComentario
+                    };
+
+                    await _notificacion.agregarNotificacion(notificacionEnvio);
+
                     return new RespuestaDTO
                     {
                         resultado = true,
@@ -122,5 +142,93 @@ namespace TiendaUNAC.Persistence.Commands
         }
 
         #endregion
+
+        #region ELIMINAR COMENTARIO
+        public async Task<RespuestaDTO> EliminarComentario(int idComentario)
+        {
+
+            _logger.LogTrace("Iniciando metodo ComentarioCommands.cambiarEstadoComentario...");
+            try
+            {
+                var EliminarComentario = await _context.ComentarioEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdComentario == idComentario);
+
+                if (EliminarComentario.IdComentario != 0)
+                {
+                    var EliminarImagenes = _context.ComentarioImagenEs.AsNoTracking().Where(x => x.IdComentario == idComentario).ToList();
+
+
+                    if (EliminarImagenes.Count > 0)
+                    {
+                        foreach (var imagen in EliminarImagenes)
+                        {
+                            var location = await _imagenes.eliminarImage(imagen.Imagen);
+                            _context.ComentarioImagenEs.Remove(imagen);
+                            _context.SaveChanges();
+                        }
+                    }
+
+                    _context.ComentarioEs.Remove(EliminarComentario);
+                    _context.SaveChanges();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Comentario eliminado exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡Problemas al eliminar el comentario!",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo ComentarioCommands.cambiarEstadoComentario...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region ACTUALIZAR ESTADO COMENTARIO
+        public async Task<RespuestaDTO> actualizareEstadoComentario(ComentarioDTOs comentarioDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo actualizareEstadoComentario.actualizarCupon...");
+            try
+            {
+                var existeComentario = await _context.ComentarioEs.FirstOrDefaultAsync(x => x.IdComentario == comentarioDTOs.IdComentario);
+                if (existeComentario != null)
+                {
+                    existeComentario.VistoAdmin = true;
+
+                    _context.ComentarioEs.Update(existeComentario);
+                    await _context.SaveChangesAsync();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha actualizado el estado del comentario exitosamente!",
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo encontrar el comentario!. Por favor, verifica los datos.",
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo actualizareEstadoComentario.actualizarCupon...");
+                throw;
+            }
+        }
+        #endregion
+
     }
 }

@@ -23,6 +23,8 @@ namespace TiendaUNAC.API.Controller
             _logger = logger;
         }
 
+        #region POST
+        
         [HttpPost("Post_Crear_Categoria")]
         public async Task<IActionResult> crearCategoria([FromBody] CategoriaDTOs categoriaDTOs)
         {
@@ -39,24 +41,9 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
+        #endregion
 
-        [HttpPut("Put_Actualizar_Categoria")]
-        public async Task<IActionResult> actualizarCategoria([FromBody] CategoriaDTOs categoriaDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando CategoriaController.actualizarCategoria...");
-                var respuesta = await _categoriaCommands.actualizarCategoria(categoriaDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar CategoriaController.actualizarCategoria...");
-                throw;
-            }
-        }
-
-
+        #region GET
         [HttpGet("Get_Categoria")]
         public async Task<IActionResult> listaCategorias(int accion)
         {
@@ -81,7 +68,6 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
-
         [HttpGet("Get_Id_Categoria")]
         public async Task<IActionResult> categoriasId(int idCategoria)
         {
@@ -105,6 +91,24 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
+        #region PUT
+        [HttpPut("Put_Actualizar_Categoria")]
+        public async Task<IActionResult> actualizarCategoria([FromBody] CategoriaDTOs categoriaDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando CategoriaController.actualizarCategoria...");
+                var respuesta = await _categoriaCommands.actualizarCategoria(categoriaDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar CategoriaController.actualizarCategoria...");
+                throw;
+            }
+        }
+        #endregion
     }
 }

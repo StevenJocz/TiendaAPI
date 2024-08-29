@@ -125,6 +125,7 @@ namespace TiendaUNAC.Domain.DTOs.PedidosDTOs
     {
         public int idUsuario { get; set; }
         public string nombre { get; set; }
+        public string documento { get; set; }
         public string correo { get; set; }
         public string telefono { get; set; }
         public string direccion { get; set; }

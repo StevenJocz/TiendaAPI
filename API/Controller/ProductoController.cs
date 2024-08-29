@@ -24,6 +24,66 @@ namespace TiendaUNAC.API.Controller
             _logger = logger;
         }
 
+
+        #region POST
+        [HttpPost("Post_Agregar_Favoritos")]
+        public async Task<IActionResult> agregarFavoritos([FromBody] FavoritosDTOs agregarFavoritos)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando ProductoController.agregarFavoritos...");
+                var respuesta = await _productoCommands.agregarFavoritos(agregarFavoritos);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.agregarFavoritos...");
+                throw;
+            }
+        }
+
+        [HttpPost("Post_Crear_Producto")]
+        public async Task<IActionResult> crearProducto([FromBody] ListaProductosDTOs listaProductosDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando ProductoController.crearProducto...");
+                var respuesta = await _productoCommands.crearProducto(listaProductosDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.crearProducto...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region GET
+        [HttpGet("Get_Favoritos_Usuario")]
+        public async Task<IActionResult> listaFavoritosUsuarios(int idUsuario)
+        {
+            _logger.LogInformation("Iniciando ProductoController.listaFavoritosUsuarios...");
+            try
+            {
+                var respuesta = await _productoQueries.listaFavoritosUsuarios(idUsuario);
+
+                if (respuesta == null || !respuesta.Any())
+                {
+                    return BadRequest("No se encontro favoritos registrados. Por favor, intenta nuevamente más tarde.");
+                }
+                else
+                {
+                    return Ok(respuesta);
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ProductoController.listaFavoritosUsuarios");
+                throw;
+            }
+        }
+
         [HttpGet("Get_Inventario")]
         public async Task<IActionResult> inventariosSION()
         {
@@ -68,23 +128,6 @@ namespace TiendaUNAC.API.Controller
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar ProductoController.inventariosSIONId");
-                throw;
-            }
-        }
-
-
-        [HttpPost("Post_Crear_Producto")]
-        public async Task<IActionResult> crearProducto([FromBody] ListaProductosDTOs listaProductosDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando ProductoController.crearProducto...");
-                var respuesta = await _productoCommands.crearProducto(listaProductosDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar ProductoController.crearProducto...");
                 throw;
             }
         }
@@ -137,22 +180,7 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
-        [HttpPut("Put_Actualizar_Producto")]
-        public async Task<IActionResult> actualizarProducto([FromBody] ListaProductosDTOs listaProductosDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando ProductoController.actualizarProducto...");
-                var respuesta = await _productoCommands.actualizarProducto(listaProductosDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar ProductoController.actualizarProducto...");
-                throw;
-            }
-        }
-
+       
         [HttpGet("Get_Favoritos")]
         public async Task<IActionResult> listaFavoritos(int idUsuario)
         {
@@ -200,23 +228,27 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
-        [HttpPost("Post_Agregar_Favoritos")]
-        public async Task<IActionResult> agregarFavoritos([FromBody] FavoritosDTOs agregarFavoritos)
+        #region PUT
+        [HttpPut("Put_Actualizar_Producto")]
+        public async Task<IActionResult> actualizarProducto([FromBody] ListaProductosDTOs listaProductosDTOs)
         {
             try
             {
-                _logger.LogInformation("Iniciando ProductoController.agregarFavoritos...");
-                var respuesta = await _productoCommands.agregarFavoritos(agregarFavoritos);
+                _logger.LogInformation("Iniciando ProductoController.actualizarProducto...");
+                var respuesta = await _productoCommands.actualizarProducto(listaProductosDTOs);
                 return Ok(respuesta);
             }
             catch (Exception)
             {
-                _logger.LogError("Error al iniciar ProductoController.agregarFavoritos...");
+                _logger.LogError("Error al iniciar ProductoController.actualizarProducto...");
                 throw;
             }
         }
+        #endregion
 
+        #region DELETE
         [HttpDelete("Delete_Eliminar_Favoritos")]
         public async Task<IActionResult> eliminarFavoritos(int idProducto, int idUsuario)
         {
@@ -232,29 +264,7 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
-        [HttpGet("Get_Favoritos_Usuario")]
-        public async Task<IActionResult> listaFavoritosUsuarios(int idUsuario)
-        {
-            _logger.LogInformation("Iniciando ProductoController.listaFavoritosUsuarios...");
-            try
-            {
-                var respuesta = await _productoQueries.listaFavoritosUsuarios(idUsuario);
-
-                if (respuesta == null || !respuesta.Any())
-                {
-                    return BadRequest("No se encontro favoritos registrados. Por favor, intenta nuevamente más tarde.");
-                }
-                else
-                {
-                    return Ok(respuesta);
-                }
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar ProductoController.listaFavoritosUsuarios");
-                throw;
-            }
-        }
     }
 }

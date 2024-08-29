@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+QiiABrB6ya1y4fsxEoAJOwFthcTujuzlJWNz2/jpqk=",
+  "Hash": "pcE2D5J8T32wcfnmojyp+1uXS7DJ/j8MJ1NEHZjzSLs=",
   "Source": "TiendaUNAC.API",
   "BasePath": "_content/TiendaUNAC.API",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "TiendaUNAC.API\\wwwroot",
       "Source": "TiendaUNAC.API",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\01ceba2d-eb83-4ff6-bd15-05f662c1c20a.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Categoria\\01ceba2d-eb83-4ff6-bd15-05f662c1c20a.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Categoria/01ceba2d-eb83-4ff6-bd15-05f662c1c20a.jpg",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\Categoria\\01ceba2d-eb83-4ff6-bd15-05f662c1c20a.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\02d53957-b534-4e32-a3b3-d4747744f1f8.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Categoria\\02d53957-b534-4e32-a3b3-d4747744f1f8.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Categoria/02d53957-b534-4e32-a3b3-d4747744f1f8.jpg",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\Categoria\\02d53957-b534-4e32-a3b3-d4747744f1f8.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\081ddbd7-2d1f-44ce-a45d-a3c3c648dd67.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Categoria\\081ddbd7-2d1f-44ce-a45d-a3c3c648dd67.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Categoria/081ddbd7-2d1f-44ce-a45d-a3c3c648dd67.jpg",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\Categoria\\081ddbd7-2d1f-44ce-a45d-a3c3c648dd67.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\7eaac0b2-525a-473d-b8e4-6e328ff5b765.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Categoria\\7eaac0b2-525a-473d-b8e4-6e328ff5b765.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Categoria/7eaac0b2-525a-473d-b8e4-6e328ff5b765.jpg",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\Categoria\\7eaac0b2-525a-473d-b8e4-6e328ff5b765.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\b6cceb9c-0a41-44c6-ade9-06a347fc5019.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Categoria\\b6cceb9c-0a41-44c6-ade9-06a347fc5019.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Categoria/b6cceb9c-0a41-44c6-ade9-06a347fc5019.jpg",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\Categoria\\b6cceb9c-0a41-44c6-ade9-06a347fc5019.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\df9f4ddc-5ea5-43e0-bb9c-8483969f759e.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Categoria\\df9f4ddc-5ea5-43e0-bb9c-8483969f759e.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Categoria/df9f4ddc-5ea5-43e0-bb9c-8483969f759e.jpg",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\Categoria\\df9f4ddc-5ea5-43e0-bb9c-8483969f759e.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Categoria\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Categoria\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Categoria/fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\Categoria\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Comentarios\\27284010-d18b-45e8-b7b3-5901d927bed1.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Comentarios\\27284010-d18b-45e8-b7b3-5901d927bed1.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Comentarios/27284010-d18b-45e8-b7b3-5901d927bed1.jpg",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\Comentarios\\27284010-d18b-45e8-b7b3-5901d927bed1.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Comentarios\\4340b6ee-6311-4c84-adba-202a096a1c31.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Comentarios\\4340b6ee-6311-4c84-adba-202a096a1c31.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Comentarios/4340b6ee-6311-4c84-adba-202a096a1c31.jpg",
       "AssetKind": "All",
@@ -170,10 +170,27 @@
       "OriginalItemSpec": "wwwroot\\Comentarios\\4340b6ee-6311-4c84-adba-202a096a1c31.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Comentarios\\4fcc7b96-0743-4c8a-a9a1-79716e2f5b99.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Comentarios\\443c7fa5-00ac-4c90-92a1-1d594f64e052.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
+      "BasePath": "_content/TiendaUNAC.API",
+      "RelativePath": "Comentarios/443c7fa5-00ac-4c90-92a1-1d594f64e052.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Comentarios\\443c7fa5-00ac-4c90-92a1-1d594f64e052.jpg"
+    },
+    {
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Comentarios\\4fcc7b96-0743-4c8a-a9a1-79716e2f5b99.jpg",
+      "SourceId": "TiendaUNAC.API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Comentarios/4fcc7b96-0743-4c8a-a9a1-79716e2f5b99.jpg",
       "AssetKind": "All",
@@ -187,27 +204,10 @@
       "OriginalItemSpec": "wwwroot\\Comentarios\\4fcc7b96-0743-4c8a-a9a1-79716e2f5b99.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Comentarios\\995f6239-39cc-4f5b-94b4-502d168ffe8a.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Comentarios\\b7382e28-f532-4699-98f3-98bf9f66647c.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
-      "BasePath": "_content/TiendaUNAC.API",
-      "RelativePath": "Comentarios/995f6239-39cc-4f5b-94b4-502d168ffe8a.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Comentarios\\995f6239-39cc-4f5b-94b4-502d168ffe8a.jpg"
-    },
-    {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Comentarios\\b7382e28-f532-4699-98f3-98bf9f66647c.jpg",
-      "SourceId": "TiendaUNAC.API",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Comentarios/b7382e28-f532-4699-98f3-98bf9f66647c.jpg",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\Comentarios\\b7382e28-f532-4699-98f3-98bf9f66647c.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\0c04d0ce-7c25-4129-bbbc-a582f6bab5af.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Productos\\0c04d0ce-7c25-4129-bbbc-a582f6bab5af.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Productos/0c04d0ce-7c25-4129-bbbc-a582f6bab5af.jpg",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\Productos\\0c04d0ce-7c25-4129-bbbc-a582f6bab5af.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\0e8767f7-276e-466a-95e6-83c042d8dd19.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Productos\\0e8767f7-276e-466a-95e6-83c042d8dd19.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Productos/0e8767f7-276e-466a-95e6-83c042d8dd19.jpg",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\Productos\\0e8767f7-276e-466a-95e6-83c042d8dd19.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\18c351db-51cd-4ff4-a7fc-ffdb3f103479.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Productos\\18c351db-51cd-4ff4-a7fc-ffdb3f103479.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Productos/18c351db-51cd-4ff4-a7fc-ffdb3f103479.jpg",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\Productos\\18c351db-51cd-4ff4-a7fc-ffdb3f103479.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\b06f5954-46b3-4128-9e1d-daafe6f71f9b.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Productos\\b06f5954-46b3-4128-9e1d-daafe6f71f9b.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Productos/b06f5954-46b3-4128-9e1d-daafe6f71f9b.jpg",
       "AssetKind": "All",
@@ -289,10 +289,10 @@
       "OriginalItemSpec": "wwwroot\\Productos\\b06f5954-46b3-4128-9e1d-daafe6f71f9b.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\d1ea3e80-41f0-4b71-a494-822278b98956.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Productos\\d1ea3e80-41f0-4b71-a494-822278b98956.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Productos/d1ea3e80-41f0-4b71-a494-822278b98956.jpg",
       "AssetKind": "All",
@@ -306,10 +306,10 @@
       "OriginalItemSpec": "wwwroot\\Productos\\d1ea3e80-41f0-4b71-a494-822278b98956.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\e150682f-c89e-438c-ab4e-3167fc7684ce.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Productos\\e150682f-c89e-438c-ab4e-3167fc7684ce.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Productos/e150682f-c89e-438c-ab4e-3167fc7684ce.jpg",
       "AssetKind": "All",
@@ -323,10 +323,10 @@
       "OriginalItemSpec": "wwwroot\\Productos\\e150682f-c89e-438c-ab4e-3167fc7684ce.jpg"
     },
     {
-      "Identity": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\Productos\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",
+      "Identity": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\Productos\\fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",
       "SourceId": "TiendaUNAC.API",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\Proyectos Desarrollo\\TiendaUNAC\\Service\\API\\wwwroot\\",
+      "ContentRoot": "D:\\Proyectos UNAC\\Proyectos\\TiendaAPI\\API\\wwwroot\\",
       "BasePath": "_content/TiendaUNAC.API",
       "RelativePath": "Productos/fb45b8f0-bdee-4006-89dc-4d4b760590f4.jpg",
       "AssetKind": "All",

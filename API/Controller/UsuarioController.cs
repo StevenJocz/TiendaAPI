@@ -27,6 +27,7 @@ namespace TiendaUNAC.API.Controller
             _logger = logger;
         }
 
+        #region POST
         [HttpPost("Post_Crear_Usuario")]
         public async Task<IActionResult> crearUsuario([FromBody] UsuariosDTOs usuariosDTOs)
         {
@@ -60,7 +61,9 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
+        #region GET
         [HttpGet("Get_Permisos")]
         public async Task<IActionResult> permisosUsuario(int tipoUsuario)
         {
@@ -137,7 +140,25 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
+        [HttpGet("Get_UsuarioDocumento")]
+        public async Task<IActionResult> UsuarioDocumento(string documento)
+        {
+            _logger.LogInformation("Iniciando UsuarioController.UsuariUsuarioDocumentooId...");
+            try
+            {
+                var respuesta = await _usuariosQueries.UsuarioDocumento(documento);
+                return Ok(respuesta);
 
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.UsuariUsuarioDocumentooId");
+                throw;
+            }
+        }
+        #endregion
+
+        #region PUT
         [HttpPut("Put_Actualizar_Usuario")]
         public async Task<IActionResult> actualizarUsuario([FromBody] UsuariosDTOs usuariosDTOs, int Accion)
         {
@@ -169,5 +190,6 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
     }
 }

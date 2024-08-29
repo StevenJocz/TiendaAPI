@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TiendaUNAC.Domain.DTOs.ComentarioDTOs;
+using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Persistence.Commands;
 using TiendaUNAC.Persistence.Queries;
@@ -23,6 +24,7 @@ namespace TiendaUNAC.API.Controller
             _logger = logger;
         }
 
+        #region POST 
         [HttpPost("Post_Agregar_Comentario")]
         public async Task<IActionResult> agregarComentario([FromBody] ComentarioDTOs comentarioDTOs)
         {
@@ -38,8 +40,9 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
-
+        #region GET 
         [HttpGet("Get_Comentario")]
         public async Task<IActionResult> listarComentario(int IdProducto)
         {
@@ -47,15 +50,7 @@ namespace TiendaUNAC.API.Controller
             try
             {
                 var respuesta = await _queriesCommands.listarComentario(IdProducto);
-
-                if (respuesta == null || !respuesta.Any())
-                {
-                    return BadRequest("No se encontron comentarios registrados. Por favor, intenta nuevamente más tarde.");
-                }
-                else
-                {
-                    return Ok(respuesta);
-                }
+                return Ok(respuesta);
             }
             catch (Exception)
             {
@@ -63,5 +58,60 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+
+        [HttpGet("Get_ComentariosAdmin")]
+        public async Task<IActionResult> listarComentariosAdministrador()
+        {
+            _logger.LogInformation("Iniciando ComentarioController.listarComentariosAdministrador...");
+            try
+            {
+                var respuesta = await _queriesCommands.listarComentariosAdministrador();
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ComentarioController.listarComentariosAdministrador");
+                throw;
+            }
+        }
+        #endregion
+
+        #region PUT 
+        [HttpPut("Put_Actualizar_Comentario")]
+        public async Task<IActionResult> actualizareEstadoComentario([FromBody] ComentarioDTOs comentarioDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando ComentarioController.actualizareEstadoComentario...");
+                var respuesta = await _comentarioCommands.actualizareEstadoComentario(comentarioDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ComentarioController.actualizareEstadoComentario...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region DELETE 
+        [HttpDelete("Eliminar_Comentario")]
+        public async Task<IActionResult> EliminarComentario(int idComentario)
+        {
+            _logger.LogInformation("Iniciando ComentarioController.EliminarComentario...");
+            try
+            {
+                var respuesta = await _comentarioCommands.EliminarComentario(idComentario);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar ComentarioController.listarComentariosAdministrador");
+                throw;
+
+            }
+        }
+        #endregion
+
     }
 }

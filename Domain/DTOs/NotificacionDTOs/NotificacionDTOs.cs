@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -52,4 +53,28 @@ namespace TiendaUNAC.Domain.DTOs.NotificacionDTOs
         public int IdTipoRelacion { get; set; }
         public int IdRelacion { get; set; }
     }
+
+    public class ListarNotificacionesDTOs
+    {
+        [Key]
+        public int IdNotificacion { get; set; }
+        public int IdTipoNotificacion { get; set; }
+        public int DeIdUsuario { get; set; }
+        public int ParaIdUsuario { get; set; }
+        public bool Leida { get; set; }
+        public string Icono { get; set; }
+        public string Notificacion { get; set; }
+        public int IdRelacion { get; set; }
+        public int Orden { get; set; }
+        public string Fecha { get; set; }
+        public string CategoriaFecha { get; set; }
+    }
+
+    public class CountNotificaciones
+    {
+        [Key]
+        public int cantidad { get; set; }
+    }
+
+    
 }

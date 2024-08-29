@@ -19,5 +19,6 @@ namespace TiendaUNAC.Domain.Entities.ComentarioE
         public string? Comentario { get; set; }
         public DateTime Fecha { get; set; }
         public int Calificacion { get; set; }
+        public bool VistoAdmin { get; set; }
     }
 }

@@ -404,7 +404,7 @@ namespace TiendaUNAC.Persistence.Queries
             var mesActual = DateTime.Now.Month;
 
             // Filtrar pedidos con estado 2
-            var pedidosEstadoDos = pedidos.Where(p => p.IdEstado == 2).ToList();
+            var pedidosEstadoDos = pedidos.Where(p => p.IdEstado == 3).ToList();
 
             // Filtrar los pedidos con estado 2 del mes actual
             var pedidosMesActual = pedidosEstadoDos.Where(p => p.FechaRegistro.Month == mesActual).ToList();

@@ -18,6 +18,7 @@ namespace TiendaUNAC.Domain.DTOs.ComentarioDTOs
         public string? Comentario { get; set; }
         public DateTime Fecha { get; set; }
         public int Calificacion { get; set; }
+        public bool VistoAdmin { get; set; }
         public List<ComentarioImagenDTOs>? imagenes { get; set; }
 
         public static ComentarioDTOs CrearDTOs(ComentarioE comentarioE)
@@ -30,6 +31,7 @@ namespace TiendaUNAC.Domain.DTOs.ComentarioDTOs
                 Comentario = comentarioE.Comentario,
                 Fecha = comentarioE.Fecha,
                 Calificacion = comentarioE.Calificacion,
+                VistoAdmin = comentarioE.VistoAdmin,
             };
         }
 
@@ -43,7 +45,21 @@ namespace TiendaUNAC.Domain.DTOs.ComentarioDTOs
                 Comentario = comentarioDTOs.Comentario,
                 Fecha = comentarioDTOs.Fecha,
                 Calificacion = comentarioDTOs.Calificacion,
+                VistoAdmin = comentarioDTOs.VistoAdmin,
             };
         }
+    }
+
+    public class Comentarios
+    {
+        public int IdComentario { get; set; }
+        public string Imagen{ get; set; }
+        public string Producto { get; set; }
+        public string Cliente { get; set; }
+        public int Calificacion { get; set; }
+        public string? Comentario { get; set; }
+        public DateTime Fecha { get; set; }
+        public bool VistoAdmin { get; set; }
+        public List<ComentarioImagenDTOs>? imagenes { get; set; }
     }
 }

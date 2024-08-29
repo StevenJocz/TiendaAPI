@@ -24,6 +24,25 @@ namespace TiendaUNAC.API.Controller
             _logger = logger;
         }
 
+        #region POST 
+        [HttpPost("Post_Crear_Cupon")]
+        public async Task<IActionResult> crearCupon([FromBody] CuponesDTOs cuponesDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando CategoriaController.crearCategoria...");
+                var respuesta = await _generalesCommands.crearCupon(cuponesDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar CategoriaController.crearCategoria...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region GET
         [HttpGet("Get_TipoDocumento")]
         public async Task<IActionResult> tipoDocumentos()
         {
@@ -95,22 +114,7 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
-        [HttpPost("Post_Crear_Cupon")]
-        public async Task<IActionResult> crearCupon([FromBody] CuponesDTOs cuponesDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando CategoriaController.crearCategoria...");
-                var respuesta = await _generalesCommands.crearCupon(cuponesDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar CategoriaController.crearCategoria...");
-                throw;
-            }
-        }
-
+      
         [HttpGet("Get_Cupones")]
         public async Task<IActionResult> Cupones()
         {
@@ -170,23 +174,6 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
-        [HttpPut("Put_Actualizar_Cupones")]
-        public async Task<IActionResult> actualizarCupones([FromBody] CuponesDTOs cuponesDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando GeneralesController.actualizarCupones...");
-                var respuesta = await _generalesCommands.actualizarCupon(cuponesDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar GeneralesController.actualizarCupones...");
-                throw;
-            }
-        }
-
-
         [HttpGet("Get_Monto")]
         public async Task<IActionResult> Monto(int IdMonto)
         {
@@ -204,22 +191,7 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
-        [HttpPut("Put_Actualizar_Monto")]
-        public async Task<IActionResult> actualizarMonto([FromBody] MontoEnvioDTOs montoEnvioDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando GeneralesController.actualizarMonto...");
-                var respuesta = await _generalesCommands.actualizarMonto(montoEnvioDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar GeneralesController.actualizarMonto...");
-                throw;
-            }
-        }
-
+       
         [HttpGet("Get_Estados")]
         public async Task<IActionResult> listarEstados(int Accion)
         {
@@ -284,6 +256,41 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
+
+        #region PUT
+        [HttpPut("Put_Actualizar_Cupones")]
+        public async Task<IActionResult> actualizarCupones([FromBody] CuponesDTOs cuponesDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando GeneralesController.actualizarCupones...");
+                var respuesta = await _generalesCommands.actualizarCupon(cuponesDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.actualizarCupones...");
+                throw;
+            }
+        }
+
+        [HttpPut("Put_Actualizar_Monto")]
+        public async Task<IActionResult> actualizarMonto([FromBody] MontoEnvioDTOs montoEnvioDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando GeneralesController.actualizarMonto...");
+                var respuesta = await _generalesCommands.actualizarMonto(montoEnvioDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar GeneralesController.actualizarMonto...");
+                throw;
+            }
+        }
+        #endregion
 
     }
 }

@@ -22,6 +22,7 @@ namespace TiendaUNAC.API.Controller
             _logger = logger;
         }
 
+        #region POST
         [HttpPost("Post_Crear_Tag")]
         public async Task<IActionResult> crearTag([FromBody] TagDTOs tagDTOs)
         {
@@ -37,25 +38,9 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
 
-
-        [HttpPut("Put_Actualizar_Tag")]
-        public async Task<IActionResult> actualizarTag([FromBody] TagDTOs tagDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando TagController.actualizarTag...");
-                var respuesta = await _tagCommands.actualizarTag(tagDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar TagController.actualizarTag...");
-                throw;
-            }
-        }
-
-
+        #region GET
         [HttpGet("Get_Tag")]
         public async Task<IActionResult> listaTag(int accion)
         {
@@ -80,7 +65,6 @@ namespace TiendaUNAC.API.Controller
             }
         }
 
-
         [HttpGet("Get_Id_Tag")]
         public async Task<IActionResult> TagId(int idTag)
         {
@@ -104,5 +88,24 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+        #endregion
+
+        #region PUT
+        [HttpPut("Put_Actualizar_Tag")]
+        public async Task<IActionResult> actualizarTag([FromBody] TagDTOs tagDTOs)
+        {
+            try
+            {
+                _logger.LogInformation("Iniciando TagController.actualizarTag...");
+                var respuesta = await _tagCommands.actualizarTag(tagDTOs);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar TagController.actualizarTag...");
+                throw;
+            }
+        }
+        #endregion
     }
 }

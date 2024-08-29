@@ -7,6 +7,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.DTOs.NotificacionDTOs;
 using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.ComentarioE;
@@ -82,8 +83,9 @@ namespace TiendaUNAC.Infrastructure
 
         //Notificaciones
         public virtual DbSet<NotificacionE> NotificacionEs { get; set; }
-        public virtual DbSet<NotificacionTipoE> NotificacionTipoEs { get; set; }
         public virtual DbSet<NotificacionRelacionE> NotificacionRelacionEs { get; set; }
+        public virtual DbSet<ListarNotificacionesDTOs> ListarNotificacionEs { get; set; }
+        public virtual DbSet<CountNotificaciones> CountNotificacionEs { get; set; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace TiendaUNAC.Persistence.Commands
     public interface INotificacionCommads
     {
         Task<bool> agregarNotificacion(NotificacionCrear notificacionCrear);
+        Task<RespuestaDTO> actualizarEstado(NotificacionDTOs NotificacionDTOs);
     }
     public class NotificacionCommads: INotificacionCommads, IDisposable
     {
@@ -102,5 +104,43 @@ namespace TiendaUNAC.Persistence.Commands
         }
         #endregion
 
+        #region ACTUALIZAR ESTADO
+        public async Task<RespuestaDTO> actualizarEstado(NotificacionDTOs notificacionDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo NotificacionCommads.actualizarEstado...");
+            try
+            {
+                var notificacion = await _context.NotificacionEs.FirstOrDefaultAsync(x => x.IdNotificacion == notificacionDTOs.IdNotificacion);
+
+                if (notificacion != null)
+                {
+                    notificacion.Leida = true;
+                    _context.NotificacionEs.Update(notificacion);
+                    await _context.SaveChangesAsync();
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡Se ha actualizado exitosamente!",
+                    };
+
+                }  else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se pudo encontrar la notificacion!. Por favor, verifica los datos.",
+
+                    };
+                }
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo NotificacionCommads.actualizarEstado...");
+                throw;
+            }
+        }
+        #endregion
     }
 }
