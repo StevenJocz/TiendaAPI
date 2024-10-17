@@ -162,6 +162,7 @@ namespace TiendaUNAC.Persistence.Queries
 
                 foreach (var item in cupones)
                 {
+                    var cantidadCupones = await _context.CuponUsuarioEs.Where(x => x.IdCupon ==  item.IdCupon).ToListAsync();
                     var list = new CuponesDTOs
                     {
                         IdCupon = item.IdCupon,
@@ -170,7 +171,8 @@ namespace TiendaUNAC.Persistence.Queries
                         FechaLimite = item.FechaLimite,
                         FechaCreacion = item.FechaCreacion,
                         IdUsuarioCreador = item.IdUsuarioCreador,
-                        Activo = item.Activo
+                        Activo = item.Activo,
+                        VecesUtilizado = cantidadCupones.Count
                     };
 
                     ListCupones.Add(list);

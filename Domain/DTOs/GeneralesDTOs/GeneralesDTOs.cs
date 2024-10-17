@@ -45,4 +45,7 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
         public decimal NumeroNuevos { get; set; }
         public int Clase { get; set; }
     }
+
+    
+
 }

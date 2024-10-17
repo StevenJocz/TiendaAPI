@@ -4,10 +4,12 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
+using TiendaUNAC.Domain.Entities.ProductoE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
 using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
@@ -21,6 +23,8 @@ namespace TiendaUNAC.Persistence.Commands
         Task<RespuestaDTO> crearUsuario(UsuariosDTOs usuariosDTOs);
         Task<RespuestaDTO> actualizarUsuario(UsuariosDTOs usuariosDTOs, int Accion);
         Task<RespuestaDTO> actualizarContrasena(passwordDTOs passwordDTOs);
+        Task<bool> insertarCodigo(CodigoDTOs codigoDTOs);
+        Task<bool> EliminarCodigo(CodigoDTOs codigoDTOs);
     }
 
     public class UsuarioCommands: IUsuarioCommands, IDisposable
@@ -96,6 +100,7 @@ namespace TiendaUNAC.Persistence.Commands
                     {
                         resultado = true,
                         mensaje = "¡Se ha añadido el producto exitosamente!",
+                        orden = usuarioE.IdUsuario
                     };
 
                 }
@@ -210,7 +215,20 @@ namespace TiendaUNAC.Persistence.Commands
             _logger.LogTrace("Iniciando metodo UsuarioCommands.actualizarContrasena...");
             try
             {
-                var existeUsuario = await _context.UsuariosEs.FirstOrDefaultAsync(x => x.IdUsuario == passwordDTOs.idUsuario);
+                var expresion = (Expression<Func<UsuariosE, bool>>)null;
+
+                if (passwordDTOs.accion == 1)
+                {
+                    expresion = expresion = x => x.IdUsuario == passwordDTOs.idUsuario;
+                }
+
+                else if (passwordDTOs.accion == 2)
+                {
+                    expresion = expresion = x => x.Correo == passwordDTOs.correo.Trim();
+                }
+
+                var existeUsuario = await _context.UsuariosEs.FirstOrDefaultAsync(expresion);
+
                 if (existeUsuario != null)
                 {
                     var hashedPassword = await _password.GenerarPassword(passwordDTOs.password);
@@ -243,6 +261,43 @@ namespace TiendaUNAC.Persistence.Commands
         }
         #endregion
 
+        #region INSERTAR CÓDIGO
+        public async Task<bool> insertarCodigo(CodigoDTOs codigoDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo  UsuarioCommands.insertarCodigo...");
+            try
+            {
+                var codigoE = CodigoDTOs.CrearE(codigoDTOs);
+                await _context.CodigoEs.AddAsync(codigoE);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo  UsuarioCommands.insertarCodigo...");
+                throw;
+            }
+        }
+        #endregion
 
+        #region ELIMINAR CÓDIGO
+        public async Task<bool> EliminarCodigo(CodigoDTOs codigoDTOs)
+        {
+            _logger.LogTrace("Iniciando metodo UsuarioCommands.EliminarCodigo...");
+            try
+            {
+                var codigoE = CodigoDTOs.CrearE(codigoDTOs);
+                _context.CodigoEs.Remove(codigoE);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo UsuarioCommands.EliminarCodigo......");
+                throw;
+            }
+        }
+        #endregion
     }
 }

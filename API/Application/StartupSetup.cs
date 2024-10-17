@@ -1,4 +1,5 @@
 ﻿using TiendaUNAC.Domain.Utilities;
+using TiendaUNAC.Infrastructure.Email;
 using TiendaUNAC.Persistence.Commands;
 using TiendaUNAC.Persistence.Queries;
 
@@ -32,6 +33,10 @@ namespace TiendaUNAC.API.Application
             service.AddScoped<IImagenes, Imagenes>();
             service.AddScoped<IPassword, Password>();
             service.AddScoped<IGenerarToken, GenerarToken>();
+            service.AddScoped<IGenerarCodigo, GenerarCodigo>();
+
+            // Email
+            service.AddScoped<IEmailService, EmailService>();
 
             return service;
         }

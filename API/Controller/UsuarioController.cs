@@ -156,6 +156,40 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+
+        [HttpGet("Get_Usuario_Correo")]
+        public async Task<IActionResult> UsuarioCorreo(string correo)
+        {
+            _logger.LogInformation("Iniciando UsuarioController.UsuarioCorreo...");
+            try
+            {
+                var respuesta = await _usuariosQueries.UsuarioCorreo(correo);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.UsuarioCorreo");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_Codigo")]
+        public async Task<IActionResult> verificarCodigo(string correo, int codigo)
+        {
+            _logger.LogInformation("Iniciando UsuarioController.verificarCodigo...");
+            try
+            {
+                var respuesta = await _usuariosQueries.verificarCodigo(correo, codigo);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioController.verificarCodigo");
+                throw;
+            }
+        }
         #endregion
 
         #region PUT

@@ -79,7 +79,9 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
 
         public class passwordDTOs
         {
+            public int accion { get; set; }
             public int idUsuario { get; set; }
+            public string? correo { get; set; }
             public string password { get; set; }
         }
 

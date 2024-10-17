@@ -102,7 +102,7 @@ namespace TiendaUNAC.Persistence.Commands
                     return new RespuestaDTO
                     {
                         resultado = false,
-                        mensaje = "¡No se pudo agregar la categoría! Por favor, inténtalo de nuevo más tarde.",
+                        mensaje = "¡No se pudo agregar la categoría! Por favor, inténtalo de nuevo más tarde.cc",
                     };
                 }
             }

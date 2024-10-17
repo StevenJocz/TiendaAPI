@@ -18,6 +18,7 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
         public DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreador { get; set; }
         public bool Activo { get; set; }
+        public int VecesUtilizado { get; set; }
 
         public static CuponesDTOs CrearDTOs(CuponesE cuponesE)
         {

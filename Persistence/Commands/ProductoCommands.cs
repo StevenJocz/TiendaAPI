@@ -257,33 +257,47 @@ namespace TiendaUNAC.Persistence.Commands
             _logger.LogTrace("Iniciando metodo ProductoCommands.agregarFavoritos...");
             try
             {
-                var newFavorito = new FavoritosDTOs
+                if (favoritosDTOs.IdUsuario != 0 )
                 {
-                    IdProducto = favoritosDTOs.IdProducto,
-                    IdUsuario = favoritosDTOs.IdUsuario,
-                    FechaAgregado = (DateTime.UtcNow).ToLocalTime(),
-                };
+                    var newFavorito = new FavoritosDTOs
+                    {
+                        IdProducto = favoritosDTOs.IdProducto,
+                        IdUsuario = favoritosDTOs.IdUsuario,
+                        FechaAgregado = (DateTime.UtcNow).ToLocalTime(),
+                    };
 
-                var favorito = FavoritosDTOs.CrearE(newFavorito);
-                await _context.FavoritosEs.AddAsync(favorito);
-                await _context.SaveChangesAsync();
+                    var favorito = FavoritosDTOs.CrearE(newFavorito);
+                    await _context.FavoritosEs.AddAsync(favorito);
+                    await _context.SaveChangesAsync();
 
-                if (favorito.IdDeseos != 0)
+                    if (favorito.IdDeseos != 0)
+                    {
+                        return new RespuestaDTO
+                        {
+                            resultado = true,
+                            mensaje = "¡Se ha añadido el producto a la lista de deseos exitosamente!",
+                        };
+                    }
+                    else
+                    {
+                        return new RespuestaDTO
+                        {
+                            resultado = false,
+                            mensaje = "¡No se pudo agregar el producto a la lista de deseos ! Por favor, inténtalo de nuevo más tarde.",
+                        };
+                    }
+
+                }
+                else
                 {
                     return new RespuestaDTO
                     {
                         resultado = true,
                         mensaje = "¡Se ha añadido el producto a la lista de deseos exitosamente!",
                     };
+
                 }
-                else
-                {
-                    return new RespuestaDTO
-                    {
-                        resultado = false,
-                        mensaje = "¡No se pudo agregar el producto a la lista de deseos ! Por favor, inténtalo de nuevo más tarde.",
-                    };
-                }
+               
             }
             catch (Exception)
             {

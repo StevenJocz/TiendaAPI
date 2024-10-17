@@ -56,6 +56,7 @@ namespace TiendaUNAC.Infrastructure
         public virtual DbSet<CuponUsuarioE> CuponUsuarioEs { get; set; }
         public virtual DbSet<EstadoE> EstadoEs { get; set; }
         public virtual DbSet<EnvioE> EnvioEs { get; set; }
+        public virtual DbSet<EmailE> EmailEs { get; set; }
 
         // Configuración
         public virtual DbSet<CategoriaE> CategoriaEs { get; set; }
@@ -75,6 +76,7 @@ namespace TiendaUNAC.Infrastructure
         // Usuarios 
         public virtual DbSet<UsuariosE> UsuariosEs { get; set; }
         public virtual DbSet<PermisosUsuarioE> PermisosUsuarioEs { get; set; }
+        public virtual DbSet<CodigoE> CodigoEs { get; set; }
        
         // Pedidos
         public virtual DbSet<PedidosE> PedidosEs { get; set; }

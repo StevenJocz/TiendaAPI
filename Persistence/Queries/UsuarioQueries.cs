@@ -14,6 +14,9 @@ using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
 using TiendaUNAC.Domain.Entities.UsuariosE;
 using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
+using TiendaUNAC.Infrastructure.Email;
+using TiendaUNAC.Persistence.Commands;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using static TiendaUNAC.Domain.DTOs.UsuariosDTOs.UsuariosDTOs;
 
 namespace TiendaUNAC.Persistence.Queries
@@ -26,6 +29,8 @@ namespace TiendaUNAC.Persistence.Queries
         Task<List<UsuariosDTOs>> UsuarioId(int IdUsuario);
         Task<List<InformacionUsuariosDTOS>> informacionUsuario(int IdUsuario);
         Task<List<UsuariosDTOs>> UsuarioDocumento(string documento);
+        Task<RespuestaDTO> UsuarioCorreo(string correo);
+        Task<RespuestaDTO> verificarCodigo(string correo, int codigo);
     }
 
     public class UsuarioQueries : IUsuarioQueries, IDisposable
@@ -35,13 +40,20 @@ namespace TiendaUNAC.Persistence.Queries
         private readonly IConfiguration _configuration;
         private readonly IPassword _password;
         private readonly IGenerarToken _generarToken;
+        private readonly IUsuarioCommands _usuarioCommands;
+        private readonly IGenerarCodigo _generarCodigo;
+        private readonly IEmailService _emailService;
 
-        public UsuarioQueries(ILogger<UsuarioQueries> logger, IPassword password, IGenerarToken generarToken, IConfiguration configuration)
+
+        public UsuarioQueries(ILogger<UsuarioQueries> logger, IPassword password, IGenerarToken generarToken, IUsuarioCommands usuarioCommands, IGenerarCodigo generarCodigo, IEmailService emailService, IConfiguration configuration)
         {
             _logger = logger;
             _configuration = configuration;
             _password = password;
             _generarToken = generarToken;
+            _usuarioCommands = usuarioCommands;
+            _generarCodigo = generarCodigo;
+            _emailService = emailService;
             string? connectionString = _configuration.GetConnectionString("ConnectionTienda");
             _context = new TiendaUNACContext(connectionString);
         }
@@ -300,7 +312,7 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
-        #region INFORMACIÓN DE USUARIO CON NUMEROD DE DOCUMENTO
+        #region INFORMACIÓN DE USUARIO CON NUMERO DE DOCUMENTO
         public async Task<List<UsuariosDTOs>> UsuarioDocumento(string documento)
         {
             _logger.LogInformation("Iniciando metodo UsuarioQueries.UsuarioId...");
@@ -337,6 +349,123 @@ namespace TiendaUNAC.Persistence.Queries
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar UsuarioQueries.UsuarioId...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region USUARIO POR CORREO
+        public async Task<RespuestaDTO> UsuarioCorreo(string correo)
+        {
+            _logger.LogInformation("Iniciando metodo UsuarioQueries.UsuarioCorreo...");
+            try
+            {
+                correo = correo.Trim();
+                var usuarios = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.Correo == correo);
+
+                if (usuarios.IdUsuario != null)
+                {
+                    string codigo = await _generarCodigo.generarCodigo();
+
+                    var codigoDTOs = new CodigoDTOs
+                    {
+                        Codigo = int.Parse(codigo),
+                        Correo = correo
+                    };
+
+                    bool insertarCodigo = await _usuarioCommands.insertarCodigo(codigoDTOs);
+
+                    if (insertarCodigo)
+                    {
+                        var contentEmail = await _context.EmailEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdTemplateCorreo == 1);
+
+                        var objectoEmail = new EmailEnviar
+                        {
+                            Para = correo,
+                            Asunto = "Restablecimiento de contraseña",
+                            Contenido = contentEmail.Contenido,
+                            Codigo = codigo,
+                            Nombre = usuarios.Nombre + " " + usuarios.Apellido
+                        };
+
+                        bool enviarEmail = await _emailService.EnviarEmailCodigo(objectoEmail); 
+
+                        if (enviarEmail)
+                        {
+                            return new RespuestaDTO
+                            {
+                                resultado = true,
+                                mensaje = "¡Las instrucciones se han enviado correctamente. Por favor, revisa tu bandeja de entrada.!"
+                            };
+                        }
+                        else
+                        {
+                            return new RespuestaDTO
+                            {
+                                resultado = false,
+                                mensaje = "¡Hubo un problema al enviar el correo. Por favor, inténtalo más tarde!"
+                            };
+                        }
+                    }
+                    else
+                    {
+                        return new RespuestaDTO
+                        {
+                            resultado = false,
+                            mensaje = "¡Hubo un problema al enviar el correo. Por favor, inténtalo más tarde!"
+                        };
+                    }
+                } 
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡No se encontró ningun usuario con el correo electrónico proporcionado. Por favor, verifica y vuelve a intentarlo.!"
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioQueries.UsuarioCorreo...");
+                throw;
+            }
+        }
+        #endregion
+
+        #region VERIFICAR CÓDIGO
+        public async Task<RespuestaDTO> verificarCodigo(string correo, int codigo)
+        {
+            _logger.LogInformation("Iniciando metodo UsuarioQueries.verificarCodigo...");
+            try
+            {
+                correo = correo.Trim();
+                var existeCodigo = await _context.CodigoEs.AsNoTracking().FirstOrDefaultAsync(x => x.Correo == correo && x.Codigo == codigo);
+
+                if (existeCodigo != null)
+                {
+                    var codigoDTOs = CodigoDTOs.CrearDTOs(existeCodigo);
+
+                    bool codigoEliminado = await _usuarioCommands.EliminarCodigo(codigoDTOs);
+
+                    return new RespuestaDTO
+                    {
+                        resultado = true,
+                        mensaje = "¡El código proporcionado es correcto!"
+                    };
+                }
+                else
+                {
+                    return new RespuestaDTO
+                    {
+                        resultado = false,
+                        mensaje = "¡El código proporcionado es incorrecto. Por favor, verifica y vuelve a intentarlo!"
+                    };
+                }
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar UsuarioQueries.verificarCodigo...");
                 throw;
             }
         }

@@ -13,8 +13,10 @@ using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Entities.PedidosE;
+using TiendaUNAC.Domain.Entities.UsuariosE;
 using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
+using TiendaUNAC.Infrastructure.Email;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace TiendaUNAC.Persistence.Commands
@@ -30,11 +32,13 @@ namespace TiendaUNAC.Persistence.Commands
         private readonly ILogger<IPedidoCommands> _logger;
         private readonly IConfiguration _configuration;
         private readonly INotificacionCommads _notificacion;
+        private readonly IEmailService _emailService;
 
-        public PedidoCommands(ILogger<PedidoCommands> logger, IConfiguration configuration, INotificacionCommads notificacion)
+        public PedidoCommands(ILogger<PedidoCommands> logger, IConfiguration configuration, INotificacionCommads notificacion, IEmailService emailService)
         {
             _logger = logger;
             _notificacion = notificacion;
+            _emailService = emailService;
             _configuration = configuration;
             string? connectionString = _configuration.GetConnectionString("ConnectionTienda");
             _context = new TiendaUNACContext(connectionString);
@@ -149,6 +153,12 @@ namespace TiendaUNAC.Persistence.Commands
                     };
 
                     await _notificacion.agregarNotificacion(notificacion);
+
+                    var contentEmail = await _context.EmailEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdTemplateCorreo == 2);
+
+                   var usuario = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x=> x.IdUsuario == registrarPedido.IdUsuario);
+
+                    bool enviarEmail = await _emailService.EnviarEmailConfirmacionPedido(registrarPedido, usuario.Correo, contentEmail.Contenido , ultimaOrden == null ? 1 : ultimaOrden.Orden + 1);
 
                     return new RespuestaDTO
                     {

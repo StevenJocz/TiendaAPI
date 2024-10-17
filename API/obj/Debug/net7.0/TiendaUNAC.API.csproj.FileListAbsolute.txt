@@ -234,3 +234,9 @@ D:\Proyectos Desarrollo\TiendaUNAC\Service\API\obj\Debug\net7.0\refint\TiendaUNA
 D:\Proyectos Desarrollo\TiendaUNAC\Service\API\obj\Debug\net7.0\TiendaUNAC.API.pdb
 D:\Proyectos Desarrollo\TiendaUNAC\Service\API\obj\Debug\net7.0\TiendaUNAC.API.genruntimeconfig.cache
 D:\Proyectos Desarrollo\TiendaUNAC\Service\API\obj\Debug\net7.0\ref\TiendaUNAC.API.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\API\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\API\bin\Debug\net7.0\MailKit.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\API\bin\Debug\net7.0\MimeKit.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\API\bin\Debug\net7.0\System.Formats.Asn1.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\API\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+D:\Proyectos UNAC\Proyectos\TiendaAPI\API\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll
