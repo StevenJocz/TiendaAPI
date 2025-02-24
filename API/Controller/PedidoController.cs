@@ -52,14 +52,7 @@ namespace TiendaUNAC.API.Controller
             {
                 var respuesta = await _pedidoQueries.ListarPedidos(accion, idUsuario);
 
-                if (respuesta == null || !respuesta.Any())
-                {
-                    return BadRequest("No se encontro pedidos registrados. Por favor, intenta nuevamente más tarde.");
-                }
-                else
-                {
-                    return Ok(respuesta);
-                }
+                return Ok(respuesta);
             }
             catch (Exception)
             {
@@ -75,19 +68,28 @@ namespace TiendaUNAC.API.Controller
             try
             {
                 var respuesta = await _pedidoQueries.ListarPedidosId(idPedido);
+                return Ok(respuesta);
 
-                if (respuesta == null || !respuesta.Any())
-                {
-                    return BadRequest("No se encontro pedidos registrados. Por favor, intenta nuevamente más tarde.");
-                }
-                else
-                {
-                    return Ok(respuesta);
-                }
             }
             catch (Exception)
             {
                 _logger.LogError("Error al iniciar PedidoController.ListarPedidosId");
+                throw;
+            }
+        }
+
+        [HttpGet("Get_Orden_Pedidos")]
+        public async Task<IActionResult> ListarPedidoOrden(int referencia)
+        {
+            _logger.LogInformation("Iniciando PedidoController.ListarPedidoOrden...");
+            try
+            {
+                var respuesta = await _pedidoQueries.ListarPedidoOrden(referencia);
+                return Ok(respuesta);
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar PedidoController.ListarPedidoOrden");
                 throw;
             }
         }

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TiendaUNAC.Domain.DTOs.PasarelaPagoDTOs;
 
 namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
 {
@@ -11,7 +12,8 @@ namespace TiendaUNAC.Domain.DTOs.GeneralesDTOs
     {
         public bool resultado { get; set; }
         public string mensaje { get; set; }
-        public int? orden { get; set; }
+        public int? referencia { get; set; }
+        public ApiResponse? apiResponse { get; set; }
     }
 
     public class tiposDocumentosDTOs

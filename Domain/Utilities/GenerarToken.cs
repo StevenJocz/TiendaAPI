@@ -28,10 +28,21 @@ namespace TiendaUNAC.Domain.Utilities
                 claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, Convert.ToString(datosUsuarioDTOs.idUsuario)));
                 claims.AddClaim(new Claim("idUsuario", Convert.ToString(datosUsuarioDTOs.idUsuario)));
                 claims.AddClaim(new Claim("nombre", datosUsuarioDTOs.nombre));
+                claims.AddClaim(new Claim("apellido", datosUsuarioDTOs.apellido));
+                claims.AddClaim(new Claim("tipoDocumento", Convert.ToString(datosUsuarioDTOs.tipoDocumento)));
+                claims.AddClaim(new Claim("documento", datosUsuarioDTOs.documento));
                 claims.AddClaim(new Claim("correo", datosUsuarioDTOs.correo));
                 claims.AddClaim(new Claim("telefono", datosUsuarioDTOs.telefono));
-                claims.AddClaim(new Claim("direccion", datosUsuarioDTOs.direccion));
+                claims.AddClaim(new Claim("genero", Convert.ToString(datosUsuarioDTOs.genero)));
                 claims.AddClaim(new Claim("tipoUsuario", Convert.ToString(datosUsuarioDTOs.tipoUsuario)));
+                claims.AddClaim(new Claim("pais", Convert.ToString(datosUsuarioDTOs.pais)));
+                claims.AddClaim(new Claim("departamento", Convert.ToString(datosUsuarioDTOs.departamento)));
+                claims.AddClaim(new Claim("ciudad", Convert.ToString(datosUsuarioDTOs.ciudad)));
+                claims.AddClaim(new Claim("tipoVia", Convert.ToString(datosUsuarioDTOs.tipoVia)));
+                claims.AddClaim(new Claim("numero1", datosUsuarioDTOs.Numero1));
+                claims.AddClaim(new Claim("numero2", datosUsuarioDTOs.Numero2));
+                claims.AddClaim(new Claim("numero3", datosUsuarioDTOs.Numero3));
+
 
                 var credencialesToken = new SigningCredentials
                 (

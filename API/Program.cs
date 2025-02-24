@@ -1,6 +1,12 @@
+using System.Net;
 using TiendaUNAC.API.Application;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+});
+
 
 // Add services to the container.
 
@@ -14,11 +20,13 @@ var configuration = proveedor.GetRequiredService<IConfiguration>();
 
 builder.Services.AddCors(opciones =>
 {
-    var fronedUrl = configuration.GetValue<string>("frontendUrl");
+    var fronedUrl = configuration.GetValue<string>("_frontendUrl");
     opciones.AddDefaultPolicy(builder => {
         builder.WithOrigins(fronedUrl).AllowAnyMethod().AllowAnyHeader().AllowCredentials();
     });
 });
+
+builder.Services.AddHttpClient();
 
 builder.Services.AddStartupSetup(builder.Configuration);
 

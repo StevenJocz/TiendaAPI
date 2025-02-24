@@ -72,7 +72,7 @@ namespace TiendaUNAC.Persistence.Queries
             _logger.LogTrace("Iniciando metodo GeneralesQueries.TiposDocumentos...");
             try
             {
-                var documentos = await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC TipoDocumentos").ToListAsync();
+                var documentos = await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC TipoDocumentos @Accion={1}, @IdTipo={0}").ToListAsync();
 
                 var listDocumentos = new List<tiposDocumentosDTOs>();
                 foreach (var item in documentos)

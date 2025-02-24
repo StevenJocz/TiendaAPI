@@ -5,12 +5,15 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.NotificacionDTOs;
+using TiendaUNAC.Domain.DTOs.PasarelaPagoDTOs;
 using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
+using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
 using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Entities.PedidosE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
@@ -29,12 +32,15 @@ namespace TiendaUNAC.Persistence.Commands
     public class PedidoCommands: IPedidoCommands, IDisposable
     {
         private readonly TiendaUNACContext _context = null;
+        private readonly TiendaUNACContext _contextSion = null;
         private readonly ILogger<IPedidoCommands> _logger;
         private readonly IConfiguration _configuration;
         private readonly INotificacionCommads _notificacion;
         private readonly IEmailService _emailService;
+        private readonly IUsuarioCommands _usuarioCommands;
+        private readonly IGenerarSessionPasarelaPago _generarSessionPasarelaPago;
 
-        public PedidoCommands(ILogger<PedidoCommands> logger, IConfiguration configuration, INotificacionCommads notificacion, IEmailService emailService)
+        public PedidoCommands(ILogger<PedidoCommands> logger, IConfiguration configuration, INotificacionCommads notificacion, IEmailService emailService, IUsuarioCommands usuarioCommands, IGenerarSessionPasarelaPago generarSessionPasarelaPago)
         {
             _logger = logger;
             _notificacion = notificacion;
@@ -42,6 +48,10 @@ namespace TiendaUNAC.Persistence.Commands
             _configuration = configuration;
             string? connectionString = _configuration.GetConnectionString("ConnectionTienda");
             _context = new TiendaUNACContext(connectionString);
+            string? connectionStringDos = _configuration.GetConnectionString("ConnectionSionWeb");
+            _contextSion = new TiendaUNACContext(connectionStringDos);
+            _usuarioCommands = usuarioCommands;
+            _generarSessionPasarelaPago = generarSessionPasarelaPago;
         }
 
         #region implementacion Disponse
@@ -72,17 +82,26 @@ namespace TiendaUNAC.Persistence.Commands
             _logger.LogTrace("Iniciando metodo PedidoCommands.registrarPedido...");
             try
             {
+                var Usuario = await _usuarioCommands.crearUsuario(registrarPedido.Cliente);
+
                 var ultimaOrden = await _context.PedidosEs.OrderByDescending(x => x.IdPedido).FirstOrDefaultAsync();
+
+                // Mientras tanto para generar la referencia
+                Random random = new Random();
+                int Referencia = random.Next(1000, 9999); 
+
 
                 var pedido = new PedidosDTOs
                 {
-                    IdUsuario = registrarPedido.IdUsuario,
+                    IdUsuario = Usuario.IdUsuario,
                     Orden = ultimaOrden == null ? 1: ultimaOrden.Orden + 1,
+                    Referencia = Referencia, 
                     IdEstado = 1,
                     SubTotal = registrarPedido.SubTotal,
                     ValorEnvio = registrarPedido.ValorEnvio,
                     ValorDescuento = registrarPedido.ValorDescuento,
                     ValorTotal = registrarPedido.ValorTotal,
+                    FormaPago = "N/A",
                     TipoEntrega = registrarPedido.TipoEntrega,
                     FechaRegistro = (DateTime.UtcNow).ToLocalTime(),
                 };
@@ -118,11 +137,11 @@ namespace TiendaUNAC.Persistence.Commands
                     {
                         IdPedido = pedidoE.IdPedido,
                         IdEstado = 2,
-                        Direccion = registrarPedido.Direccion,
-                        Complemento = registrarPedido.Complemento,
-                        Barrio = registrarPedido.Barrio,
-                        Destinatario = registrarPedido.Destinatario,
-                        Responsable = registrarPedido.Responsable
+                        Direccion = Usuario.TipoVia + " " + Usuario.Numero1  + "#" + Usuario.Numero2 + "-" + Usuario.Numero3,
+                        Complemento = registrarPedido.Cliente.Complementario,
+                        Barrio = registrarPedido.Cliente.Barrio,
+                        Destinatario = Usuario.Nombre + " " + Usuario.Apellido,
+                        Responsable = Usuario.Nombre + " " + Usuario.Apellido
                     };
 
                     var envioE = EnvioDTOs.CrearE(envio);
@@ -134,7 +153,7 @@ namespace TiendaUNAC.Persistence.Commands
                         var cuponUsuario = new CuponUsuarioDTOs
                         {
                             IdCupon = registrarPedido.IdCupon,
-                            IdUsuario = registrarPedido.IdUsuario,
+                            IdUsuario = Usuario.IdUsuario,
                             FechaRegistro = DateTime.UtcNow,
                         };
 
@@ -146,7 +165,7 @@ namespace TiendaUNAC.Persistence.Commands
                     var notificacion = new NotificacionCrear
                     {
                         IdTipoNotificacion = 1,
-                        DeIdUsuario = registrarPedido.IdUsuario,
+                        DeIdUsuario = Usuario.IdUsuario,
                         ParaIdUsuario = 2,
                         IdTipoRelacion = 1,
                         IdRelacion = pedidoE.IdPedido
@@ -156,15 +175,30 @@ namespace TiendaUNAC.Persistence.Commands
 
                     var contentEmail = await _context.EmailEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdTemplateCorreo == 2);
 
-                   var usuario = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x=> x.IdUsuario == registrarPedido.IdUsuario);
+                    bool enviarEmail = await _emailService.EnviarEmailConfirmacionPedido(registrarPedido, Usuario.Correo, contentEmail.Contenido , ultimaOrden == null ? 1 : ultimaOrden.Orden + 1);
 
-                    bool enviarEmail = await _emailService.EnviarEmailConfirmacionPedido(registrarPedido, usuario.Correo, contentEmail.Contenido , ultimaOrden == null ? 1 : ultimaOrden.Orden + 1);
+                    var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC TipoDocumentos @Accion={2}, @IdTipo={Usuario.IdTipoDocumento}").ToListAsync()).FirstOrDefault();
+
+                    var datosPasarela = new PasarelaPagoDTOs
+                    {
+                        document = Usuario.Documento,
+                        documentType = tipoDocumento.Documento,
+                        name = Usuario.Nombre,
+                        surname = Usuario.Apellido,
+                        email = Usuario.Correo,
+                        mobile = Usuario.Celular,
+                        reference = Referencia.ToString(),
+                        total = registrarPedido.ValorTotal,
+                    };
+
+                    var Pasarela = await _generarSessionPasarelaPago.CrearSesionPago(datosPasarela);
 
                     return new RespuestaDTO
                     {
                         resultado = true,
                         mensaje = "¡Se ha añadido el pedido exitosamente!",
-                        orden = ultimaOrden == null ? 1 : ultimaOrden.Orden + 1,
+                        referencia = Referencia,
+                        apiResponse = Pasarela
                     };
                 }
                 else
@@ -256,6 +290,8 @@ namespace TiendaUNAC.Persistence.Commands
             }
         }
         #endregion
+      
+
 
     }
 }

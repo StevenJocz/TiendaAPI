@@ -4,15 +4,21 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using TiendaUNAC.Domain.DTOs.ConfiguracionDTOs;
 using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
+using TiendaUNAC.Domain.Entities.ConfiguracionE;
+using TiendaUNAC.Domain.Entities.GeneralesE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
+using TiendaUNAC.Domain.Utilities;
 using TiendaUNAC.Infrastructure;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -21,20 +27,29 @@ namespace TiendaUNAC.Persistence.Queries
     public interface IPedidoQueries {
         Task<List<ListaPedidoDTOs>> ListarPedidos(int accion, int idUsuario);
         Task<List<ListarPedidoIdDTOs>> ListarPedidosId(int idPedido);
+        Task<List<EstadoPagoDTOs>> ListarPedidoOrden(int referencia);
     }
 
     public class PedidoQueries: IPedidoQueries, IDisposable
     {
         private readonly TiendaUNACContext _context = null;
+        private readonly TiendaUNACContext _contextSion = null;
         private readonly ILogger<IPedidoQueries> _logger;
         private readonly IConfiguration _configuration;
+        private readonly IGenerarSessionPasarelaPago _generarSessionPasarelaPago;
 
-        public PedidoQueries(ILogger<PedidoQueries> logger, IConfiguration configuration)
+
+        public PedidoQueries(ILogger<PedidoQueries> logger, IConfiguration configuration, IGenerarSessionPasarelaPago generarSessionPasarelaPago)
         {
             _logger = logger;
             _configuration = configuration;
             string? connectionString = _configuration.GetConnectionString("ConnectionTienda");
             _context = new TiendaUNACContext(connectionString);
+
+            string? connectionStringDos = _configuration.GetConnectionString("ConnectionSionWeb");
+            _contextSion = new TiendaUNACContext(connectionStringDos);
+
+            _generarSessionPasarelaPago = generarSessionPasarelaPago;
         }
 
         #region implementacion Disponse
@@ -96,7 +111,7 @@ namespace TiendaUNAC.Persistence.Queries
         }
         #endregion
 
-        #region LISTA TODOS LOS PEDIDOS
+        #region LISTA  PEDIDOS POR ID
         public async Task<List<ListarPedidoIdDTOs>> ListarPedidosId(int idPedido)
         {
             _logger.LogTrace("Iniciando metodo PedidoQueries.ListarPedidosId...");
@@ -138,7 +153,6 @@ namespace TiendaUNAC.Persistence.Queries
                         documento = usuario.Documento,
                         correo = usuario.Correo,
                         telefono = usuario.Celular,
-                        direccion = usuario.Direccion,
 
                     };
 
@@ -176,6 +190,83 @@ namespace TiendaUNAC.Persistence.Queries
                 }
 
                 return listaPedido;
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo PedidoQueries.ListarPedidosId...");
+                throw;
+            }
+
+        }
+        #endregion
+
+
+        #region LISTA  PEDIDOS POR ORDEN
+        public async Task<List<EstadoPagoDTOs>> ListarPedidoOrden(int referencia)
+        {
+            _logger.LogTrace("Iniciando metodo PedidoQueries.ListarPedidosId...");
+            try
+            {
+                var pedido = await _context.PedidosEs.AsNoTracking().FirstOrDefaultAsync(x => x.Referencia == referencia);
+
+                var pago = new List<EstadoPagoDTOs>();
+
+                if (pedido.IdPedido > 0)
+                {
+                    var usuario = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdUsuario == pedido.IdUsuario);
+
+                    bool estadoPasarelaPago = await _generarSessionPasarelaPago.EstadoSesion(1, pedido.Referencia.ToString());
+
+                    var EstadoSion = await _contextSion.EstadoPagoEs.AsNoTracking().FirstOrDefaultAsync(x => x.IdReferencia == referencia);
+
+                    if (estadoPasarelaPago)
+                    {
+                        pedido.IdEstado = EstadoSion != null ? EstadoSion.Estado switch
+                        {
+                            "APPROVED" => 3,
+                            "PENDING" => 1,
+                            _ => 8
+                        } : 8;
+
+                        pedido.FormaPago = EstadoSion.FormaPago;
+
+                        _context.PedidosEs.Update(pedido);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    var estadoPagoTexto = EstadoSion != null ? EstadoSion.Estado switch
+                    {
+                        "APPROVED" => "Aprobada",
+                        "PENDING" => "Pendiente",
+                        "REJECTED" => "Cancelada",
+                        "FAILED" => "Fallida",
+                        "PARTIAL_APPROVED" => "Aprobada Parcialmente",
+                        "EXPIRED" => "Expirada",
+                        "CANCELLED" => "Cancelada",
+                        "REVERSED" => "Reversada",
+                        _ => "Desconocida"
+                    } : "Desconocida";
+
+
+                    var lista = new EstadoPagoDTOs
+                    {
+                        IdEstado = EstadoSion.IdEstado,
+                        Estado = estadoPagoTexto,
+                        RequestId = EstadoSion.RequestId,
+                        IdReferencia = EstadoSion.IdReferencia,
+                        Fecha = EstadoSion.Fecha,
+                        Valor = EstadoSion.Valor,
+                        Moneda = EstadoSion.Moneda,
+                        FormaPago = EstadoSion.FormaPago,
+                        Razon = EstadoSion.Razon,
+                        Mensaje = EstadoSion.Mensaje,
+                        Correo = usuario.Correo,
+                    };
+
+                    pago.Add(lista);
+                }
+
+                return pago;
             }
             catch (Exception)
             {

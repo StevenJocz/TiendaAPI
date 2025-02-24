@@ -61,6 +61,7 @@ namespace TiendaUNAC.Infrastructure
         // Configuración
         public virtual DbSet<CategoriaE> CategoriaEs { get; set; }
         public virtual DbSet<TagE> TagEs { get; set; }
+        public virtual DbSet<EstadoPagoE> EstadoPagoEs { get; set; }
 
         // Productos
         public virtual DbSet<ProductoE> ProductoEs { get; set; }

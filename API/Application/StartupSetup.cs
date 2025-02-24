@@ -34,6 +34,7 @@ namespace TiendaUNAC.API.Application
             service.AddScoped<IPassword, Password>();
             service.AddScoped<IGenerarToken, GenerarToken>();
             service.AddScoped<IGenerarCodigo, GenerarCodigo>();
+            service.AddScoped<IGenerarSessionPasarelaPago, GenerarSessionPasarelaPago>();
 
             // Email
             service.AddScoped<IEmailService, EmailService>();

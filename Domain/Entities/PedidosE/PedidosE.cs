@@ -15,12 +15,14 @@ namespace TiendaUNAC.Domain.Entities.PedidosE
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdPedido { get; set; }
         public int Orden { get; set; }
+        public int Referencia { get; set; }
         public int IdUsuario { get; set; }
         public int IdEstado { get; set; }
         public decimal SubTotal { get; set; }
         public decimal ValorEnvio { get; set; }
         public decimal ValorDescuento { get; set; }
         public decimal ValorTotal { get; set; }
+        public string FormaPago { get; set; }
         public string TipoEntrega { get; set; }
         public DateTime FechaRegistro { get; set; }
 

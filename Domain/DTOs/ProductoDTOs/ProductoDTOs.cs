@@ -76,6 +76,7 @@ namespace TiendaUNAC.Domain.DTOs.ProductoDTOs
         public int IdTercero { get; set; }
         public double? stock { get; set; }
         public double? precioBase { get; set; }
+        public double iva { get; set; }
         public List<ListaImagenesDTOs> Imagenes { get; set; }
         public List<ListaTallaDTOs> Tallas { get; set; }
     }

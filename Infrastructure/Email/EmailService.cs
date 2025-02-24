@@ -85,15 +85,14 @@ namespace TiendaUNAC.Infrastructure.Email
                                      .Replace("[SubTotal]", pedido.SubTotal.ToString("N2"))
                                      .Replace("[ValorEnvio]", pedido.ValorEnvio.ToString("N2"))
                                      .Replace("[ValorDescuento]", pedido.ValorDescuento.ToString("N2"))
-                                     .Replace("[ValorTotal]", pedido.ValorTotal.ToString("N2"))
-                                     .Replace("[Dirección de envío]", $"{pedido.Direccion}, {pedido.Barrio}, {pedido.Complemento}");
+                                     .Replace("[ValorTotal]", pedido.ValorTotal.ToString("N2"));
 
                 
                 var registrosHtml = new StringBuilder();
                 foreach (var registro in pedido.Registros)
                 {
                     registrosHtml.Append("<tr>")
-                                 .Append($"<td><img src='http://localhost:5072/{registro.imagen}' alt='' /> {registro.Nombre}</td>")
+                                 .Append($"<td><img src='https://apitienda.unac.edu.co/{registro.imagen}' alt='' /> {registro.Nombre}</td>")
                                  .Append($"<td>{registro.Color}</td>")
                                  .Append($"<td>{(string.IsNullOrEmpty(registro.Talla) ? "No Aplica" : registro.Talla)}</td>")
                                  .Append($"<td>{registro.Cantidad}</td>")

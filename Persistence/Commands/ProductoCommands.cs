@@ -150,7 +150,6 @@ namespace TiendaUNAC.Persistence.Commands
                 throw;
             }
         }
-
         #endregion
 
         #region ACTUALIZAR PRODUCTO
@@ -305,7 +304,6 @@ namespace TiendaUNAC.Persistence.Commands
                 throw;
             }
         }
-
         #endregion
 
         #region ELIMINAR FAVORITOS

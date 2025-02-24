@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
+using TiendaUNAC.Domain.DTOs.PedidosDTOs;
 using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
 using TiendaUNAC.Domain.Entities.ProductoE;
 using TiendaUNAC.Domain.Entities.UsuariosE;
@@ -20,7 +21,7 @@ namespace TiendaUNAC.Persistence.Commands
 {
     public interface IUsuarioCommands
     {
-        Task<RespuestaDTO> crearUsuario(UsuariosDTOs usuariosDTOs);
+        Task<UsuariosDTOs> crearUsuario(DatosCliente datosCliente);
         Task<RespuestaDTO> actualizarUsuario(UsuariosDTOs usuariosDTOs, int Accion);
         Task<RespuestaDTO> actualizarContrasena(passwordDTOs passwordDTOs);
         Task<bool> insertarCodigo(CodigoDTOs codigoDTOs);
@@ -66,52 +67,78 @@ namespace TiendaUNAC.Persistence.Commands
         #endregion
 
         #region CREA USUARIO
-        public async Task<RespuestaDTO> crearUsuario(UsuariosDTOs usuariosDTOs)
+        public async Task<UsuariosDTOs> crearUsuario(DatosCliente datosCliente)
         {
             _logger.LogInformation("Iniciando metodo UsuarioCommands.crearUsuario...");
             try
             {
-                var hashedPassword = await _password.GenerarPassword(usuariosDTOs.Password);
-                var usuario = new UsuariosDTOs
+                var usuarioExite = await _context.UsuariosEs.AsNoTracking().FirstOrDefaultAsync(x => x.Correo == datosCliente.Correo);
+                var usuario = new UsuariosDTOs(); 
+                
+                if (usuarioExite != null)
                 {
-                    IdTipoUsuario = usuariosDTOs.IdTipoUsuario,
-                    Nombre = usuariosDTOs.Nombre,
-                    Apellido = usuariosDTOs.Apellido,
-                    IdTipoDocumento = usuariosDTOs.IdTipoDocumento,
-                    Documento = usuariosDTOs.Documento,
-                    FechaNacimiento = usuariosDTOs.FechaNacimiento,
-                    Celular = usuariosDTOs.Celular,
-                    IdPais = usuariosDTOs.IdPais,
-                    IdDepartamento = usuariosDTOs.IdDepartamento,
-                    IdMunicipio = usuariosDTOs.IdMunicipio,
-                    Direccion = usuariosDTOs.Direccion,
-                    Correo = usuariosDTOs.Correo,
-                    Password = hashedPassword,
-                    FechaRegistro = usuariosDTOs.FechaRegistro
-                };
-
-                var usuarioE = UsuariosDTOs.CrearE(usuario);
-                await _context.UsuariosEs.AddAsync(usuarioE);
-                await _context.SaveChangesAsync();
-
-                if (usuarioE.IdUsuario != 0)
-                {
-                    return new RespuestaDTO
+                    usuario = new UsuariosDTOs
                     {
-                        resultado = true,
-                        mensaje = "¡Se ha añadido el producto exitosamente!",
-                        orden = usuarioE.IdUsuario
+                        IdUsuario = usuarioExite.IdUsuario,
+                        IdTipoUsuario = usuarioExite.IdTipoUsuario,
+                        Nombre = usuarioExite.Nombre,
+                        Apellido = usuarioExite.Apellido,
+                        IdGenero = usuarioExite.IdGenero,
+                        IdTipoDocumento = usuarioExite.IdTipoDocumento,
+                        Documento = usuarioExite.Documento,
+                        Celular = usuarioExite.Celular,
+                        IdPais = usuarioExite.IdPais,
+                        IdDepartamento = usuarioExite.IdDepartamento,
+                        IdMunicipio = usuarioExite.IdMunicipio,
+                        TipoVia = usuarioExite.TipoVia,
+                        Numero1 = usuarioExite.Numero1,
+                        Numero2 = usuarioExite.Numero2,
+                        Numero3 = usuarioExite.Numero3,
+                        Correo = usuarioExite.Correo,
+                        FechaRegistro = (DateTime.UtcNow).ToLocalTime(),
                     };
+
+                    usuarioExite.IdPais = usuarioExite.IdPais;
+                    usuarioExite.IdDepartamento = datosCliente.Departamento;
+                    usuarioExite.IdMunicipio = datosCliente.Ciudad;
+                    usuarioExite.TipoVia = datosCliente.TipoVia;
+                    usuarioExite.Numero1 = datosCliente.Numero1;
+                    usuarioExite.Numero2 = datosCliente.Numero2;
+                    usuarioExite.Numero3 = datosCliente.Numero3;
+
+                    _context.UsuariosEs.Update(usuarioExite);
+                    await _context.SaveChangesAsync();
+
+                    return usuario;
 
                 }
                 else
                 {
-                    return new RespuestaDTO
+                    usuario = new UsuariosDTOs
                     {
-                        resultado = false,
-                        mensaje = "¡No se pudo agregar el producto! Por favor, inténtalo de nuevo más tarde.",
+                        IdTipoUsuario = 2,
+                        Nombre = datosCliente.Nombres,
+                        Apellido = datosCliente.Apellidos,
+                        IdGenero = datosCliente.Genero,
+                        IdTipoDocumento = datosCliente.TipoDocumento,
+                        Documento = datosCliente.Documento,
+                        Celular = datosCliente.Celular,
+                        IdPais = datosCliente.Pais,
+                        IdDepartamento = datosCliente.Departamento,
+                        IdMunicipio = datosCliente.Ciudad,
+                        TipoVia = datosCliente.TipoVia,
+                        Numero1 = datosCliente.Numero1,
+                        Numero2 = datosCliente.Numero2,
+                        Numero3 = datosCliente.Numero3,
+                        Correo = datosCliente.Correo,
+                        FechaRegistro = (DateTime.UtcNow).ToLocalTime(),
                     };
+                    var usuarioE = UsuariosDTOs.CrearE(usuario);
+                    await _context.UsuariosEs.AddAsync(usuarioE);
+                    await _context.SaveChangesAsync();
+                    return usuario;
                 }
+                
             }
             catch (Exception)
             {
@@ -180,7 +207,6 @@ namespace TiendaUNAC.Persistence.Commands
                     {
                         existeUsuario.IdDepartamento = usuariosDTOs.IdDepartamento;
                         existeUsuario.IdMunicipio = usuariosDTOs.IdMunicipio;
-                        existeUsuario.Direccion = usuariosDTOs.Direccion;
                     }
 
                     _context.UsuariosEs.Update(existeUsuario);

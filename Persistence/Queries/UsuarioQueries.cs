@@ -8,6 +8,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TiendaUNAC.Domain.DTOs.GeneralesDTOs;
 using TiendaUNAC.Domain.DTOs.ProductoDTOs;
 using TiendaUNAC.Domain.DTOs.UsuariosDTOs;
@@ -94,22 +95,38 @@ namespace TiendaUNAC.Persistence.Queries
                 if (usuarioExite != null)
                 {
                     var verificarPassword = await _password.VerificarPassword(password, usuarioExite.Password);
-                    var departamentoCiudad = (await _context.ubicacionEs
-                                            .FromSqlInterpolated($"EXEC Ubicacion @Accion={5}, @Parametro={usuarioExite.IdMunicipio}")
-                                            .ToListAsync())
-                                            .FirstOrDefault();
-
-
+                   
                     if (verificarPassword)
                     {
+                        var departamentoCiudad = (await _context.ubicacionEs
+                                           .FromSqlInterpolated($"EXEC Ubicacion @Accion={5}, @Parametro={usuarioExite.IdMunicipio}")
+                                           .ToListAsync())
+                                           .FirstOrDefault();
+
+
+                        var tipoDocumento = (await _context.tipoDocumentosEs.FromSqlInterpolated($"EXEC TipoDocumentos @Accion={2}, @IdTipo={usuarioExite.IdTipoDocumento}").ToListAsync())
+                                                 .FirstOrDefault();
+
                         var datosUsuario = new DatosUsuarioDTOs
                         {
                             idUsuario = usuarioExite.IdUsuario,
                             nombre = usuarioExite.Nombre,
+                            apellido = usuarioExite.Apellido,
+                            tipoDocumento = usuarioExite.IdTipoDocumento,
+                            documento = usuarioExite.Documento,
                             correo = usuarioExite.Correo,
                             telefono = usuarioExite.Celular,
-                            direccion = departamentoCiudad.Nombre + " - " + usuarioExite.Direccion,
-                            tipoUsuario = usuarioExite.IdTipoUsuario
+                            tipoUsuario = usuarioExite.IdTipoUsuario,
+                            genero = usuarioExite.IdGenero,
+                            pais = usuarioExite.IdPais,
+                            departamento = usuarioExite.IdDepartamento,
+                            ciudad = usuarioExite.IdMunicipio,
+                            tipoVia = usuarioExite.TipoVia,
+                            Numero1 = usuarioExite.Numero1,
+                            Numero2 = usuarioExite.Numero2,
+                            Numero3 = usuarioExite.Numero3,
+
+
                         };
 
                         var totken = await _generarToken.Token(datosUsuario);
@@ -209,10 +226,8 @@ namespace TiendaUNAC.Persistence.Queries
                         Apellido = item.Apellido,
                         TipoDocumento = tipoDocumento.Documento,
                         Documento = item.Documento,
-                        FechaNacimiento = item.FechaNacimiento,
                         Celular = item.Celular,
                         Ubicacion = ubicacion.Nombre,
-                        Direccion = item.Direccion,
                         Correo = item.Correo,
                         FechaRegistro = item.FechaRegistro
                     };
@@ -248,12 +263,10 @@ namespace TiendaUNAC.Persistence.Queries
                     Apellido = usuarios.Apellido,
                     IdTipoDocumento = usuarios.IdTipoDocumento,
                     Documento = usuarios.Documento,
-                    FechaNacimiento = usuarios.FechaNacimiento,
                     Celular = usuarios.Celular,
                     IdPais = usuarios.IdPais,
                     IdDepartamento = usuarios.IdDepartamento,
                     IdMunicipio = usuarios.IdMunicipio,
-                    Direccion = usuarios.Direccion,
                     Correo = usuarios.Correo,
                     FechaRegistro = usuarios.FechaRegistro
                 };
@@ -292,10 +305,8 @@ namespace TiendaUNAC.Persistence.Queries
                     Apellido = usuarios.Apellido,
                     TipoDocumento = tipoDocumento.Documento,
                     Documento = usuarios.Documento,
-                    FechaNacimiento = usuarios.FechaNacimiento,
                     Celular = usuarios.Celular,
                     Ubicacion = ubicacion.Nombre,
-                    Direccion = usuarios.Direccion,
                     Correo = usuarios.Correo,
                     FechaRegistro = usuarios.FechaRegistro
                 };
@@ -331,12 +342,10 @@ namespace TiendaUNAC.Persistence.Queries
                         Apellido = usuarios.Apellido,
                         IdTipoDocumento = usuarios.IdTipoDocumento,
                         Documento = usuarios.Documento,
-                        FechaNacimiento = usuarios.FechaNacimiento,
                         Celular = usuarios.Celular,
                         IdPais = usuarios.IdPais,
                         IdDepartamento = usuarios.IdDepartamento,
                         IdMunicipio = usuarios.IdMunicipio,
-                        Direccion = usuarios.Direccion,
                         Correo = usuarios.Correo,
                         FechaRegistro = usuarios.FechaRegistro
                     };

@@ -15,14 +15,17 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
         public int IdTipoUsuario { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+        public int IdGenero { get; set; }
         public int IdTipoDocumento { get; set; }
         public string Documento { get; set; }
-        public DateTime FechaNacimiento { get; set; }
         public string Celular { get; set; }
         public int IdPais { get; set; }
         public int IdDepartamento { get; set; }
         public int IdMunicipio { get; set; }
-        public string Direccion { get; set; }
+        public string TipoVia { get; set; }
+        public string Numero1 { get; set; }
+        public string Numero2 { get; set; }
+        public string Numero3 { get; set; }
         public string Correo { get; set; }
         public string Password { get; set; }
         public DateTime FechaRegistro { get; set; }
@@ -35,14 +38,17 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
                 IdTipoUsuario = usuariosE.IdTipoUsuario,
                 Nombre = usuariosE.Nombre,
                 Apellido = usuariosE.Apellido,
+                IdGenero = usuariosE.IdGenero,
                 IdTipoDocumento = usuariosE.IdTipoDocumento,
                 Documento = usuariosE.Documento,
-                FechaNacimiento = usuariosE.FechaNacimiento,
                 Celular = usuariosE.Celular,
                 IdPais = usuariosE.IdPais,
                 IdDepartamento = usuariosE.IdDepartamento,
                 IdMunicipio = usuariosE.IdMunicipio,
-                Direccion = usuariosE.Direccion,
+                TipoVia = usuariosE.TipoVia,
+                Numero1 = usuariosE.Numero1,
+                Numero2 = usuariosE.Numero2,
+                Numero3 = usuariosE.Numero3,
                 Correo = usuariosE.Correo,
                 Password = usuariosE.Password, 
                 FechaRegistro= usuariosE.FechaRegistro
@@ -57,14 +63,17 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
                 IdTipoUsuario = usuariosDTOs.IdTipoUsuario,
                 Nombre = usuariosDTOs.Nombre,
                 Apellido = usuariosDTOs.Apellido,
+                IdGenero = usuariosDTOs.IdGenero,
                 IdTipoDocumento = usuariosDTOs.IdTipoDocumento,
                 Documento = usuariosDTOs.Documento,
-                FechaNacimiento = usuariosDTOs.FechaNacimiento,
                 Celular = usuariosDTOs.Celular,
                 IdPais = usuariosDTOs.IdPais,
                 IdDepartamento = usuariosDTOs.IdDepartamento,
                 IdMunicipio = usuariosDTOs.IdMunicipio,
-                Direccion = usuariosDTOs.Direccion,
+                TipoVia = usuariosDTOs.TipoVia,
+                Numero1 = usuariosDTOs.Numero1,
+                Numero2 = usuariosDTOs.Numero2,
+                Numero3 = usuariosDTOs.Numero3,
                 Correo = usuariosDTOs.Correo,
                 Password = usuariosDTOs.Password,
                 FechaRegistro = usuariosDTOs.FechaRegistro
@@ -89,10 +98,21 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
         {
             public int idUsuario { get; set; }
             public string nombre { get; set; }
+            public string apellido { get; set; }
+            public int tipoDocumento { get; set; }
+            public string documento { get; set; }
             public string correo { get; set; }
             public string telefono { get; set; }
-            public string direccion { get; set; }
+            public int genero { get; set; }
+            public int pais { get; set; }
+            public int departamento { get; set; }
+            public int ciudad { get; set; }
+            public string tipoVia { get; set; }
+            public string Numero1 { get; set; }
+            public string Numero2 { get; set; }
+            public string Numero3 { get; set; }
             public int tipoUsuario { get; set; }
+           
         }
 
         public class RespuestaInicioSesion

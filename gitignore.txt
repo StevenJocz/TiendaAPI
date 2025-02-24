@@ -1,0 +1,44 @@
+# Compilaciones y binarios
+bin/
+obj/
+*.dll
+*.pdb
+*.exe
+*.log
+*.tlog
+*.cache
+
+# Archivos de Visual Studio
+.vs/
+*.suo
+*.user
+*.sln.docstates
+*.csproj.user
+
+# Archivos de configuración local
+appsettings.Development.json
+secrets.json
+.env
+
+# Dependencias y paquetes
+packages/
+node_modules/
+
+# Caché y archivos temporales
+*.tmp
+*.bak
+*.swp
+*.cache
+*.lck
+
+# Archivos de depuración y perfiles
+*.dotCover
+*.coverlet
+*.ncrunch*
+*.axd
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini

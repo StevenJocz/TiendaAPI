@@ -28,22 +28,6 @@ namespace TiendaUNAC.API.Controller
         }
 
         #region POST
-        [HttpPost("Post_Crear_Usuario")]
-        public async Task<IActionResult> crearUsuario([FromBody] UsuariosDTOs usuariosDTOs)
-        {
-            try
-            {
-                _logger.LogInformation("Iniciando UsuarioController.crearUsuario...");
-                var respuesta = await _usuarioCommands.crearUsuario(usuariosDTOs);
-                return Ok(respuesta);
-            }
-            catch (Exception)
-            {
-                _logger.LogError("Error al iniciar UsuarioController.crearUsuario...");
-                throw;
-            }
-        }
-
         [HttpPost("Post_InicioSesion")]
         public async Task<IActionResult> InicioSesion([FromBody] InicioSesionDTOs inicioSesionDTOs)
         {

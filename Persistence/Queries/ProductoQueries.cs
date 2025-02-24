@@ -160,8 +160,10 @@ namespace TiendaUNAC.Persistence.Queries
                     {
                         var imagenes = new ImagenDto
                         {
-                            ImagenUno = imageneE.ElementAtOrDefault(0).Imagen,
-                            ImagenDos = imageneE.ElementAtOrDefault(1).Imagen
+                            ImagenUno = imageneE.ElementAtOrDefault(0)?.Imagen ?? string.Empty,
+                            ImagenDos = !string.IsNullOrEmpty(imageneE.ElementAtOrDefault(1)?.Imagen)
+                                        ? imageneE.ElementAtOrDefault(1).Imagen
+                                        : imageneE.ElementAtOrDefault(0)?.Imagen ?? string.Empty
                         };
 
                         ListImagenes.Add(imagenes);
@@ -259,7 +261,6 @@ namespace TiendaUNAC.Persistence.Queries
 
                     double precio = inventario.precio * inventario.iva / 100;
 
-
                     var list = new ListaProductosDTOs
                     {
                         Id = item.IdProducto,
@@ -274,6 +275,7 @@ namespace TiendaUNAC.Persistence.Queries
                         Activo = item.Activo,
                         IdTercero = item.IdTercero,
                         stock = inventario.existencias,
+                        iva = inventario.iva,
                         precioBase = inventario.precio + precio,
                         Imagenes = ListImagenes,
                         Tallas = ListTallas

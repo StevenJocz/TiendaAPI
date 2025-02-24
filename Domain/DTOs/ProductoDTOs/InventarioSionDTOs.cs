@@ -15,6 +15,6 @@ namespace TiendaUNAC.Domain.DTOs.ProductoDTOs
         public string nombre { get; set; }
         public double precio { get; set; }
         public double existencias { get; set; }
-        public int iva { get; set; }
+        public double iva { get; set; }
     }
 }

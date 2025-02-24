@@ -15,7 +15,8 @@ namespace TiendaUNAC.Domain.Utilities
 
     public class Imagenes : IImagenes
     {
-        private string rutaUrl = "http://localhost:5072/";
+        //private string rutaUrl = "http://localhost:5072/";
+        private string rutaUrl = "https://apitienda.unac.edu.co/";
 
         public async Task<string> guardarImage(string base64Image, string ruta)
         {
