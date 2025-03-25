@@ -89,6 +89,7 @@ namespace TiendaUNAC.Infrastructure
         public virtual DbSet<NotificacionRelacionE> NotificacionRelacionEs { get; set; }
         public virtual DbSet<ListarNotificacionesDTOs> ListarNotificacionEs { get; set; }
         public virtual DbSet<CountNotificaciones> CountNotificacionEs { get; set; }
+        public virtual DbSet<PagoPendiente> PagoPendienteEs { get; set; }
 
     }
 }

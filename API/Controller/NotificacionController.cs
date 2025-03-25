@@ -57,7 +57,27 @@ namespace TiendaUNAC.API.Controller
                 throw;
             }
         }
+
+
+        [HttpGet("Get_PagoPendiente")]
+        public async Task<IActionResult> PagoPendiente(string Documento)
+        {
+            _logger.LogInformation("Iniciando NotificacionController.PagoPendiente...");
+            try
+            {
+                var respuesta = await _notificacionQueries.PagoPendiente(Documento);
+                return Ok(respuesta);
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error al iniciar NotificacionController.PagoPendiente");
+                throw;
+            }
+        }
         #endregion
+
+
 
         #region PUT
         [HttpPut("Put_Actualizar_Estado")]

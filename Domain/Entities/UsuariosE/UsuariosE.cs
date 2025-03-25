@@ -29,7 +29,7 @@ namespace TiendaUNAC.Domain.Entities.UsuariosE
         public string Numero2 { get; set; }
         public string Numero3 { get; set; }
         public string Correo { get; set; }
-        public string Password { get; set; }
+        public string? Password { get; set; }
         public DateTime FechaRegistro { get; set; }
     }
 }

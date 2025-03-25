@@ -116,6 +116,7 @@ namespace TiendaUNAC.Persistence.Commands
                 {
                     usuario = new UsuariosDTOs
                     {
+                        IdUsuario = 0,
                         IdTipoUsuario = 2,
                         Nombre = datosCliente.Nombres,
                         Apellido = datosCliente.Apellidos,
@@ -136,6 +137,7 @@ namespace TiendaUNAC.Persistence.Commands
                     var usuarioE = UsuariosDTOs.CrearE(usuario);
                     await _context.UsuariosEs.AddAsync(usuarioE);
                     await _context.SaveChangesAsync();
+                    usuario.IdUsuario = usuarioE.IdUsuario;
                     return usuario;
                 }
                 

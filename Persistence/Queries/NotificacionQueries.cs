@@ -18,6 +18,7 @@ namespace TiendaUNAC.Persistence.Queries
     {
         Task<List<ListarNotificacionesDTOs>> ListarNotificaciones(int accion, int idUsuario);
         Task<int> cantidadNotifiaciones(int idUsuario);
+        Task<List<PagoPendiente>> PagoPendiente(string Documento);
     }
 
     public class NotificacionQueries: INotificacionQueries, IDisposable
@@ -115,5 +116,33 @@ namespace TiendaUNAC.Persistence.Queries
             }
         }
         #endregion
+
+        public async Task<List<PagoPendiente>> PagoPendiente(string Documento)
+        {
+            _logger.LogTrace("Iniciando metodo NotificacionQueries.PagoPendiente...");
+            try
+            {
+                var pagoPendiente = await _context.PagoPendienteEs.FromSqlInterpolated($"EXEC LISTAR_PagoPendiente_PlaceToPay @Accion={1}, @Documento={Documento}, @Referencia={0}").ToListAsync();
+
+                var ListaPagoPendiente = new List<PagoPendiente>();
+                foreach (var item in pagoPendiente)
+                {
+                    var list = new PagoPendiente
+                    {
+                       IdReferencia = item.IdReferencia,
+                       Valor = item.Valor
+                    };
+                    ListaPagoPendiente.Add(list);
+                }
+                return ListaPagoPendiente;
+
+            }
+            catch (Exception)
+            {
+                _logger.LogError("Error en el metodo NotificacionQueries.PagoPendiente...");
+                throw;
+            }
+        }
+
     }
 }

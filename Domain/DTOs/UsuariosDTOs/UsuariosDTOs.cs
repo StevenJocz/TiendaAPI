@@ -27,7 +27,7 @@ namespace TiendaUNAC.Domain.DTOs.UsuariosDTOs
         public string Numero2 { get; set; }
         public string Numero3 { get; set; }
         public string Correo { get; set; }
-        public string Password { get; set; }
+        public string? Password { get; set; }
         public DateTime FechaRegistro { get; set; }
 
         public static UsuariosDTOs CrearDTOs(UsuariosE usuariosE)
